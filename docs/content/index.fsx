@@ -27,7 +27,7 @@ This example demonstrates using a function defined in this sample library.
 
 *)
 #r "FSharp.FGL.dll"
-open FSharp.FGL
+open FSharp.FGL 
 
 printfn "hello = %i" <| Library.hello 0
 
