@@ -9,16 +9,7 @@ FSharp.FGL
 
 Documentation
 
-<div class="row">
-  <div class="span1"></div>
-  <div class="span6">
-    <div class="well well-small" id="nuget">
-      The FSharp.FGL library can be <a href="https://nuget.org/packages/FSharp.FGL">installed from NuGet</a>:
-      <pre>PM> Install-Package FSharp.FGL</pre>
-    </div>
-  </div>
-  <div class="span1"></div>
-</div>
+FSharp.FGL is a functional library to work with graphs. 
 
 Example
 -------
