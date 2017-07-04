@@ -2,31 +2,39 @@
 
 open Aether
 
+///Labeled vertex
 type LVertex<'Vertex,'Label> =
     'Vertex * 'Label
 
+///Unlabeled edge
 type Edge<'Vertex> =
     'Vertex * 'Vertex
 
+///Labeled edge
 type LEdge<'Vertex,'Edge> =
     'Vertex * 'Vertex * 'Edge
 
+///Tuple list of adjacent vertices and the linking edges
 type Adj<'Vertex,'Edge> when 'Vertex: comparison=
     List<'Vertex*'Edge>
 
+///Context of a vertice as defined by Martin Erwig. Adjacency of type 'Adj'
 type Context<'Vertex,'Label,'Edge> when 'Vertex: comparison=
     Adj<'Vertex,'Edge>*'Vertex*'Label*Adj<'Vertex,'Edge>
 
+///Map of adjacent vertices as key and the linking edges as values
 type MAdj<'Vertex,'Edge> when 'Vertex: comparison =
     Map<'Vertex,'Edge>
 
+///Context of a vertices as defined by Martin Erwig. Adjacency of type 'MAdj'
 type MContext<'Vertex,'Label,'Edge> when 'Vertex: comparison =
     MAdj<'Vertex,'Edge> * 'Label * MAdj<'Vertex,'Edge>
 
+///Map of Vertices as keys and MContexts as values
 type Graph<'Vertex,'Label,'Edge> when 'Vertex: comparison =
     Map<'Vertex, MContext<'Vertex,'Label,'Edge>>
 
-
+///Lenses for working with contexts
 module Lenses = 
     /// Lens for predecessors in a context
     let pred_ : Lens<Context<'Vertex,_,'Edge>, Adj<'Vertex,'Edge>> =
@@ -48,6 +56,7 @@ module Lenses =
     let msucc_ : Lens<MContext<'Vertex,_,'Edge>, MAdj<'Vertex,'Edge>> =
         (fun (_, _, s) -> s), (fun s (p, l, _) -> (p, l, s))
 
+///General functions for both directed and undirected graphs
 module Graph =
 
     (* Transition functions *)

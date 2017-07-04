@@ -3,7 +3,8 @@
 open Aether
 open FSharp.FGL
 
-module vertices = 
+///Functions for vertices of undirected Graphs
+module Vertices = 
     (* Add and remove *)
 
     ///Adds a labeled vertex to the graph.
@@ -114,7 +115,7 @@ module vertices =
         g
         |> Map.fold (fun s v (_,l,_) -> folder s v l) state
 
-
+///Functions for edges of undirected Graphs
  module Edges =
      (* Add and remove *)
 

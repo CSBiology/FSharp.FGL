@@ -3,7 +3,9 @@
 open Aether
 open FSharp.FGL
 
-module vertices = 
+
+///Functions for vertices of directed Graphs
+module Vertices = 
     //Add and remove
 
     ///Adds a labeled vertex to the graph.
@@ -130,8 +132,9 @@ module vertices =
     
     let fold (state: 'T) (folder: 'T -> 'Vertex -> 'Label -> 'T) (g: Graph<'Vertex,'Label,'Edge>) : 'T = 
         g
-        |> Graph.foldContexts state (fun acc (_, v, l, _) -> folder acc v l) 
+        |> Graph.foldContexts state (fun acc (_, v, l, _) -> folder acc v l)
 
+///Functions for edges of directed Graphs
 module Edges = 
 
     //Add and remove
@@ -254,3 +257,4 @@ module Edges =
                         recurse st g'
             | (None,_) -> st
         recurse state graph
+
