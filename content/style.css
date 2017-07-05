@@ -4,6 +4,10 @@
   Formatting for F# code snippets
 /*--------------------------------------------------------------------------*/
 
+p.indent {margin-left: 5px}
+
+
+
 /* strings --- and stlyes for other string related formats */
 span.s { color:#E0E268; }
 /* printf formatters */

@@ -38,19 +38,19 @@
 <h2><a name="Inductive-Graph" class="anchor" href="#Inductive-Graph">Inductive Graph</a></h2>
 <p>The general aim of this FSharp.FGL is to provide an environment for F# programmers to functionally work with graphs. Besides the basic functions a graph-structure has to fulfill (like adding/removing vertices or counting edges), there are also functionalities needed which are not as elegantly and efficiently implementable in functional graphs (e.g. marking vertices as visited). This is tackled by Martin Erwig's <a href="https://web.engr.oregonstate.edu/~erwig/papers/InductiveGraphs_JFP01.pdf">Inductive Graph Model</a>.</p>
 <p>The inductive graph consists of so called contexts. Every context carries the information about one vertex in the form (pred, id, l, succ) where:<br>
--pred is a collection of all vertices pointing to this vertex<br>
--id is the identifier of the vertex<br>
--l is the label of the vertex<br>
--succ is a collection of all vertices this vertex points to<br>
+<p class="indent">-pred is a collection of all vertices pointing to this vertex</p>
+<p class="indent">-id is the identifier of the vertex</p>
+<p class="indent">-l is the label of the vertex</p>
+<p class="indent">-succ is a collection of all vertices this vertex points to</p>
 In this structure, both pred and succ are of type adjacency. This type consists of the id of the other vertex and the edgelabel.</p>
 <p>Working with the inductive graph model allows easy recursive walking through the graph because every vertex contains the information of it's edges to the other vertices. Also especially the so called <a href="">decompose-function</a> is a good way to avoid the need of remembering vertices.</p>
 <a name="Implementation"></a>
 <h2><a name="Implementation" class="anchor" href="#Implementation">Implementation</a></h2>
-<p>The basic structure of the implementation is done as in the <a href="https://github.com/xyncro/hekate">Hekate graph library</a>. Building a new library has many reasons:<br>
--FSharp.FGL was built with the intent to have easily readable code, so users can -if needed- design their own functions with the given structure more easily<br>
--The aforementioned decompose function is publicly accessible in FSharp.FGL. This is important for using path search algorithms more efficiently<br>
--The functions in FSharp.FGl are sorted into the Undirected and the Directed module. By this, users can more intuitively pick the right function for their purpose<br>
--FSharp.FGL aims to provide a thorough set of graph related functions, including path search functions and different graph models.</p>
+<p>The basic structure of the implementation is done as in the <a href="https://github.com/xyncro/hekate">Hekate graph library</a>. Building a new library has many reasons:
+<p class="indent">-FSharp.FGL was built with the intent to have easily readable code, so users can -if needed- design their own functions with the given structure more easily</p>
+<p class="indent">-The aforementioned decompose function is publicly accessible in FSharp.FGL. This is important for using path search algorithms more efficiently</p>
+<p class="indent">-The functions in FSharp.FGl are sorted into the Undirected and the Directed module. By this, users can more intuitively pick the right function for their purpose</p>
+<p class="indent">-FSharp.FGL aims to provide a thorough set of graph related functions, including path search functions and different graph models.</p></p>
 
 
         </div>
