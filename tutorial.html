@@ -38,7 +38,7 @@
 <h2><a name="Inductive-Graph" class="anchor" href="#Inductive-Graph">Inductive Graph</a></h2>
 <p>The general aim of this FSharp.FGL is to provide an environment for F# programmers to functionally work with graphs. Besides the basic functions a graph-structure has to fulfill (like adding/removing vertices or counting edges), there are also functionalities needed which are not as elegantly and efficiently implementable in functional graphs (e.g. marking vertices as visited). This is tackled by Martin Erwig's <a href="https://web.engr.oregonstate.edu/~erwig/papers/InductiveGraphs_JFP01.pdf">Inductive Graph Model</a>.</p>
 <p>The inductive graph consists of so called contexts. Every context carries the information about one vertex in the form (pred, id, l, succ) where:<br>
-<p class="indent">-</b>pred</b> is a collection of all vertices pointing to this vertex</p>
+<p class="indent">-<b>pred</b> is a collection of all vertices pointing to this vertex</p>
 <p class="indent">-<b>id</b> is the identifier of the vertex</p>
 <p class="indent">-<b>l</b> is the label of the vertex</p>
 <p class="indent">-<b>succ</b> is a collection of all vertices this vertex points to</p>
