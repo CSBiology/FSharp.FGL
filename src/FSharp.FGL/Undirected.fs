@@ -222,3 +222,11 @@ module Vertices =
                         recurse st g'
             | (None,_) -> st
         recurse state graph
+
+module Graph =
+
+    ///Creates an undirected graph from a list of vertices and a list of edges
+    let create vertices edges =
+        Graph.empty
+        |> Vertices.addMany vertices
+        |> Edges.addMany edges

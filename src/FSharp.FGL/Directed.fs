@@ -258,3 +258,10 @@ module Edges =
             | (None,_) -> st
         recurse state graph
 
+module Graph =
+
+    ///Creates a directed graph from a list of vertices and a list of edges
+    let create vertices edges =
+        Graph.empty
+        |> Vertices.addMany vertices
+        |> Edges.addMany edges
