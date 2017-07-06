@@ -49,37 +49,89 @@ In this quick tutorial we will work with directed Graphs.</p>
 <h2><a name="Creating-a-Graph" class="anchor" href="#Creating-a-Graph">Creating a Graph</a></h2>
 <p>The Graph can be created by the "Graph.empty" function. The Graph can then be filled by the "Vertices.add"/"Vertices.addMany" and the "Edges.add"/"Edges.addMany" functions.
 Keep in mind that FSharp.FGL does not support unlabeled edges and unlabeled vertices</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//Creating a list of labeled vertices</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="i">vertexList</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="t">LVertex</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="t">int</span>,<span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="t">string</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="t">list</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="f">init</span> <span class="n">4</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">i</span> <span class="k">-&gt;</span> 
+        <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="i">i</span>,
+        <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="f">sprintf</span> <span class="s">&quot;VertexNr. </span><span class="pf">%i</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">i</span>)
+
+<span class="c">//Creating a list of labeled edges</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="i">edgeList</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="t">LEdge</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs6', 19)" onmouseover="showTip(event, 'fs6', 19)" class="t">int</span>,<span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="t">float</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'fs8', 21)" onmouseover="showTip(event, 'fs8', 21)" class="t">list</span> <span class="o">=</span> [(<span class="n">1</span>,<span class="n">2</span>,<span class="n">1.</span>);(<span class="n">2</span>,<span class="n">1</span>,<span class="n">1.</span>);(<span class="n">1</span>,<span class="n">3</span>,<span class="n">0.5</span>);(<span class="n">3</span>,<span class="n">4</span>,<span class="n">0.8</span>);(<span class="n">4</span>,<span class="n">3</span>,<span class="n">0.8</span>)]
+
+<span class="c">//Creating a graph out of the two lists can be done in different ways</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="i">myGraph</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="t">Graph</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs6', 24)" onmouseover="showTip(event, 'fs6', 24)" class="t">int</span>,<span onmouseout="hideTip(event, 'fs7', 25)" onmouseover="showTip(event, 'fs7', 25)" class="t">string</span>,<span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="t">float</span><span class="o">&gt;</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs17', 27)" onmouseover="showTip(event, 'fs17', 27)" class="t">Graph</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 28)" onmouseover="showTip(event, 'fs18', 28)" class="f">create</span> <span onmouseout="hideTip(event, 'fs4', 29)" onmouseover="showTip(event, 'fs4', 29)" class="i">vertexList</span> <span onmouseout="hideTip(event, 'fs13', 30)" onmouseover="showTip(event, 'fs13', 30)" class="i">edgeList</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 31)" onmouseover="showTip(event, 'fs19', 31)" class="i">myGraph&#39;</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs17', 32)" onmouseover="showTip(event, 'fs17', 32)" class="t">Graph</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs6', 33)" onmouseover="showTip(event, 'fs6', 33)" class="t">int</span>,<span onmouseout="hideTip(event, 'fs7', 34)" onmouseover="showTip(event, 'fs7', 34)" class="t">string</span>,<span onmouseout="hideTip(event, 'fs15', 35)" onmouseover="showTip(event, 'fs15', 35)" class="t">float</span><span class="o">&gt;</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs17', 36)" onmouseover="showTip(event, 'fs17', 36)" class="t">Graph</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="i">empty</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 38)" onmouseover="showTip(event, 'fs21', 38)" class="t">Vertices</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 39)" onmouseover="showTip(event, 'fs22', 39)" class="f">addMany</span> <span onmouseout="hideTip(event, 'fs4', 40)" onmouseover="showTip(event, 'fs4', 40)" class="i">vertexList</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 41)" onmouseover="showTip(event, 'fs23', 41)" class="t">Edges</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="f">addMany</span> <span onmouseout="hideTip(event, 'fs13', 43)" onmouseover="showTip(event, 'fs13', 43)" class="i">edgeList</span>
+</code></pre></td>
+</tr>
+</table>
+<p>The Graph.create function is located in the Directed and in the Undirected namespaces. Therefore calling it while having one of those opened will result in building the according graph type.
+Adding and Removing single vertices or edges can be done with the following functions:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
 <span class="l">5: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="i">myGraph</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="t">Graph</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs6', 8)" onmouseover="showTip(event, 'fs6', 8)" class="t">int</span>,<span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="t">string</span>,<span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="t">float</span><span class="o">&gt;</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="f">init</span> <span class="n">10</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">i</span> <span class="k">-&gt;</span> 
-        <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="i">i</span>,
-        <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="f">sprintf</span> <span class="s">&quot;VertexNr. </span><span class="pf">%i</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="i">i</span>)
-    <span class="o">|&gt;</span> <span class="k">fun</span> <span onmouseout="hideTip(event, 'fs13', 17)" onmouseover="showTip(event, 'fs13', 17)" class="i">vertexList</span> <span class="k">-&gt;</span>  <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="t">Vertices</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="f">addMany</span> <span onmouseout="hideTip(event, 'fs13', 20)" onmouseover="showTip(event, 'fs13', 20)" class="i">vertexList</span> <span onmouseout="hideTip(event, 'fs5', 21)" onmouseover="showTip(event, 'fs5', 21)" class="t">Graph</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="i">empty</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="i">myChangedGraph</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs17', 45)" onmouseover="showTip(event, 'fs17', 45)" class="t">Graph</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs6', 46)" onmouseover="showTip(event, 'fs6', 46)" class="t">int</span>,<span onmouseout="hideTip(event, 'fs7', 47)" onmouseover="showTip(event, 'fs7', 47)" class="t">string</span>,<span onmouseout="hideTip(event, 'fs15', 48)" onmouseover="showTip(event, 'fs15', 48)" class="t">float</span><span class="o">&gt;</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs16', 49)" onmouseover="showTip(event, 'fs16', 49)" class="i">myGraph</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs21', 50)" onmouseover="showTip(event, 'fs21', 50)" class="t">Vertices</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 51)" onmouseover="showTip(event, 'fs26', 51)" class="f">add</span> (<span class="n">5</span>,<span class="s">&quot;VertexNr. 5&quot;</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 52)" onmouseover="showTip(event, 'fs23', 52)" class="t">Edges</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs27', 53)" onmouseover="showTip(event, 'fs27', 53)" class="f">add</span> (<span class="n">5</span>,<span class="n">1</span>,<span class="n">0.7</span>)
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs23', 54)" onmouseover="showTip(event, 'fs23', 54)" class="t">Edges</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs28', 55)" onmouseover="showTip(event, 'fs28', 55)" class="f">remove</span> (<span class="n">2</span>,<span class="n">1</span>)
 </code></pre></td>
 </tr>
 </table>
+<h2><a name="Iteration" class="anchor" href="#Iteration">Iteration</a></h2>
+<p>coming soon</p>
 
 <div class="tip" id="fs1">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
 <div class="tip" id="fs2">namespace FSharp.FGL</div>
 <div class="tip" id="fs3">namespace FSharp.FGL.Directed</div>
-<div class="tip" id="fs4">val myGraph : Graph&lt;int,string,float&gt;<br /><br />Full name: Newgraph.myGraph</div>
-<div class="tip" id="fs5">Multiple items<br />module Graph<br /><br />from FSharp.FGL<br /><br />--------------------<br />type Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge (requires comparison)&gt; = Map&lt;&#39;Vertex,MContext&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;&gt;<br /><br />Full name: FSharp.FGL.Graph&lt;_,_,_&gt;</div>
+<div class="tip" id="fs4">val vertexList : LVertex&lt;int,string&gt; list<br /><br />Full name: Newgraph.vertexList</div>
+<div class="tip" id="fs5">type LVertex&lt;&#39;Vertex,&#39;Label&gt; = &#39;Vertex * &#39;Label<br /><br />Full name: FSharp.FGL.LVertex&lt;_,_&gt;</div>
 <div class="tip" id="fs6">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>
 <div class="tip" id="fs7">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
-<div class="tip" id="fs8">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs8">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
 <div class="tip" id="fs9">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
 <div class="tip" id="fs10">val init : length:int -&gt; initializer:(int -&gt; &#39;T) -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List.init</div>
 <div class="tip" id="fs11">val i : int</div>
 <div class="tip" id="fs12">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
-<div class="tip" id="fs13">val vertexList : (int * string) list</div>
-<div class="tip" id="fs14">module Vertices<br /><br />from FSharp.FGL.Directed</div>
-<div class="tip" id="fs15">val addMany : vertices:LVertex&lt;&#39;Vertex,&#39;Label&gt; list -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Vertices.addMany</div>
-<div class="tip" id="fs16">val empty : Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Graph.empty</div>
+<div class="tip" id="fs13">val edgeList : LEdge&lt;int,float&gt; list<br /><br />Full name: Newgraph.edgeList</div>
+<div class="tip" id="fs14">type LEdge&lt;&#39;Vertex,&#39;Edge&gt; = &#39;Vertex * &#39;Vertex * &#39;Edge<br /><br />Full name: FSharp.FGL.LEdge&lt;_,_&gt;</div>
+<div class="tip" id="fs15">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs16">val myGraph : Graph&lt;int,string,float&gt;<br /><br />Full name: Newgraph.myGraph</div>
+<div class="tip" id="fs17">Multiple items<br />module Graph<br /><br />from FSharp.FGL.Directed<br /><br />--------------------<br />module Graph<br /><br />from FSharp.FGL<br /><br />--------------------<br />type Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge (requires comparison)&gt; = Map&lt;&#39;Vertex,MContext&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;&gt;<br /><br />Full name: FSharp.FGL.Graph&lt;_,_,_&gt;</div>
+<div class="tip" id="fs18">val create : vertices:LVertex&lt;&#39;Vertex,&#39;Label&gt; list -&gt; edges:LEdge&lt;&#39;Vertex,&#39;Edge&gt; list -&gt; Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Graph.create</div>
+<div class="tip" id="fs19">val myGraph&#39; : Graph&lt;int,string,float&gt;<br /><br />Full name: Newgraph.myGraph&#39;</div>
+<div class="tip" id="fs20">val empty : Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Graph.empty</div>
+<div class="tip" id="fs21">module Vertices<br /><br />from FSharp.FGL.Directed</div>
+<div class="tip" id="fs22">val addMany : vertices:LVertex&lt;&#39;Vertex,&#39;Label&gt; list -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Vertices.addMany</div>
+<div class="tip" id="fs23">module Edges<br /><br />from FSharp.FGL.Directed</div>
+<div class="tip" id="fs24">val addMany : edges:LEdge&lt;&#39;Vertex,&#39;Edge&gt; list -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; Map&lt;&#39;Vertex,MContext&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Edges.addMany</div>
+<div class="tip" id="fs25">val myChangedGraph : Graph&lt;int,string,float&gt;<br /><br />Full name: Newgraph.myChangedGraph</div>
+<div class="tip" id="fs26">val add : &#39;Vertex * &#39;Label -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Vertices.add</div>
+<div class="tip" id="fs27">val add : &#39;Vertex * &#39;Vertex * &#39;Edge -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; Map&lt;&#39;Vertex,MContext&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Edges.add</div>
+<div class="tip" id="fs28">val remove : &#39;Vertex * &#39;Vertex -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; Map&lt;&#39;Vertex,MContext&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;&gt; (requires comparison)<br /><br />Full name: FSharp.FGL.Directed.Edges.remove</div>
 
         </div>
         <div class="span3">
@@ -96,6 +148,7 @@ Keep in mind that FSharp.FGL does not support unlabeled edges and unlabeled vert
             <li class="nav-header">Getting started</li>
             <li><a href="/FSharp.FGL/tutorial.html">Introduction</a></li>
 			</li>
+			<li><a href="/FSharp.FGL/newgraph.html">Working with FSharp.FGL</a></li>
             <li class="nav-header">Documentation</li>
             <li><a href="/FSharp.FGL/reference/index.html">API Reference</a></li>
           </ul>

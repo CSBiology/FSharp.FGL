@@ -45,8 +45,8 @@
 <p class="indent">-<b>succ</b> is a collection of all vertices this vertex points to</p>
 In this structure, both pred and succ are of type adjacency. This type consists of the id of the other vertex and the edgelabel.</p>
 <p>Working with the inductive graph model allows easy recursive walking through the graph because every vertex contains the information of it's edges to the other vertices. The so called <a href="">decompose-function</a> then solves the problem of remembering which vertices were already visited by removing them from the graph.</p>
-<a name="Implementation"></a>
-<h2><a name="Implementation" class="anchor" href="#Implementation">Implementation</a></h2>
+<a name="Features"></a>
+<h2><a name="Features" class="anchor" href="#Features">Features</a></h2>
 <p>The basic structure of the implementation is done as in the <a href="https://github.com/xyncro/hekate">Hekate graph library</a>. Building a new library has many reasons:
 <p class="indent">-FSharp.FGL was built with the intent to have easily readable code, so users can -if needed- design their own functions with the given structure more easily</p>
 <p class="indent">-The aforementioned decompose function is publicly accessible in FSharp.FGL. This is important for using path search algorithms more efficiently</p>
@@ -70,7 +70,7 @@ In this structure, both pred and succ are of type adjacency. This type consists 
             <li><a href="/FSharp.FGL/tutorial.html">Introduction</a></li>
 				  <ul class="nav nav-list">
 					<li><a href="/FSharp.FGL/tutorial.html#InductiveGraph">Inductive Graph</a></li>
-					<li><a href="/FSharp.FGL/tutorial.html#Implementation">Implementation</a></li>
+					<li><a href="/FSharp.FGL/tutorial.html#Features">Features</a></li>
 				  </ul>
 			</li>
             <li class="nav-header">Documentation</li>
