@@ -261,7 +261,7 @@ module Edges =
 module Graph =
 
     ///Creates a directed graph from a list of vertices and a list of edges
-    let create vertices edges =
+    let create vertices edges : Graph<'Vertex,'Label,'Edge> =
         Graph.empty
         |> Vertices.addMany vertices
         |> Edges.addMany edges

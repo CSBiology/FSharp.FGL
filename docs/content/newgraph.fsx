@@ -41,7 +41,8 @@ let myGraph' : Graph<int,string,float> =
     |> Edges.addMany edgeList
 
 (**
-The Graph.create function is located in the Directed and in the Undirected namespaces. Therefore calling it while having one of those opened will result in building the according graph type. Adding and Removing single vertices or edges can be done with the following functions:
+The Graph.create function is located in the Directed and in the Undirected namespaces. Therefore calling it while having one of those opened will result in building the according graph type.
+Adding and Removing single vertices or edges can be done with the following functions:
 *)
 
 let myChangedGraph : Graph<int,string,float> =
@@ -54,4 +55,5 @@ let myChangedGraph : Graph<int,string,float> =
 
 ## Iteration
 
+coming soon
 *)
