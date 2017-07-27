@@ -369,6 +369,16 @@ Target "Release" (fun _ ->
     |> Async.RunSynchronously
 )
 
+Target "ReleaseLocal" (fun _ ->
+    let tempDocsDir = "docs/local"
+    CreateDir tempDocsDir
+    CleanDir tempDocsDir
+    CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
+    ReplaceInFiles 
+        (seq {yield "/" + project + "/",""}) 
+        ((filesInDirMatching "*.html" (directoryInfo tempDocsDir)) |> Array.map (fun x -> tempDocsDir + "/" + x.Name))
+)
+
 Target "BuildPackage" DoNothing
 
 // --------------------------------------------------------------------------------------
