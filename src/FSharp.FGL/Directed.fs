@@ -129,6 +129,12 @@ module Vertices =
         g
         |> Graph.iterContexts (fun (_, v, l, _) -> action v l)
 
+    let iteri (action: int -> 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit =
+        let mutable i = 0
+        g
+        |> Map.iter (fun vertex (_, l, _) ->
+            action i vertex l
+            i <- i + 1)
     
     let fold (state: 'T) (folder: 'T -> 'Vertex -> 'Label -> 'T) (g: Graph<'Vertex,'Label,'Edge>) : 'T = 
         g

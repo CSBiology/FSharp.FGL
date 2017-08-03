@@ -106,10 +106,17 @@ module Vertices =
             p, mapping i vertex l, s)
 
     ///Performs a given function on every vertex and its label of a graph.
-    let iter (action: 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit=
+    let iter (action: 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit =
         g
         |> Map.iter (fun vertex (_, l, _) ->
             action vertex l)
+    
+    let iteri (action: int -> 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit =
+        let mutable i = 0
+        g
+        |> Map.iter (fun vertex (_, l, _) ->
+            action i vertex l
+            i <- i + 1)
 
     let fold (state: 'T) (folder: 'T -> 'Vertex -> 'Label -> 'T) (g: Graph<'Vertex,'Label,'Edge>) : 'T = 
         g
@@ -194,7 +201,7 @@ module Vertices =
             | (Some c,g') -> 
                 c
                 |> fun (_,v,_,s) -> 
-                    List.iteri (fun _ (v',e) -> action v v' e) s
+                    List.iter (fun (v',e) -> action v v' e) s
                     recurse g'
             | (None,_) -> ()
         recurse graph   
