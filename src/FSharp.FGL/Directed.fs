@@ -271,3 +271,41 @@ module Graph =
         Graph.empty
         |> Vertices.addMany vertices
         |> Edges.addMany edges
+
+    ///Transforms a graph into an adjacency matrix of its edges.
+    let inline toAdjacencyMatrix (g:Graph<'Vertex,'Label,'Edge>) =
+        //Create a hashmap of the vertices
+        let hashMap = System.Collections.Generic.Dictionary<'Vertex,int>()
+        let n = 
+            let rec loop g i= 
+                match Graph.decomposeFirst g with
+                | Some (_,v,_,_),g -> 
+                    hashMap.[v] <- i
+                    loop g (i+1)        
+                | None, _ -> i+1
+            loop g 0
+        //Create the matrix
+        let adj : 'Edge [][] = Array.init n (fun _ -> 
+            Array.zeroCreate n)
+        //Fill the matrix with values by using the hashmap as an index finder
+        Edges.iter (fun v1 v2 e -> adj.[hashMap.Item v1].[hashMap.Item v2] <- e) g
+        adj
+
+    ///Transfroms a graph into a adjacency matrix, maps every edge using the projection.
+    let inline toAdjacencyMatrixBy (projection : 'Edge -> 'REdge) (g:Graph<'Vertex,'Label,'Edge>) =
+        //Create a hashmap of the vertices
+        let hashMap = System.Collections.Generic.Dictionary<'Vertex,int>()
+        let n = 
+            let rec loop g i= 
+                match Graph.decomposeFirst g with
+                | Some (_,v,_,_),g -> 
+                    hashMap.[v] <- i
+                    loop g (i+1)        
+                | None, _ -> i+1
+            loop g 0
+        //Create the matrix
+        let adj : 'REdge [][] = Array.init n (fun _ -> 
+            Array.zeroCreate n)
+        //Fill the matrix with values by using the hashmap as an index finder
+        Edges.iter (fun v1 v2 e -> adj.[hashMap.Item v1].[hashMap.Item v2] <- projection e) g
+        adj
