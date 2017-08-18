@@ -706,11 +706,12 @@
     <None Include="paket.template" />
     <Content Include="App.config" />
     <Compile Include="Graph.fs" />
+    <Compile Include="Models.fs" />
     <Compile Include="Undirected.fs" />
+    <Compile Include="Directed.fs" />
     <None Include="Scripts\load-references-debug.fsx" />
     <None Include="Scripts\load-project-debug.fsx" />
     <Content Include="packages.config" />
-    <Compile Include="Directed.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aether">

@@ -309,3 +309,9 @@ module Graph =
         //Fill the matrix with values by using the hashmap as an index finder
         Edges.iter (fun v1 v2 e -> adj.[hashMap.Item v1].[hashMap.Item v2] <- projection e) g
         adj
+    
+module Models = 
+
+    ///Creates a directed graph of vertexcount n and edge probability p
+    let gilbert (nodeInitializer: int -> LVertex<'Vertex,'Label>) (n: int) (p: float) : Graph<'Vertex,'Label,int> =
+        FSharp.FGL.Algorithm.Models.gilbert Graph.empty nodeInitializer (fun lv g -> Vertices.add lv g) (fun (v1,_) (v2,_) g -> Edges.add (v1,v2,1) g) n p
