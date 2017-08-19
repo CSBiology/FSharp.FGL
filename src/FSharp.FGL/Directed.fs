@@ -315,3 +315,7 @@ module Models =
     ///Creates a directed graph of vertexcount n and edge probability p
     let gilbert (nodeInitializer: int -> LVertex<'Vertex,'Label>) (n: int) (p: float) : Graph<'Vertex,'Label,int> =
         FSharp.FGL.Algorithm.Models.gilbert Graph.empty nodeInitializer (fun lv g -> Vertices.add lv g) (fun (v1,_) (v2,_) g -> Edges.add (v1,v2,1) g) n p
+    
+    ///Creates a directed graph of vertexcount v and edgecount e
+    let erdosRenyi (nodeInitializer: int -> LVertex<'Vertex,'Label>) (v: int) (e: int) : Graph<'Vertex,'Label,int> =
+        FSharp.FGL.Algorithm.Models.erdosRenyi Graph.empty nodeInitializer (fun lv g -> Vertices.add lv g) (fun (v1,_) (v2,_) g -> Edges.add (v1,v2,1) g) v e
