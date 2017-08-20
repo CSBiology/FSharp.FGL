@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Adj<'Vertex, 'Edge> - FSharp.FGL</title>
+    <title>Models - FSharp.FGL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Timo Mühlhaus"/>
@@ -35,116 +35,57 @@
 
 
 
-<h1>Adj<'Vertex, 'Edge></h1>
+<h1>Models</h1>
 <p>
-  <span>Namespace: FSharp.FGL</span><br />
+  <span>Namespace: FSharp.FGL.Algorithm</span><br />
 </p>
 <div class="xmldoc">
-<p>Tuple list of adjacent vertices and the linking edges</p>
+<p>Contains generic functions for creating model graphs</p>
 
 </div>
-  <h3>Instance members</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '90', 90)" onmouseover="showTip(event, '90', 90)">
-            Head
+          <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+            erdosRenyi (...)
           </code>
-          <div class="tip" id="90">
-            <strong>Signature:</strong> &#39;Vertex * &#39;Edge<br />
-                      </div>
+          <div class="tip" id="16">
+            <strong>Signature:</strong> newGraph:&#39;Graph -&gt; fVertexKey:(int -&gt; &#39;Vertex) -&gt; fAddVertex:(&#39;Vertex -&gt; &#39;Graph -&gt; &#39;Graph) -&gt; fAddEdge:(&#39;Vertex -&gt; &#39;Vertex -&gt; &#39;Graph -&gt; &#39;Graph) -&gt; vertexCount:int -&gt; edgeCount:int -&gt; &#39;Graph<br />
+                          <strong>Type parameters:</strong> 'Graph, 'Vertex          </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Models.fs#L31-31" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
-              <p>CompiledName: <code>get_Head</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '91', 91)" onmouseover="showTip(event, '91', 91)">
-            IsEmpty
+          <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
+            gilbert (...)
           </code>
-          <div class="tip" id="91">
-            <strong>Signature:</strong> bool<br />
-                      </div>
+          <div class="tip" id="17">
+            <strong>Signature:</strong> newGraph:&#39;Graph -&gt; fVertexKey:(int -&gt; &#39;Vertex) -&gt; fAddVertex:(&#39;Vertex -&gt; &#39;Graph -&gt; &#39;Graph) -&gt; fAddEdge:(&#39;Vertex -&gt; &#39;Vertex -&gt; &#39;Graph -&gt; &#39;Graph) -&gt; vertexCount:int -&gt; p:float -&gt; &#39;Graph<br />
+                          <strong>Type parameters:</strong> 'Graph, 'Vertex          </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Models.fs#L6-6" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
-              <p>CompiledName: <code>get_IsEmpty</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
-            [index]
-          </code>
-          <div class="tip" id="92">
-            <strong>Signature:</strong> index:int -&gt; &#39;Vertex * &#39;Edge<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Item</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
-            Length
-          </code>
-          <div class="tip" id="93">
-            <strong>Signature:</strong> int<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Length</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
-            Tail
-          </code>
-          <div class="tip" id="94">
-            <strong>Signature:</strong> (&#39;Vertex * &#39;Edge) list<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Tail</code></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>Static members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Static member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
-            Empty
-          </code>
-          <div class="tip" id="95">
-            <strong>Signature:</strong> (&#39;Vertex * &#39;Edge) list<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Empty</code></p>
         </td>
       </tr>
     </tbody>

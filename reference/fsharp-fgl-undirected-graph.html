@@ -53,19 +53,59 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '63', 63)" onmouseover="showTip(event, '63', 63)">
+          <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
             create vertices edges
           </code>
-          <div class="tip" id="63">
+          <div class="tip" id="70">
             <strong>Signature:</strong> vertices:LVertex&lt;&#39;Vertex,&#39;Label&gt; list -&gt; edges:LEdge&lt;&#39;Vertex,&#39;Edge&gt; list -&gt; Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />
                           <strong>Type parameters:</strong> 'Vertex, 'Label, 'Edge          </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Undirected.fs#L229-229" class="github-link">
+            <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Undirected.fs#L236-236" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
           <p>Creates an undirected graph from a list of vertices and a list of edges</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
+            toAdjacencyMatrix g
+          </code>
+          <div class="tip" id="71">
+            <strong>Signature:</strong> g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; &#39;Edge [] []<br />
+                          <strong>Type parameters:</strong> 'Vertex, 'Label, 'Edge          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Undirected.fs#L242-242" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Transforms a graph into a adjacency matrix of its edges. If there is no edge between two vertices, the noEdgeValue is used.</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
+            toAdjacencyMatrixBy projection g
+          </code>
+          <div class="tip" id="72">
+            <strong>Signature:</strong> projection:(&#39;Edge -&gt; &#39;REdge) -&gt; g:Graph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; -&gt; &#39;REdge [] []<br />
+                          <strong>Type parameters:</strong> 'Edge, 'REdge, 'Vertex, 'Label          </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Undirected.fs#L261-261" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Transfroms a graph into a adjacency matrix, maps every edge using the projection.</p>
 
 
         </td>
@@ -87,8 +127,10 @@
             
             <li class="nav-header">Getting started</li>
             <li><a href="/FSharp.FGL/tutorial.html">Introduction</a></li>
-			</li>
+			
 			<li><a href="/FSharp.FGL/newgraph.html">Working with FSharp.FGL</a></li>
+            <li class="nav-header">Testing</li>
+            <li><a href="/FSharp.FGL/models.html">Testing With Models</a></li>
             <li class="nav-header">Documentation</li>
             <li><a href="/FSharp.FGL/reference/index.html">API Reference</a></li>
           </ul>
