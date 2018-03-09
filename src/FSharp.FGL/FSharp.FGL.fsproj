@@ -65,7 +65,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\.paket\paket.targets" />
   <ItemGroup>
     <None Include="Script.fsx" />
     <None Include="paket.references" />

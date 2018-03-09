@@ -61,7 +61,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\.paket\paket.targets" />
   <ItemGroup>
     <Compile Include="Tests.fs" />
     <None Include="paket.references" />
