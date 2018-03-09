@@ -6,14 +6,17 @@ nuget Aether
 group Build
   source https://nuget.org/api/v2
   
-  nuget SourceLink.Fake
   nuget FAKE
   nuget FSharp.Formatting
+
+  nuget SourceLink.Create.CommandLine copy_local: true
+  clitool dotnet-sourcelink
 
   github fsharp/FAKE modules/Octokit/Octokit.fsx
 
 group Test
   source https://nuget.org/api/v2
   
-  nuget NUnit ~> 3
-  nuget NUnit.Runners ~> 3
+  nuget xunit
+
+  clitool dotnet-xunit

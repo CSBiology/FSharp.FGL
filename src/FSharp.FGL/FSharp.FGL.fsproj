@@ -7,17 +7,11 @@
     <AssemblyName>FSharp.FGL</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Script.fsx" />
-    <None Include="paket.references" />
-    <None Include="paket.template" />
     <Content Include="App.config" />
     <Compile Include="Graph.fs" />
     <Compile Include="Models.fs" />
     <Compile Include="Undirected.fs" />
     <Compile Include="Directed.fs" />
-    <None Include="Scripts\load-references-debug.fsx" />
-    <None Include="Scripts\load-project-debug.fsx" />
-    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

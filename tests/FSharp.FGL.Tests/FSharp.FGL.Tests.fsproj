@@ -2,13 +2,15 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <!-- unfortunately dotnet xunit needs a little help to get the right runtime version -->
+    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">2.0.0</RuntimeFrameworkVersion>
     <ProjectGuid>12cff99c-5660-42fe-9370-9085a6558f16</ProjectGuid>
     <RootNamespace>FSharp.FGL.Tests</RootNamespace>
     <AssemblyName>FSharp.FGL.Tests</AssemblyName>
+    <DebugType>portable</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Tests.fs" />
-    <None Include="paket.references" />
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
