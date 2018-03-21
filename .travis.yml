@@ -1,5 +1,5 @@
 language: csharp
-mono: none # until https://github.com/dotnet/sdk/issues/335 is solved installing mono makes no sense
+mono: latest # until https://github.com/dotnet/sdk/issues/335 is solved installing mono makes no sense
 dotnet: 2.1.101
 
 sudo: false  # use the new container-based Travis infrastructure

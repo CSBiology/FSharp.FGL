@@ -1,8 +1,9 @@
 version: '0.0.1.{build}'
 image: Visual Studio 2017
-branches:
+# branches:
 #   only:
 #   - master
+skip_tags: true
 init:
   # Good practise, because Windows line endings are different from Unix/Linux ones
   - cmd: git config --global core.autocrlf true
