@@ -12,7 +12,7 @@ install:
 before_build:
   # Display .NET Core version
   - cmd: dotnet --version
-  - cmd: Get-ChildItem
+  - cmd: 'dir /a'
 build_script:
   # output will be in bin
   - cmd: build.cmd All
