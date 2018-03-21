@@ -43,9 +43,6 @@ let solutionFile  = "FSharp.FGL.sln"
 // Default target configuration
 let configuration = environVarOrDefault "Configuration" "Release"
 
-// Pattern specifying assemblies to be tested using NUnit
-let testAssemblies = "tests/**/bin" </> configuration </> "*Tests*.dll"
-
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
 let gitOwner = "CSBiology"
@@ -62,7 +59,7 @@ let gitRaw = environVarOrDefault "gitRaw" "https://raw.githubusercontent.com/CSB
 // --------------------------------------------------------------------------------------
 
 // dotnet cli version
-let dotnetcliVersion = "2.1.100"
+let dotnetcliVersion = "2.1.102"
 
 // Read additional information from the release notes document
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
@@ -137,17 +134,19 @@ Target "Restore" (fun _ ->
 )
 
 Target "Build" (fun _ ->
-    DotNetCli.Build (fun p ->
-        { p with AdditionalArgs = "/p:SourceLinkCreate=true"::p.AdditionalArgs})
+    DotNetCli.Build id
 )
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using dotnet cli tool
 
 Target "RunTests" (fun _ ->
-    DotNetCli.RunCommand (fun p ->
-        { p with WorkingDir = __SOURCE_DIRECTORY__ </> "tests" </> "FSharp.FGL.Tests" } )
-        (sprintf "%s" "xunit")
+    !! ("tests/**/*.fsproj")
+    |> Seq.iter (fun pr ->
+        DotNetCli.Test (fun p ->
+            { p with Project = pr}
+        )
+    )
 )
 
 // --------------------------------------------------------------------------------------
@@ -159,15 +158,6 @@ Target "NuGet" (fun _ ->
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes})
-)
-
-Target "Sourcelink.Test" (fun _ ->
-    !! (sprintf "%s/*.nupkg" "bin")
-    |> Seq.iter (fun nupkg ->
-        DotNetCli.RunCommand
-            (fun p -> { p with WorkingDir = __SOURCE_DIRECTORY__ @@ "src" @@ "FSharp.FGL" } )
-            (sprintf "sourcelink test %s" nupkg)
-    )
 )
 
 Target "PublishNuget" (fun _ ->
@@ -383,7 +373,6 @@ Target "All" DoNothing
   ==> "GenerateReferenceDocs"
   ==> "GenerateDocs"
   ==> "NuGet"
-//   ==> "Sourcelink.Test" Have to find out why this breaks
   ==> "BuildPackage"
   ==> "All"
   =?> ("ReleaseDocs",isLocalBuild)

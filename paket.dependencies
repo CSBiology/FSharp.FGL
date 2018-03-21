@@ -4,19 +4,16 @@ nuget FSharp.Core redirects: force
 nuget Aether
 
 group Build
-  source https://nuget.org/api/v2
-  
-  nuget FAKE
-  nuget FSharp.Formatting
+    source https://nuget.org/api/v2
 
-  nuget SourceLink.Create.CommandLine copy_local: true
-  clitool dotnet-sourcelink
+    nuget FAKE
+    nuget FSharp.Formatting
 
-  github fsharp/FAKE modules/Octokit/Octokit.fsx
+    github fsharp/FAKE modules/Octokit/Octokit.fsx
 
 group Test
-  source https://nuget.org/api/v2
-  
-  nuget xunit
+    source https://nuget.org/api/v2
 
-  clitool dotnet-xunit
+    nuget xunit
+    nuget Microsoft.NET.Test.Sdk
+    nuget xunit.runner.visualstudio

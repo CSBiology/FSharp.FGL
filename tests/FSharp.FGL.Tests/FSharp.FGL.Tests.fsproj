@@ -8,6 +8,7 @@
     <RootNamespace>FSharp.FGL.Tests</RootNamespace>
     <AssemblyName>FSharp.FGL.Tests</AssemblyName>
     <DebugType>portable</DebugType>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Tests.fs" />

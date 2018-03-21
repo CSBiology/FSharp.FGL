@@ -5,8 +5,8 @@ open System.Reflection
 [<assembly: AssemblyTitleAttribute("FSharp.FGL")>]
 [<assembly: AssemblyProductAttribute("FSharp.FGL")>]
 [<assembly: AssemblyDescriptionAttribute("Functional graph library for F#")>]
-[<assembly: AssemblyVersionAttribute("1.0")>]
-[<assembly: AssemblyFileVersionAttribute("1.0")>]
+[<assembly: AssemblyVersionAttribute("0.6")>]
+[<assembly: AssemblyFileVersionAttribute("0.6")>]
 [<assembly: AssemblyConfigurationAttribute("Release")>]
 do ()
 
@@ -14,6 +14,6 @@ module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "FSharp.FGL"
     let [<Literal>] AssemblyProduct = "FSharp.FGL"
     let [<Literal>] AssemblyDescription = "Functional graph library for F#"
-    let [<Literal>] AssemblyVersion = "1.0"
-    let [<Literal>] AssemblyFileVersion = "1.0"
+    let [<Literal>] AssemblyVersion = "0.6"
+    let [<Literal>] AssemblyFileVersion = "0.6"
     let [<Literal>] AssemblyConfiguration = "Release"

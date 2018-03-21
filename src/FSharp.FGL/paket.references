@@ -1,6 +1,2 @@
 FSharp.Core
 Aether
-
-group Build
-    SourceLink.Create.CommandLine
-    dotnet-sourcelink

@@ -5,6 +5,7 @@
     <ProjectGuid>4e235ddd-1b59-4a93-abe9-2feef18b09a1</ProjectGuid>
     <RootNamespace>FSharp.FGL</RootNamespace>
     <AssemblyName>FSharp.FGL</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="App.config" />
