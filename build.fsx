@@ -59,7 +59,7 @@ let gitRaw = environVarOrDefault "gitRaw" "https://raw.githubusercontent.com/CSB
 // --------------------------------------------------------------------------------------
 
 // dotnet cli version
-let dotnetcliVersion = "2.1.102"
+let dotnetcliVersion = "2.1.101"
 
 // Read additional information from the release notes document
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
@@ -126,7 +126,14 @@ Target "Clean" (fun _ ->
 // restore and build
 
 Target "InstallDotNetCLI" (fun _ ->
-    DotNetCli.InstallDotNetSDK dotnetcliVersion |> ignore
+    let installedVersion =
+        if DotNetCli.isInstalled () then
+            DotNetCli.getVersion ()
+        else
+            ""
+
+    if not (installedVersion.StartsWith("2.1")) then
+        DotNetCli.InstallDotNetSDK dotnetcliVersion |> ignore
 )
 
 Target "Restore" (fun _ ->
@@ -349,10 +356,10 @@ Target "ReleaseLocal" (fun _ ->
     CreateDir tempDocsDir
     CleanDir tempDocsDir
     CopyRecursive "docs/output" tempDocsDir true |> tracefn "%A"
-    ReplaceInFiles 
+    ReplaceInFiles
         (seq {
             yield "href=\"/" + project + "/","href=\""
-            yield "src=\"/" + project + "/","src=\""}) 
+            yield "src=\"/" + project + "/","src=\""})
         ((filesInDirMatching "*.html" (directoryInfo tempDocsDir)) |> Array.map (fun x -> tempDocsDir + "/" + x.Name))
 )
 

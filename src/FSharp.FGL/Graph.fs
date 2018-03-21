@@ -1,4 +1,4 @@
-﻿namespace FSharp.FGL
+namespace FSharp.FGL
 
 open Aether
 
