@@ -8,4 +8,4 @@ before_install:
   - chmod +x build.sh
 
 script:
- - build.sh RunTests
+ - ./build.sh RunTests
