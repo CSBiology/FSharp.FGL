@@ -25,11 +25,6 @@ GITHUB
   remote: fsharp/FAKE
     modules/Octokit/Octokit.fsx (c160d4907360cfd42904008dab2bd22c0a4a9952)
       Octokit (>= 0.20)
-GROUP MultiFramework
-NUGET
-  remote: https://dotnet.myget.org/F/dotnet-core/api/v3/index.json
-    Microsoft.TargetingPack.NETFramework.v4.6.1 (1.0.0) - version_in_path: true
-
 GROUP Test
 RESTRICTION: || (== net461) (== netcoreapp2.0)
 NUGET

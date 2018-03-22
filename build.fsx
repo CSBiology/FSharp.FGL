@@ -141,7 +141,11 @@ Target "Restore" (fun _ ->
 )
 
 Target "Build" (fun _ ->
-    DotNetCli.Build id
+    { BaseDirectory = __SOURCE_DIRECTORY__
+      Includes = [ project + ".sln" ]
+      Excludes = [] }
+    |> MSBuild "" "Build" ["Configuration", configuration;]
+    |> Log "AppBuild-Output: "
 )
 
 // --------------------------------------------------------------------------------------
@@ -151,7 +155,7 @@ Target "RunTests" (fun _ ->
     !! ("tests/**/*.fsproj")
     |> Seq.iter (fun pr ->
         DotNetCli.Test (fun p ->
-            { p with Project = pr}
+            { p with Project = pr; Configuration = configuration}
         )
     )
 )

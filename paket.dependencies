@@ -20,8 +20,3 @@ group Test
     nuget xunit
     nuget Microsoft.NET.Test.Sdk
     nuget xunit.runner.visualstudio
-
-group MultiFramework
-    source: https://dotnet.myget.org/F/dotnet-core/api/v3/index.json
-
-    nuget Microsoft.TargetingPack.NETFramework.v4.6.1 1.0.0 version_in_path: true
