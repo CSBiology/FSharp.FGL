@@ -11,6 +11,8 @@ group Build
     nuget FAKE
     nuget FSharp.Formatting
 
+    nuget xunit.runner.console
+
     github fsharp/FAKE modules/Octokit/Octokit.fsx
 
 group Test
