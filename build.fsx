@@ -8,6 +8,7 @@ open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open System
+open System.IO
 
 // --------------------------------------------------------------------------------------
 // Information about the project to be used at NuGet and in AssemblyInfo files
@@ -151,13 +152,47 @@ Target "Build" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Run the unit tests using dotnet cli tool
 
+open Fake.Testing
+
+let runTests config (proj : string) =
+    if EnvironmentHelper.isWindows then
+        DotNetCli.Test (fun c ->
+            { c with
+                Project = proj
+                Configuration = config })
+    else
+        // work around xunit/mono issue
+        let projDir = Path.GetDirectoryName proj
+        let projName = Path.GetFileNameWithoutExtension proj
+        let netcoreFrameworks, legacyFrameworks =
+            !! (projDir @@ "bin" @@ config @@ "*/")
+            |> Seq.map Path.GetFileName
+            |> Seq.toArray
+            |> Array.partition
+                (fun f ->
+                    f.StartsWith "netcore" ||
+                    f.StartsWith "netstandard")
+
+        for framework in netcoreFrameworks do
+            DotNetCli.Test (fun c ->
+                { c with
+                    Project = proj
+                    Framework = framework
+                    Configuration = config })
+
+        for framework in legacyFrameworks do
+            let assembly = projDir @@ "bin" @@ config @@ framework @@ projName + ".dll"
+            !! assembly
+            |> xUnit2 (fun c ->
+                { c with
+                    Parallel = ParallelMode.Collections
+                    TimeOut = TimeSpan.FromMinutes 20. })
+
+let testProjects = "tests/**/*.??proj"
+
 Target "RunTests" (fun _ ->
-    !! ("tests/**/*.fsproj")
-    |> Seq.iter (fun pr ->
-        DotNetCli.Test (fun p ->
-            { p with Project = pr; Configuration = configuration}
-        )
-    )
+    for proj in !! testProjects do
+        runTests "Release" proj
 )
 
 // --------------------------------------------------------------------------------------
