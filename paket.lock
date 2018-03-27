@@ -1,12 +1,12 @@
-RESTRICTION: == netstandard2.0
+RESTRICTION: || (== net461) (== netstandard2.0)
 NUGET
   remote: https://www.nuget.org/api/v2
     Aether (8.2)
       FSharp.Core (>= 4.1)
-      NETStandard.Library (>= 1.6.1)
+      NETStandard.Library (>= 1.6.1) - restriction: || (&& (== net461) (< net45) (>= netstandard1.6)) (== netstandard2.0)
     FSharp.Core (4.3.4) - redirects: force
-    Microsoft.NETCore.Platforms (2.0.1)
-    NETStandard.Library (2.0.1)
+    Microsoft.NETCore.Platforms (2.0.1) - restriction: || (&& (== net461) (>= monoandroid) (>= netstandard1.6)) (&& (== net461) (>= monotouch)) (&& (== net461) (< net45) (>= netstandard1.6)) (&& (== net461) (< net45) (>= netstandard2.0)) (&& (== net461) (>= netcoreapp2.0)) (&& (== net461) (< netstandard1.0) (>= netstandard1.6)) (&& (== net461) (< netstandard1.3) (>= netstandard1.6) (>= wpa81)) (&& (== net461) (>= netstandard1.6) (< portable-net45+win8+wpa81)) (&& (== net461) (>= netstandard1.6) (>= uap10.0)) (&& (== net461) (>= netstandard1.6) (>= uap10.1)) (&& (== net461) (>= xamarinios)) (&& (== net461) (>= xamarinmac)) (&& (== net461) (>= xamarintvos)) (&& (== net461) (>= xamarinwatchos)) (== netstandard2.0)
+    NETStandard.Library (2.0.1) - restriction: || (&& (== net461) (< net45) (>= netstandard1.6)) (== netstandard2.0)
       Microsoft.NETCore.Platforms (>= 1.1)
 
 GROUP Build
