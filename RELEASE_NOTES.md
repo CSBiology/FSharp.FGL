@@ -1,6 +1,6 @@
-### 1.0 - Unreleased
-* More awesome stuff coming
-* Added SourceLink for Source Indexing PDB
+### 0.6 - Unreleased
+* .NET Standard 2.0
+* SDK based project
 
 #### 0.5.1-beta - November 6 2013
 * Improved quality of solution-wide README.md files
