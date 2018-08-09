@@ -2,6 +2,7 @@ framework: auto-detect
 
 source https://nuget.org/api/v2
 
+nuget Aether
 nuget FSharp.Core
 nuget Argu
 

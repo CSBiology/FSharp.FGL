@@ -14,7 +14,6 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="App.config" />
     <Compile Include="Graph.fs" />
     <Compile Include="Models.fs" />
     <Compile Include="Undirected.fs" />
