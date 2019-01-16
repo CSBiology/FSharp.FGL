@@ -1,11 +1,24 @@
 language: csharp
-mono: latest # until https://github.com/dotnet/sdk/issues/335 is solved we don't have the full benefit of mono
-dotnet: 2.1.101
-
-sudo: false  # use the new container-based Travis infrastructure
+#sudo: required
+sudo: false
+dist: trusty # Ubuntu 14.04
+mono: latest
+dotnet : 2.1.403
 
 before_install:
-  - chmod +x build.sh
+
+ - dotnet restore build.proj
+
+install:
+
+  # workaround for missing .net 4.5 targing pack
+
+  - export FrameworkPathOverride=$(dirname $(which mono))/../lib/mono/4.5/
 
 script:
- - ./build.sh RunTests
+ - dotnet fake build
+
+branches:
+  except:
+    - gh-pages
+    - nuget
