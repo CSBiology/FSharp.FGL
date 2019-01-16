@@ -36,19 +36,33 @@
         <div class="span3">
           <img src="@Root/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
           <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">@Properties["project-name"]</li>
-            <li><a href="@Root/index.html">Home page</a></li>
-            <li class="divider"></li>
-            <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
-            <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
-            <li><a href="@Root/license.html">License</a></li>
-            <li><a href="@Root/release-notes.html">Release Notes</a></li>
-            
-            <li class="nav-header">Getting started</li>
-            <li><a href="@Root/tutorial.html">Sample tutorial</a></li>
+              <li class="nav-header">@Properties["project-name"]</li>
+              <li><a href="@Root/index.html">Home page</a></li>
+              <li class="divider"></li>
+              <li><a href="@Properties["project-nuget"]">Get Library via NuGet</a></li>
+              <li><a href="@Properties["project-github"]">Source Code on GitHub</a></li>
+              <li><a href="@Root/license.html">License</a></li>
+              <li><a href="@Root/release-notes.html">Release Notes</a></li>
 
-            <li class="nav-header">Documentation</li>
-            <li><a href="@Root/reference/index.html">API Reference</a></li>
+              <li class="nav-header">Getting started</li>
+              <li><a href="@Root/tutorial.html">Introduction</a></li>
+              @if (Properties.Dictionary.ContainsKey("page-source") && Properties["page-source"].ToString().EndsWith("tutorial.fsx"))
+              {
+                  <ul class="nav nav-list">
+                      <li><a href="@Root/tutorial.html#InductiveGraph">Inductive Graph</a></li>
+                      <li><a href="@Root/tutorial.html#Features">Features</a></li>
+                  </ul>
+
+              }
+
+              <li><a href="@Root/newgraph.html">Working with FSharp.FGL</a></li>
+              <li class="nav-header">Testing</li>
+              <li><a href="@Root/models.html">Testing With Models</a></li>
+
+              <li><a href="@Root/tutorial.html">Sample tutorial</a></li>
+
+              <li class="nav-header">Documentation</li>
+              <li><a href="@Root/reference/index.html">API Reference</a></li>
           </ul>
         </div>
       </div>
