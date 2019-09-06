@@ -183,7 +183,7 @@ module Graph =
         g
         |> Map.iter (fun v mc ->  action (toContext v mc))
 
-
+///Functions for vertices of both directed and undirected graphs
 module Vertices = 
 
     (* Add and remove *)
