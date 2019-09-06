@@ -206,7 +206,7 @@ module Vertices =
         List.fold (fun g' v -> remove v g') g nList
 
 
-        ///Evaluates the number of vertices in the graph.
+    ///Evaluates the number of vertices in the graph.
     let count (g: Graph<'Vertex,'Label,'Edge>) : int = 
         g.Count
 
@@ -224,6 +224,12 @@ module Vertices =
     let tryFind (v: 'Vertex) (g: Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> option = 
         Map.tryFind v g
         |> Option.map (fun (_, l, _) -> v, l)    
+
+
+    ///Creates a list of all vertices and their labels.
+    let toVertexList (g:Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> list=
+        Map.toList g
+        |> List.map (fun (v, (_, l, _)) -> v, l)
 
 
 
@@ -249,14 +255,24 @@ module Vertices =
         g
         |> Graph.iterContexts (fun (_, v, l, _) -> action v l)
 
-    
+    ///Performs a given function on every vertex and its label of a graph. The mapping function also receives an ascending integer index.
     let iteri (action: int -> 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit =
         let mutable i = 0
         g
         |> Map.iter (fun vertex (_, l, _) ->
             action i vertex l
             i <- i + 1)
-    
+ 
+    /// Applies a function folder to each vertex of the graph, threading an accumulator argument through the computation.
     let fold (state: 'T) (folder: 'T -> 'Vertex -> 'Label -> 'T) (g: Graph<'Vertex,'Label,'Edge>) : 'T = 
         g
         |> Graph.foldContexts state (fun acc (_, v, l, _) -> folder acc v l)
+
+    /// Returns a new graph containing only the vertices for which the given predicate returns true.
+    let filter (predicate : 'Vertex -> 'Label -> bool) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        let verticesToRemove = 
+            g
+            |> toVertexList
+            |> List.choose (fun (v,l) -> if predicate v l then None else Some v)
+        removeMany verticesToRemove g
+

@@ -63,6 +63,17 @@ module Vertices =
                 let degree = List.length neighbours
                 ((float neighbourEdges) / (float (degree * (degree - 1)))) / 2.
     
+    /// Returns all edges pointing to the given vertex
+    let inwardEdges (c:Context<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list =
+        match c with
+        | (p, v, _, _) ->
+            p |> List.map (fun (v2,e) -> v2,v,e)
+
+    /// Returns all edges pointing away from the given vertex
+    let outwardEdges (c:Context<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list =
+        match c with
+        | (_, v, _, s) ->
+            s |> List.map (fun (v2,e) -> v,v2,e)
 
     //General
 
@@ -136,6 +147,7 @@ module Edges =
             Map.tryFind v1 g
             |> Option.bind (fun (_, _, s) -> Map.tryFind v2 s)
             |> Option.map (fun e -> (v1,v2,e))
+
     ///Transforms a directed graph to an undirected graph.
     let undirect (computeEdge: 'Edge -> 'Edge -> 'Edge) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
         g
@@ -153,6 +165,16 @@ module Edges =
     ///Reverses all edges in the graph.
     let rev (g: Graph<'Vertex,'Label,'Edge>) : (Graph<'Vertex,'Label,'Edge>)= 
         Map.map (fun _ (p,l,s) -> (s,l,p)) g
+
+    
+    ///Creates a list of all edges and their labels.
+    let toEdgeList (g:Graph<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list = 
+       g
+       |> Graph.mapContexts (fun (p,v,l,s) -> s)
+       |> Map.toList
+       |> List.collect (fun (v,es) -> 
+            es
+            |> List.map (fun (v2,e) -> v,v2,e))
 
 
     //Iterative 
@@ -199,14 +221,15 @@ module Edges =
             | (None,_) -> st
         recurse state graph
 
-    let filter (predicate : LEdge<'Vertex,'Edge> -> bool) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+    /// Returns a new graph containing only the edges for which the given predicate returns true.
+    let filter (predicate : 'Vertex -> 'Vertex -> 'Edge -> bool) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
         g
         |> Graph.mapContexts (fun (p, v, l, s) -> 
             (
-            p |> List.filter (fun (v2,e) -> predicate (v2,v,e)),
+            p |> List.filter (fun (v2,e) -> predicate v2 v e),
             v,
             l,
-            s |> List.filter (fun (v2,e) -> predicate (v,v2,e))
+            s |> List.filter (fun (v2,e) -> predicate v v2 e)
             )
             |> Graph.fromContext
             )
