@@ -15,7 +15,7 @@ type LEdge<'Vertex,'Edge> =
     'Vertex * 'Vertex * 'Edge
 
 ///Tuple list of adjacent vertices and the linking edges
-type Adj<'Vertex,'Edge> when 'Vertex: comparison=
+type Adj<'Vertex,'Edge> when 'Vertex: comparison =
     List<'Vertex*'Edge>
 
 ///Context of a vertice as defined by Martin Erwig. Adjacency of type 'Adj'
@@ -61,23 +61,23 @@ module Graph =
 
     (* Transition functions *)
 
-    let private fromAdj<'Vertex,'Edge when 'Vertex: comparison> : Adj<'Vertex,'Edge> -> MAdj<'Vertex,'Edge> =
+    let internal fromAdj<'Vertex,'Edge when 'Vertex: comparison> : Adj<'Vertex,'Edge> -> MAdj<'Vertex,'Edge> =
         Map.ofList 
 
-    let private fromContext<'Vertex,'Label,'Edge when 'Vertex: comparison> : Context<'Vertex,'Label,'Edge> -> MContext<'Vertex,'Label,'Edge> =
+    let internal fromContext<'Vertex,'Label,'Edge when 'Vertex: comparison> : Context<'Vertex,'Label,'Edge> -> MContext<'Vertex,'Label,'Edge> =
         fun (p, _, l, s) -> fromAdj p, l, fromAdj s
 
-    let private toAdj<'Vertex,'Edge when 'Vertex: comparison> : MAdj<'Vertex,'Edge> -> Adj<'Vertex,'Edge> =
+    let internal toAdj<'Vertex,'Edge when 'Vertex: comparison> : MAdj<'Vertex,'Edge> -> Adj<'Vertex,'Edge> =
         Map.toList
 
-    let private toContext (v:'Vertex) (mc : MContext<'Vertex,'Label,'Edge>) : Context<'Vertex,'Label,'Edge> =
+    let internal toContext (v:'Vertex) (mc : MContext<'Vertex,'Label,'Edge>) : Context<'Vertex,'Label,'Edge> =
         mc
         |> fun (p, l, s) -> toAdj p, v, l, toAdj s
 
 
     (* Compose Graphs *)
 
-    let private composeGraph c v p s (g:Graph<'Vertex,'Label,'Edge>) =
+    let internal composeGraph c v p s (g:Graph<'Vertex,'Label,'Edge>) =
         let g1 = (Optic.set (Map.value_ v) (Some (fromContext c))) g
         let g2 = 
             List.fold (fun g (value, edge) -> 
@@ -93,18 +93,18 @@ module Graph =
             adjListInGraphMapping g) 
             g2 s
 
-    let private compose c g =
+    let internal compose c g =
         composeGraph c (Optic.get Lenses.val_ c) (Optic.get Lenses.pred_ c) (Optic.get Lenses.succ_ c) g
       
     (* Decompose Graphs *)
 
-    let private decomposeContext v c : Context<'Vertex,'Label,'Edge>=
+    let internal decomposeContext v c : Context<'Vertex,'Label,'Edge>=
         c
         |> Optic.map Lenses.mpred_ (Map.remove v)
         |> Optic.map Lenses.msucc_ (Map.remove v)
         |> toContext v
 
-    let private decomposeGraph v p s g : Graph<'Vertex,'Label,'Edge>=
+    let internal decomposeGraph v p s g : Graph<'Vertex,'Label,'Edge>=
         let g1 = Map.remove v g
         let g2 =
             List.fold (fun g (value, _) ->
@@ -182,4 +182,3 @@ module Graph =
     let iterContexts (action : Context<'Vertex,'Label,'Edge> -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit = 
         g
         |> Map.iter (fun v mc ->  action (toContext v mc))
-
