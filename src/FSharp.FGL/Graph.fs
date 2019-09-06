@@ -182,3 +182,81 @@ module Graph =
     let iterContexts (action : Context<'Vertex,'Label,'Edge> -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit = 
         g
         |> Map.iter (fun v mc ->  action (toContext v mc))
+
+
+module Vertices = 
+
+    (* Add and remove *)
+
+    ///Adds a labeled vertex to the graph.
+    let add ((v, l): LVertex<'Vertex,'Label>) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        Map.add v (Map.empty, l, Map.empty) g
+
+    ///Adds a list of labeled vertices to the graph.    
+    let addMany (vertices:list<LVertex<'Vertex,'Label>>) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        List.fold (fun g vertex -> add vertex g) g vertices
+
+    ///Removes a vertex from the graph.
+    let remove (v:'Vertex) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        Graph.decompose v g
+        |> snd
+
+    ///Removes a list of vertices from the graph.
+    let removeMany nList (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        List.fold (fun g' v -> remove v g') g nList
+
+
+        ///Evaluates the number of vertices in the graph.
+    let count (g: Graph<'Vertex,'Label,'Edge>) : int = 
+        g.Count
+
+ 
+    ///Returns true, if the vertex v is contained in the graph. Otherwise, it returns false.
+    let contains v (g: Graph<'Vertex,'Label,'Edge>) : bool =
+        Map.containsKey v g
+
+    ///Lookup a labeled vertex in the graph. Raising KeyNotFoundException if no binding exists in the graph.
+    let find (v: 'Vertex) (g: Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> = 
+        Map.find v g
+        |> fun (_, l, _) -> v, l
+
+    ///Lookup a labeled vertex in the graph, returning a Some value if a binding exists and None if not.
+    let tryFind (v: 'Vertex) (g: Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> option = 
+        Map.tryFind v g
+        |> Option.map (fun (_, l, _) -> v, l)    
+
+
+
+            //Iterative
+
+    ///Maps the vertexlabels of the graph.
+    let map (mapping: 'Vertex -> 'Label -> 'RLabel) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'RLabel,'Edge>=
+        g
+        |> Map.map (fun vertex (p, l, s) ->
+            p, mapping vertex l, s)
+
+    ///Maps the vertexlabels of the graph. The mapping function also receives an ascending integer index.
+    let mapi (mapping: int -> 'Vertex -> 'Label -> 'RLabel) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'RLabel,'Edge> =
+        g
+        |> Map.toArray
+        |> Array.mapi (fun i (v,c) -> v,(i,c))
+        |> Map.ofArray
+        |> Map.map (fun vertex (i,(p, l, s)) ->
+            p, mapping i vertex l, s)
+    
+    ///Performs a given function on every vertex and its label of a graph.
+    let iter (action: 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit=
+        g
+        |> Graph.iterContexts (fun (_, v, l, _) -> action v l)
+
+    
+    let iteri (action: int -> 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit =
+        let mutable i = 0
+        g
+        |> Map.iter (fun vertex (_, l, _) ->
+            action i vertex l
+            i <- i + 1)
+    
+    let fold (state: 'T) (folder: 'T -> 'Vertex -> 'Label -> 'T) (g: Graph<'Vertex,'Label,'Edge>) : 'T = 
+        g
+        |> Graph.foldContexts state (fun acc (_, v, l, _) -> folder acc v l)
