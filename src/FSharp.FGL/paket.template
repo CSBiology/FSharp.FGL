@@ -1,29 +1,25 @@
-type file
-id FSharp.FGL
-title
+type project
+id
     FSharp.FGL
-owners
-    Timo Mühlhaus
 authors 
-    Timo Mühlhaus
-projectUrl
-    https://github.com/CSBiology/FSharp.FGL
-iconUrl
-    https://raw.githubusercontent.com/CSBiology/FSharp.FGL/master/docs/files/img/logo.png
+    HLWeil,WalternativE
+description
+	description
+owners
+    CSBiology
 licenseUrl
-    https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.txt
+    https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE
 requireLicenseAcceptance
-    false
+    False
 language
     F#
 copyright
-    Copyright 2017
+    Copyright 2020
 tags
-    functional graph library F# FSharp bioinformatics
+    F# FSharp bioinformatics datascience biology graph FGL network
 summary
-    Functional graph library for F#
-description
-    Functional graph library for F#
-
-files
-	../../bin/FSharp.FGL ==> lib
+    Functional graph-library written in F#
+repositoryType
+    git
+repositoryUrl
+    https://github.com/CSBiology/FSharp.FGL

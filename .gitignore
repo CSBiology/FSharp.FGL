@@ -20,6 +20,8 @@ build/
 [Bb]in/
 [Oo]bj/
 
+codeCov.xml
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -179,9 +181,7 @@ release.sh
 localpackages/
 paket-files
 *.orig
-docsrc/content/license.md
-docsrc/content/release-notes.md
 .fake
 docsrc/tools/FSharp.Formatting.svclog
 docs
-temp
+/temp
