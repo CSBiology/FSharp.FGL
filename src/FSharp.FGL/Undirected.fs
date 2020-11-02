@@ -181,7 +181,7 @@ module Graph =
                 | Some (_,v,_,_),g -> 
                     hashMap.[v] <- i
                     loop g (i+1)        
-                | None, _ -> i+1
+                | None, _ -> i
             loop g 0
         //Create the matrix
         let adj : 'Edge [][] = Array.init n (fun _ -> 
