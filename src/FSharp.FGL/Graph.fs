@@ -98,11 +98,11 @@ module Graph =
       
     (* Decompose Graphs *)
 
-    let internal decomposeContext v c : Context<'Vertex,'Label,'Edge>=
-        c
-        |> Optic.map Lenses.mpred_ (Map.remove v)
-        |> Optic.map Lenses.msucc_ (Map.remove v)
-        |> toContext v
+    //let internal decomposeContext v c : Context<'Vertex,'Label,'Edge>=
+    //    c
+    //    |> Optic.map Lenses.mpred_ (Map.remove v)
+    //    |> Optic.map Lenses.msucc_ (Map.remove v)
+    //    |> toContext v
 
     let internal decomposeGraph v p s g : Graph<'Vertex,'Label,'Edge>=
         let g1 = Map.remove v g
@@ -124,7 +124,7 @@ module Graph =
     let decompose (v:'Vertex) (g: Graph<'Vertex,'Label,'Edge>) = 
         Map.find v g
         |> fun mc ->
-            let c = decomposeContext v mc
+            let c = toContext v mc
             let g = decomposeGraph v (Optic.get Lenses.pred_ c) (Optic.get Lenses.succ_ c) g
             c, g
 
@@ -132,7 +132,7 @@ module Graph =
     let tryDecompose (v:'Vertex) (g: Graph<'Vertex,'Label,'Edge>) = 
         match Map.tryFind v g with
         | Some mc ->
-            let c = decomposeContext v mc
+            let c = toContext v mc
             let g = decomposeGraph v (Optic.get Lenses.pred_ c) (Optic.get Lenses.succ_ c) g
             Some c, g
         | _ ->
