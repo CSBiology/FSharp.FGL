@@ -38,13 +38,24 @@ This example demonstrates a possible gdf data structure.
 To read GDF files, just use the ofFile function located in the gdf module of the FSharp.FGL.IO namespace. It does not need anything but the file path ans will return the vertices and edges as a vertex list, edge list tupel.
 *)
 open Aether
+
 open FSharp.FGL.IO
-GDF.fromFile @"C:\YourPathString"
+
+let fileDir = __SOURCE_DIRECTORY__ + "/data/"
+
+let path = fileDir + "GDFExample.txt"
+
+let gdfFileRead = GDF.fromFile path
+(***include-value: gdfFileRead***)
+
 (**
-Additionally, you can use the ofSeq function instead of ofFile to directly transform a sequence to a vertex list, edge list tupel.
+Additionally, you can use the fromArray function instead of fromFile to directly transform an array to a vertex list, edge list tupel.
 <br>
 *)
-   
 open Aether
+
 open FSharp.FGL.IO
-GDF.fromSeq (nodedef>name VARCHAR,label VARCHAR;s1,Site number 1;edgedef>node1 VARCHAR,node2 VARCHAR, weight DOUBLE;s1,s2,1.2341)
+
+let gdfArrayRead = GDF.fromArray [|nodedef>name VARCHAR,label VARCHAR;s1,Site number 1;s2,Site number 2;edgedef>node1 VARCHAR,node2 VARCHAR, weight DOUBLE;s1,s2,1.2341|]
+
+(***include-value: gdfArrayRead***)
