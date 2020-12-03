@@ -59,3 +59,22 @@ open FSharp.FGL.IO
 let gdfArrayRead = GDF.fromArray [|nodedef>name VARCHAR,label VARCHAR;s1,Site number 1;s2,Site number 2;edgedef>node1 VARCHAR,node2 VARCHAR, weight DOUBLE;s1,s2,1.2341|]
 
 (***include-value: gdfArrayRead***)
+(**
+##Writing GDF format files
+<br>
+
+To save a graph that takes the same form as a graph created by the reading GDF file functions, the toFile function can be applied. Additionally to the graph and the filepath, the state of the graph(directed/undirected) has to be stated. In case of an undirected graph, the addendum false is used.
+*)
+open Aether
+
+open FSharp.FGL.IO
+
+open FSharp.FGL.Directed
+
+let fileDir = __SOURCE_DIRECTORY__ + "/data/"
+
+let path = fileDir + "GDFExampleToFile.txt"
+
+let graph = Graph.create gdfFileRead
+
+toFile graph false path
