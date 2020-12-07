@@ -38,10 +38,10 @@ module GDF =
    //Returns a appropite function based on the value of the header, to change the corresponding values to their respective TypeDefinitoions type.
     let private getTypeInfoMapper (headerValue:string) =
         let headerValueId = (headerValue.Split ' '|> Array.item 0)
-        if      headerValue.Trim().Contains "VARCHAR"   then (fun x -> match x with |" "| "" ->  headerValueId,(VARCHAR "DefaultValue")                |_ -> headerValueId,(VARCHAR x))
-        elif    headerValue.Trim().Contains "INT"       then (fun x -> match x with |" "| "" ->  headerValueId,(INT 1)                                 |_ -> headerValueId,(INT (int x)))
-        elif    headerValue.Trim().Contains "DOUBLE"    then (fun x -> match x with |" "| "" ->  headerValueId,(DOUBLE 0.0)                            |_ -> (headerValueId,(DOUBLE (float x))))
-        elif    headerValue.Trim().Contains "BOOLEAN"   then (fun x -> match x with |" "| "" ->  headerValueId,(BOOLEAN true)                          |"true" -> headerValueId,(BOOLEAN true)|"false" -> headerValueId,(BOOLEAN false)|_ -> failwith"unknown value in visible")
+        if      headerValue.Trim().Contains "VARCHAR"   then (fun x -> match x with |" "| "" ->  headerValueId,(VARCHAR "")                 |_ -> headerValueId,(VARCHAR x))
+        elif    headerValue.Trim().Contains "INT"       then (fun x -> match x with |" "| "" ->  headerValueId,(INT 1)                      |_ -> headerValueId,(INT (int x)))
+        elif    headerValue.Trim().Contains "DOUBLE"    then (fun x -> match x with |" "| "" ->  headerValueId,(DOUBLE 0.0)                 |_ -> (headerValueId,(DOUBLE (float x))))
+        elif    headerValue.Trim().Contains "BOOLEAN"   then (fun x -> match x with |" "| "" ->  headerValueId,(BOOLEAN true)               |"true" -> headerValueId,(BOOLEAN true)|"false" -> headerValueId,(BOOLEAN false)|_ -> failwith"unknown value in visible")
         else failwith "unknown typeAnnotation in header"
 
     //Reconstructs the intended Type of var x from TypeInfo         
@@ -137,9 +137,8 @@ module GDF =
         |> System.IO.File.ReadAllLines
         |> fromArray
 
-
     //Returns the GDFValue-type as string
-    let typeOfGDFValue (value:GDFValue) =    
+    let private gdfTypeToString (value:GDFValue) =    
         match value with
             | VARCHAR     x   -> "VARCHAR"
             | BOOLEAN     x   -> "BOOLEAN"
@@ -149,71 +148,84 @@ module GDF =
     //Applies typeOfGDFValue on all GDF Values of a given Map
     let private getGDFValue (value:Map<'key,GDFValue>) =
         let valueList = Map.toList value|>List.map(snd)
-        List.map(typeOfGDFValue) valueList
-
-    //Adds quotationmarks at the beginning and the end of strings
-    let private addQuotationsToString (x:string) : string =
-        let sb = StringBuilder()
-        let charList = x.ToCharArray()|>List.ofArray
-        let updatedCharList = [''']@charList@[''']
-        for i in updatedCharList do sb.Append(i)
-        sb.ToString()
+        List.map(gdfTypeToString) valueList    
 
     //Checks if a string contains commas, if true then applies addQuotationsToString
     let private addQuotationsIfNeeded (x:string) :string =
-        if x.Contains "'" then addQuotationsToString x
+        if x.Contains "," then sprintf "'%s'" x
         else x
 
     //Reconstructs the header of an edge or node based on a Map<string,GDFValue> 
-    let private reconstructHeader (value:Map<string,GDFValue>) =
-        let headerString    =   value|>Map.toList|>List.map(fst)
-        let headerTypes     =   value|>getGDFValue 
-        let header          =   List.map2 (fun a b -> (a)+" "+(b)) headerString headerTypes
-        let defIndex        =   header|>List.findIndex(fun x -> x.Contains "def>")
-        let headerSortedNew =   ((header.[defIndex])::header)|>List.distinct
-        String.concat ";" headerSortedNew
+    let private reconstructHeaderMapVertex (vertices:LVertex<GDFValue,Map<string,GDFValue>>list) =
+        let headerMap       = List.map snd vertices|>List.map(Map.toList)|>List.concat|>List.map(fun (a,b)-> (a,gdfTypeToString b))|>Map.ofList
+        headerMap
+    let private reconstructHeaderMapEdges (edges:LEdge<GDFValue,Map<string,GDFValue>>list) =
+        let headerMap       = List.map (fun (a,b,c)->c) edges|>List.map(Map.toList)|>List.concat|>List.map(fun (a,b)-> (a,gdfTypeToString b))|>Map.ofList
+        headerMap
+    let private headerMapToString (headerMap:Map<string,string>)=     
+        let mapToString = headerMap|>Map.toList|>List.map(fun (a,b) -> a+" "+b)  
+        mapToString    
 
-    //Reconstructs vertices or edges based on LVertex or LEdge
-    let private reconstructVertices (value:LVertex<GDFValue,Map<string,GDFValue>>)     =
-        let index               =   ("nodedef>name",(fst value))        
-        let valueList           =   index::(snd value|>Map.toList)|>List.distinct
-        let updatedValueList    =   valueList|>List.map(snd)|>List.map(fun x -> gdfValueToString x)
-        let nameIndex           =   valueList|>List.map(fst)|>List.findIndex (fun x -> x.Contains "def>")
-        let valueListSortedNew  =   ((updatedValueList.[nameIndex])::updatedValueList)|>List.distinct|> List.map(addQuotationsIfNeeded)
-        String.concat ";" valueListSortedNew
-    let private reconstructEdges (value:LEdge<GDFValue,Map<string,GDFValue>>)     =
-        let index1              =   ("edgedef>node1"),((fun (a,b,c) -> a) value)
+    //Returns the appropriate default value to the given GDF Type
+    let private getGDFDefaultValue (headerValue:string) =
+        if      headerValue.Trim().Contains "VARCHAR"   then (VARCHAR " ") 
+        elif    headerValue.Trim().Contains "INT"       then (INT 0)
+        elif    headerValue.Trim().Contains "DOUBLE"    then (DOUBLE 0.0)
+        elif    headerValue.Trim().Contains "BOOLEAN"   then (BOOLEAN false)
+        else failwith "unknown typeAnnotation in header"
+
+    //Takes a Value Map(Vertex or Edge) and compares its keys with a Map of the header to find Missing keys. If there are any, it adds these values to the value Map.
+    let private addEmptyValuesIfNeeded (value:Map<string,GDFValue>) (headerMap:Map<string,string>) =
+        if (Map.toList value|>List.map fst|>List.sort) = (Map.toList headerMap|>List.map fst|>List.sort) then
+            let getMissingValues (a,b)  = match a with|true ->false|_ ->true 
+            let headerStrings           = Map.toList headerMap|>List.map fst
+            let missingValues           = List.map (fun x -> Map.containsKey x value) headerStrings|>List.map2 (fun a b ->b,a) headerStrings|>List.filter(fun x -> getMissingValues x)|>List.map snd
+            let missingValueWithType    = List.map2(fun a b -> (a,b)) missingValues (List.map(fun x -> Map.find x headerMap) missingValues)
+            let missingValuesUpdated    =  missingValueWithType|>List.map(fun (a,b)->(a,getGDFDefaultValue b))
+            let updatedMap              = (missingValuesUpdated@(value|>Map.toList))|>Map.ofList
+            updatedMap
+        else
+            value
+
+    //Reconstructs vertices or edges based on LVertex or LEdge and the associated header as Map
+    let private reconstructVertex (value:LVertex<GDFValue,Map<string,GDFValue>>) (headerMap:Map<string,string>)    =
+        let index               =   ("name",(fst value))        
+        let updateValueMap      =   addEmptyValuesIfNeeded (snd value) headerMap
+        let valueList           =   (index::(updateValueMap|>Map.toList))|>List.map(snd)|>List.map(fun x -> gdfValueToString x)|>List.distinct|>List.map(addQuotationsIfNeeded)
+        valueList
+    let private reconstructEdge (value:LEdge<GDFValue,Map<string,GDFValue>>) (headerMap:Map<string,string>)    =
+        let index1              =   ("node1"),((fun (a,b,c) -> a) value)
         let index2              =   ("node2"),((fun (a,b,c) -> b) value)
-        let valueList           =   index1::index2::((fun (a,b,c) -> c) value|>Map.toList)|>List.distinct
-        let updatedValueList    =   valueList|>List.map(snd)|>List.map(fun x -> gdfValueToString x)
-        let nameIndex           =   valueList|>List.map(fst)|>List.findIndex (fun x -> x.Contains "def>")
-        let valueListSortedNew  =   ((updatedValueList.[nameIndex])::updatedValueList)|>List.distinct|> List.map(addQuotationsIfNeeded)
-        String.concat ";" valueListSortedNew
+        let updateValueMap      =   addEmptyValuesIfNeeded ((fun (a,b,c)->c) value) headerMap
+        let valueList           =   (index1::index2::(updateValueMap|>Map.toList))|>List.map(snd)|>List.map(fun x -> gdfValueToString x)|>List.distinct|>List.map(addQuotationsIfNeeded)
+        valueList
 
-    ////WIP, searches for values, that are described in the header but are not present in the value list and adds them as an empty string
-    //let addEmptyValuesIfNeeded (value:(string*GDFValue) list) (header:string)=
-    //    let headerList :string list     =   header.Split ";"|>List.ofArray|>List.sort
-    //    let valueGDFTypes :string list  =   List.map fst value|>List.sort
-    //    if headerList = valueGDFTypes then
-    //        value
-    //    else
-    //       ((),())::value|>List.sort
-       
-    //Constructs an Array containing vertex header,vertices,edge header and edges based on an LVertex list and an LEdge list
-    let private vertexListEdgeListToStringArray (vertexList:LVertex<GDFValue,Map<string,GDFValue>> list) (edgeList:LEdge<GDFValue,Map<string,GDFValue>> list) : string[]=
-        let vertexHeader    = List.map snd vertexList|>List.map reconstructHeader|>List.distinct|>String.concat ";"
-        let edgeHeader      = List.map (fun (a,b,c) ->c) edgeList|>List.map reconstructHeader|>List.distinct|>String.concat ";"
-        let vertices        = List.map reconstructVertices vertexList
-        let edges           = List.map reconstructEdges edgeList
-        let verticesWithHeaders = vertexHeader::vertices
-        let edgesWithHeaders   = edgeHeader::edges
-        verticesWithHeaders@edgesWithHeaders|>List.toArray
-
-    //Takes a graph, transforms it into an array containing all relevant information and writes it into a file indicated by the path
-    let toFile (graph:Graph<'Vertex,'Lable,'Edge>) (edgesDirected:bool) (path:string) =
+    //Takes a graph and transforms it into a .txt file that is readable with the fromFile function.
+    let toFile (graph:Graph<GDFValue,Map<string,GDFValue>,Map<string,GDFValue>>) (edgesDirected:bool) (path:string) =
         let vertexList  = Vertices.toVertexList graph
-        let edgeList    = match edgesDirected with 
+        let edgeList    = 
+            match edgesDirected with 
             |true   -> Directed.Edges.toEdgeList graph
             |_      -> Directed.Edges.toEdgeList graph(***Add function, that removes the return edges?***)  
-        let content = vertexListEdgeListToStringArray vertexList edgeList|> String.concat ";"
-        System.IO.File.AppendAllText(path,content)
+
+        let vertexHeaderMap = reconstructHeaderMapVertex vertexList
+        let edgeHeaderMap   = reconstructHeaderMapEdges edgeList
+
+        let vertexHeader    = 
+            let headerStringList    = headerMapToString vertexHeaderMap 
+            let name                = headerStringList|>List.findIndex(fun x -> x.Contains "name")
+            headerStringList.[name]::headerStringList|>List.distinct|>String.concat ","
+        let edgeHeader      = 
+            let headerStringList    = headerMapToString edgeHeaderMap     
+            let node1               = headerStringList|>List.findIndex(fun x -> x.Contains "node1")
+            let node2               = headerStringList|>List.findIndex(fun x -> x.Contains "node2")
+            headerStringList.[node1]::headerStringList.[node2]::headerStringList|>List.distinct|>String.concat ","
+        
+        let vertexData      = List.map(fun x -> reconstructVertex x vertexHeaderMap) vertexList   |>List.map(String.concat ",")
+        let edgeData        = List.map(fun x -> reconstructEdge x edgeHeaderMap) edgeList          |>List.map(String.concat ",")
+
+        let vertices        = vertexHeader::vertexData
+        let edges           = edgeHeader::edgeData
+
+        let content         = vertices@edges|>String.concat "\n"
+        System.IO.File.AppendAllText(path,content)   
