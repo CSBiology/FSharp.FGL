@@ -6,5 +6,5 @@ open Expecto
 let main argv =
 
     //FSharp.FGL core tests
-    Tests.runTestsWithCLIArgs [] argv SomeTests.testStuff         |> ignore
+    Tests.runTestsWithCLIArgs [] argv SomeTests.testGDFReaderFuntions |>ignore
     0

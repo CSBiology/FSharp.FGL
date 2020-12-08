@@ -17,6 +17,7 @@
     <PackageReference Include="Expecto" Version="9.*" />
     <PackageReference Include="YoloDev.Expecto.TestSdk" Version="0.*" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
+    <ProjectReference Include="..\..\src\FSharp.FGL.IO\FSharp.FGL.IO.fsproj" />
     <ProjectReference Include="..\..\src\FSharp.FGL\FSharp.FGL.fsproj" />
     <PackageReference Update="FSharp.Core" Version="4.*" />
   </ItemGroup>

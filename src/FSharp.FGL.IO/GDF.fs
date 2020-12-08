@@ -39,9 +39,9 @@ module GDF =
     let private getTypeInfoMapper (headerValue:string) =
         let headerValueId = (headerValue.Split ' '|> Array.item 0)
         if      headerValue.Trim().Contains "VARCHAR"   then (fun x -> match x with |" "| "" ->  headerValueId,(VARCHAR "")                 |_ -> headerValueId,(VARCHAR x))
-        elif    headerValue.Trim().Contains "INT"       then (fun x -> match x with |" "| "" ->  headerValueId,(INT 1)                      |_ -> headerValueId,(INT (int x)))
+        elif    headerValue.Trim().Contains "INT"       then (fun x -> match x with |" "| "" ->  headerValueId,(INT 0)                      |_ -> headerValueId,(INT (int x)))
         elif    headerValue.Trim().Contains "DOUBLE"    then (fun x -> match x with |" "| "" ->  headerValueId,(DOUBLE 0.0)                 |_ -> (headerValueId,(DOUBLE (float x))))
-        elif    headerValue.Trim().Contains "BOOLEAN"   then (fun x -> match x with |" "| "" ->  headerValueId,(BOOLEAN true)               |"true" -> headerValueId,(BOOLEAN true)|"false" -> headerValueId,(BOOLEAN false)|_ -> failwith"unknown value in visible")
+        elif    headerValue.Trim().Contains "BOOLEAN"   then (fun x -> match x with |" "| "" ->  headerValueId,(BOOLEAN false)              |"true" -> headerValueId,(BOOLEAN true)|"false" -> headerValueId,(BOOLEAN false)|_ -> failwith"unknown value in visible")
         else failwith "unknown typeAnnotation in header"
 
     //Reconstructs the intended Type of var x from TypeInfo         
