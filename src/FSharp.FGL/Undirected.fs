@@ -125,8 +125,12 @@ module Vertices =
             |> List.collect (fun (v,es) -> 
                 es
                 |> List.map (fun (v2,e) -> v,v2,e))
-        List.fold (fun acc sL -> match List.contains ((fun (a,b,c)->(b,a,c))sL) acc with|true -> acc|false ->sL::acc) [] sourceList
-                 
+        List.fold (fun acc sL -> 
+            match List.contains ((fun (a,b,c) -> (b,a,c)) sL) acc with
+            |true -> acc
+            |false ->sL::acc) [] sourceList
+     
+     
     (* Iterative *)
 
     ///Maps edgelabels of the graph.

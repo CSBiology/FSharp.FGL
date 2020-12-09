@@ -18,22 +18,21 @@ module GDF =
     let private splitElementInfos (line:string) =
         let chars = line.ToCharArray()
 
-        let rec stringDeconstruction insideQuote potEmpty i vertexInfos (sb:StringBuilder) =
+        let rec stringDeconstruction insideQuote i vertexInfos (sb:StringBuilder) =
             match chars.[i] with
             // Handle quote marks
             | '\'' when i = chars.Length-1  -> sb.ToString() :: vertexInfos
-            | '\'' when insideQuote         -> stringDeconstruction false false (i+1) vertexInfos (sb)
-            | '\''                          -> stringDeconstruction true false (i+1) vertexInfos (sb)
+            | '\'' when insideQuote         -> stringDeconstruction false  (i+1) vertexInfos (sb)
+            | '\''                          -> stringDeconstruction true  (i+1) vertexInfos (sb)
             // Handle commas
-            | ',' when insideQuote          -> stringDeconstruction insideQuote false (i+1) vertexInfos (sb.Append ',')
-            | ',' when i = chars.Length-1   -> "" :: vertexInfos
-            | ',' when potEmpty = true      -> stringDeconstruction false false (i+1) (""::vertexInfos) (sb.Clear())
-            | ','                           -> stringDeconstruction insideQuote true (i+1) (sb.ToString() :: vertexInfos) (sb.Clear())
+            | ',' when insideQuote          -> stringDeconstruction insideQuote  (i+1) vertexInfos (sb.Append ',')
+            | ',' when i = chars.Length-1   -> sb.ToString() :: "" :: vertexInfos
+            | ','                           -> stringDeconstruction insideQuote  (i+1) (sb.ToString() :: vertexInfos) (sb.Clear())
             // Handle every other symbol
             | c when i = chars.Length-1     -> sb.Append(c).ToString() :: vertexInfos
-            | c                             -> stringDeconstruction insideQuote false (i+1) vertexInfos (sb.Append c)
+            | c                             -> stringDeconstruction insideQuote  (i+1) vertexInfos (sb.Append c)
 
-        stringDeconstruction false false 0 [] (StringBuilder())
+        stringDeconstruction false 0 [] (StringBuilder())
         |> List.rev
         |> List.toArray
 
@@ -158,16 +157,22 @@ module GDF =
         else x
 
     //Reconstructs the header of an edge or node based on a Map<string,GDFValue> 
-    let private reconstructHeaderMapVertex (vertices:LVertex<GDFValue,Map<string,GDFValue>>list) =
-        //List.map snd vertices|>List.map(Map.toList)|>List.concat|>List.map(fun (a,b)-> (a,gdfTypeToString b))|>Map.ofList
-        vertices |> List.collect (snd >> Map.toList)|>List.map(fun (a,b)-> (a,gdfTypeToString b))|>Map.ofList
+    let private reconstructVerticesHeader (vertices:LVertex<GDFValue,Map<string,GDFValue>>list) =
+        vertices 
+        |>List.collect (snd >> Map.toList)
+        |>List.map(fun (a,b)-> (a,gdfTypeToString b))
+        |>Map.ofList
 
-    let private reconstructHeaderMapEdges (edges:LEdge<GDFValue,Map<string,GDFValue>>list) =
-        //List.map (fun (a,b,c)->c) edges|>List.map(Map.toList)|>List.concat|>List.map(fun (a,b)-> (a,gdfTypeToString b))|>Map.ofList
-        edges |> List.collect ((fun (a,b,c)->c) >> Map.toList)|>List.map(fun (a,b)-> (a,gdfTypeToString b))|>Map.ofList
+    let private reconstructEdgesHeader (edges:LEdge<GDFValue,Map<string,GDFValue>>list) =
+        edges 
+        |>List.collect ((fun (a,b,c)->c) >> Map.toList)
+        |>List.map(fun (a,b)-> (a,gdfTypeToString b))
+        |>Map.ofList
 
     let private headerMapToString (headerMap:Map<string,string>)=     
-        headerMap|>Map.toList|>List.map(fun (a,b) -> a+" "+b)  
+        headerMap
+        |>Map.toList
+        |>List.map(fun (a,b) -> a+" "+b)  
             
 
     //Returns the appropriate default value to the given GDF Type
@@ -181,11 +186,14 @@ module GDF =
     //Takes a Value Map(Vertex or Edge) and compares its keys with a Map of the header to find Missing keys. If there are any, it adds these values to the value Map.
     let private addEmptyValuesIfNeeded (value:Map<string,GDFValue>) (headerMap:Map<string,string>) =
         if (Map.toList value|>List.map fst|>List.sort) = (Map.toList headerMap|>List.map fst|>List.sort) then
-            let getMissingValues (a,b)  = match a with|true ->false|_ ->true 
-            let headerStrings           = Map.toList headerMap|>List.map fst
-            let missingValues           = List.map (fun x -> Map.containsKey x value) headerStrings|>List.map2 (fun a b ->b,a) headerStrings|>List.filter(fun x -> getMissingValues x)|>List.map snd
-            let missingValueWithType    = List.map2(fun a b -> (a,b)) missingValues (List.map(fun x -> Map.find x headerMap) missingValues)
-            let missingValuesUpdated    =  missingValueWithType|>List.map(fun (a,b)->(a,getGDFDefaultValue b))
+            let getMissingValues (a,b)  =   match a with|true ->false|_ ->true 
+            let headerStrings           =   Map.toList headerMap|>List.map fst
+            let missingValues           =   List.map (fun x -> Map.containsKey x value) headerStrings
+                                                |>List.map2 (fun a b ->b,a) headerStrings
+                                                |>List.filter(fun x -> getMissingValues x)
+                                                |>List.map snd
+            let missingValueWithType    =   List.map2(fun a b -> (a,b)) missingValues (List.map(fun x -> Map.find x headerMap) missingValues)
+            let missingValuesUpdated    =   missingValueWithType|>List.map(fun (a,b)->(a,getGDFDefaultValue b))
             (missingValuesUpdated@(value|>Map.toList))|>Map.ofList
         else
             value
@@ -194,13 +202,21 @@ module GDF =
     let private reconstructVertex (value:LVertex<GDFValue,Map<string,GDFValue>>) (headerMap:Map<string,string>)    =
         let index               =   ("name",(fst value))
         let updateValueMap      =   addEmptyValuesIfNeeded (snd value) headerMap
-        (index::(updateValueMap|>Map.toList))|>List.distinct|>List.map(snd)|>List.map(fun x -> gdfValueToString x)|>List.map(addQuotationsIfNeeded)
+        (index::(updateValueMap|>Map.toList))
+            |>List.distinct
+            |>List.map(snd)
+            |>List.map(fun x -> gdfValueToString x)
+            |>List.map(addQuotationsIfNeeded)
         
     let private reconstructEdge (value:LEdge<GDFValue,Map<string,GDFValue>>) (headerMap:Map<string,string>)    =
         let index1              =   ("node1"),((fun (a,b,c) -> a) value)
         let index2              =   ("node2"),((fun (a,b,c) -> b) value)
         let updateValueMap      =   addEmptyValuesIfNeeded ((fun (a,b,c)->c) value) headerMap
-        (index1::index2::(updateValueMap|>Map.toList))|>List.distinct|>List.map(snd)|>List.map(fun x -> gdfValueToString x)|>List.map(addQuotationsIfNeeded)
+        (index1::index2::(updateValueMap|>Map.toList))
+            |>List.distinct
+            |>List.map(snd)
+            |>List.map(fun x -> gdfValueToString x)
+            |>List.map(addQuotationsIfNeeded)
 
     //Takes a graph and transforms it into a .txt file that is readable with the fromFile function.
     let toFile (graph:Graph<GDFValue,Map<string,GDFValue>,Map<string,GDFValue>>) (edgesDirected:bool) (path:string) =
@@ -210,20 +226,27 @@ module GDF =
             |true   -> Directed.Edges.toEdgeList graph
             |_      -> Directed.Edges.toEdgeList graph(***Add function, that removes the return edges?***)  
 
-        let vertexHeaderMap = reconstructHeaderMapVertex vertexList
-        let edgeHeaderMap   = reconstructHeaderMapEdges edgeList
+        let vertexHeaderMap = reconstructVerticesHeader vertexList
+        let edgeHeaderMap   = reconstructEdgesHeader edgeList
 
         let vertexHeader    = 
             let headerStringList    = headerMapToString vertexHeaderMap 
             let name                = headerStringList|>List.findIndex(fun x -> x.Contains "name")
             let headerIndex         = "nodedef>name VARCHAR"
-            headerStringList.[name]::headerIndex::headerStringList|>List.distinct|>List.tail|>String.concat ","
+            headerStringList.[name]::headerIndex::headerStringList
+                |>List.distinct
+                |>List.tail
+                |>String.concat ","
+        
         let edgeHeader      = 
             let headerStringList    = headerMapToString edgeHeaderMap     
             let node1               = headerStringList|>List.findIndex(fun x -> x.Contains "node1")
             let node1Index          = "edgedef>node1 VARCHAR"
             let node2               = headerStringList|>List.findIndex(fun x -> x.Contains "node2")
-            headerStringList.[node1]::node1Index::headerStringList.[node2]::headerStringList|>List.distinct|>List.tail|>String.concat ","
+            headerStringList.[node1]::node1Index::headerStringList.[node2]::headerStringList
+                |>List.distinct
+                |>List.tail
+                |>String.concat ","
         
         let vertexData      = List.map(fun x -> reconstructVertex x vertexHeaderMap) vertexList     |>List.map(String.concat ",")
         let edgeData        = List.map(fun x -> reconstructEdge x edgeHeaderMap) edgeList           |>List.map(String.concat ",")

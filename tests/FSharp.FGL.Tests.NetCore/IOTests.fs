@@ -43,7 +43,7 @@ let testGDFReaderFuntions =
             let testEmptyArray =
                 [|
                     "nodedef>name VARCHAR,att1 VARCHAR,att2 BOOLEAN,att3 INT,att4 DOUBLE";
-                    "s1,,,, ";
+                    "s1,,,,";
                     "s2,,true,1,2.0";
                     "s2,test2,,1,2.0";
                     "s3,test3,true, ,3.0";
