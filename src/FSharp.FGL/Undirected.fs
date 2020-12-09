@@ -119,22 +119,14 @@ module Vertices =
     ///Creates a list of all edges and their labels.
     let toEdgeList (g:Graph<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list = 
         let sourceList = 
-           g
-           |> Graph.mapContexts (fun (p,v,l,s) -> s)
-           |> Map.toList
-           |> List.collect (fun (v,es) -> 
+            g
+            |> Graph.mapContexts (fun (p,v,l,s) -> s)
+            |> Map.toList
+            |> List.collect (fun (v,es) -> 
                 es
                 |> List.map (fun (v2,e) -> v,v2,e))
-        let rec takeOnlyOne (i:int) (targetList:LEdge<'Vertex,'Edge>list) =
-            let edgeMirrored    = (fun (s,t,l) -> (t,s,l)) sourceList.[i]
-            let lastItem        = sourceList.[((List.length sourceList)-1)]
-            if i = List.length sourceList-1 then
-                match (List.contains edgeMirrored targetList) with |true -> targetList|false -> ((sourceList.[i])::targetList)
-            else
-                match (List.contains edgeMirrored targetList) with |true -> takeOnlyOne (i+1) targetList|false -> takeOnlyOne (i+1) ((sourceList.[i])::targetList)            
-        takeOnlyOne 0 []        
-
-            
+        List.fold (fun acc sL -> match List.contains ((fun (a,b,c)->(b,a,c))sL) acc with|true -> acc|false ->sL::acc) [] sourceList
+                 
     (* Iterative *)
 
     ///Maps edgelabels of the graph.

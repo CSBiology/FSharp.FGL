@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Compile Include="Utils.fs" />
-    <Compile Include="FSharp.FGL\SomeTests.fs" />
+    <Compile Include="IOTests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
@@ -20,5 +20,9 @@
     <ProjectReference Include="..\..\src\FSharp.FGL.IO\FSharp.FGL.IO.fsproj" />
     <ProjectReference Include="..\..\src\FSharp.FGL\FSharp.FGL.fsproj" />
     <PackageReference Update="FSharp.Core" Version="4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="FSharp.FGL\" />
   </ItemGroup>
 </Project>

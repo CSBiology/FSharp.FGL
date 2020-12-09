@@ -1,0 +1,31 @@
+ModuleId = "0D-34-BD-94-6A-20-03-6C-A1-44-0D-C0-FB-64-1F-18-CD-38-62-85"
+hitPointId = 11695
+context = Null
+exception = System.Collections.Generic.KeyNotFoundException: The given key '0D-34-BD-94-6A-20-03-6C-A1-44-0D-C0-FB-64-1F-18-CD-38-62-85' was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at AltCover.Recorder.Counter.addSingleVisit(Dictionary`2 counts, String moduleId, Int32 hitPointId, Track context)
+   at AltCover.Recorder.Instance.I.addVisit(String moduleId, Int32 hitPointId, Track context)
+   at AltCover.Recorder.Instance.I.logException[a,b,c,d](a moduleId, b hitPointId, c context, d x)
+   at AltCover.Recorder.Instance.I.addVisit(String moduleId, Int32 hitPointId, Track context)
+   at AltCover.Recorder.Instance.I.visitImpl@292.Invoke(String moduleId, Int32 hitPointId, Track context)
+   at AltCover.Recorder.Instance.I.visitImpl(String moduleId, Int32 hitPointId, Track context)
+   at Microsoft.FSharp.Primitives.Basics.List.loop@521-16[T](T[] res, Int32 i, FSharpList`1 l)
+   at Microsoft.FSharp.Primitives.Basics.List.toArray[T](FSharpList`1 l)
+   at Microsoft.FSharp.Collections.ListModule.ToArray[T](FSharpList`1 list)
+   at FSharp.FGL.IO.GDF.splitElementInfos(String line)
+   at FSharp.FGL.IO.GDF.getVertexByHeader(String header, String line)
+   at FSharp.FGL.IO.GDF.|VertexHeader|_|@103.Invoke(String line)
+   at FSharp.FGL.IO.GDF.loop@117.Invoke(FSharpOption`1 vertexF, FSharpOption`1 edgeF, FSharpList`1 vertices, FSharpList`1 edges, Int32 i)
+   at FSharp.FGL.IO.GDF.fromArray(String[] data)
+   at FSharp.FGL.IO.GDF.fromFile(String path)
+   at GDFModuleTests.testGDFReaderFuntions@14.Invoke(Unit unitVar0)
+   at Expecto.Impl.execTestAsync@566-1.Invoke(Unit unitVar)
+   at Microsoft.FSharp.Control.AsyncPrimitives.CallThenInvoke[T,TResult](AsyncActivation`1 ctxt, TResult result1, FSharpFunc`2 part2)
+   at <StartupCode$FSharp-Core>.$Async.StartChild@1666-5.Invoke(AsyncActivation`1 ctxt)
+   at Microsoft.FSharp.Control.Trampoline.Execute(FSharpFunc`2 firstAction)
+   at Microsoft.FSharp.Control.TrampolineHolder.ExecuteWithTrampoline(FSharpFunc`2 firstAction)
+   at <StartupCode$FSharp-Core>.$Async.-ctor@163-1.Invoke(Object o)
+   at System.Threading.QueueUserWorkItemCallbackDefaultContext.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading._ThreadPoolWaitCallback.PerformWaitCallback()
+
