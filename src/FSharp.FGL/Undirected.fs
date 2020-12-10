@@ -115,8 +115,22 @@ module Vertices =
             Map.tryFind v1 g
             |> Option.bind (fun (_, _, s) -> Map.tryFind v2 s)
             |> Option.map (fun e -> (v1,v2,e))
-
-
+    
+    ///Creates a list of all edges and their labels.
+    let toEdgeList (g:Graph<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list = 
+        let sourceList = 
+            g
+            |> Graph.mapContexts (fun (p,v,l,s) -> s)
+            |> Map.toList
+            |> List.collect (fun (v,es) -> 
+                es
+                |> List.map (fun (v2,e) -> v,v2,e))
+        List.fold (fun acc sL -> 
+            match List.contains ((fun (a,b,c) -> (b,a,c)) sL) acc with
+            |true -> acc
+            |false ->sL::acc) [] sourceList
+     
+     
     (* Iterative *)
 
     ///Maps edgelabels of the graph.
