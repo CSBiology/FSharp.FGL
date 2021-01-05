@@ -201,7 +201,10 @@ module Graph =
         let adj : 'Edge [][] = Array.init n (fun _ -> 
             Array.zeroCreate n)
         //Fill the matrix with values by using the hashmap as an index finder
-        Edges.iter (fun v1 v2 e -> adj.[hashMap.Item v1].[hashMap.Item v2] <- e) g
+        Edges.iter (fun v1 v2 e -> 
+            adj.[hashMap.Item v1].[hashMap.Item v2] <- e
+            adj.[hashMap.Item v2].[hashMap.Item v1] <- e
+            ) g
         adj
 
     ///Transfroms a graph into a adjacency matrix, maps every edge using the projection.
@@ -220,5 +223,9 @@ module Graph =
         let adj : 'REdge [][] = Array.init n (fun _ -> 
             Array.zeroCreate n)
         //Fill the matrix with values by using the hashmap as an index finder
-        Edges.iter (fun v1 v2 e -> adj.[hashMap.Item v1].[hashMap.Item v2] <- projection e) g
+        Edges.iter (fun v1 v2 e -> 
+            let e' = projection e
+            adj.[hashMap.Item v1].[hashMap.Item v2] <- e'
+            adj.[hashMap.Item v2].[hashMap.Item v1] <- e'
+            ) g
         adj
