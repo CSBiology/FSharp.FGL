@@ -12,7 +12,7 @@ module GDF =
         | VARCHAR   of string
         | BOOLEAN   of bool
         | DOUBLE    of float
-        | INT       of int
+        | INTEGER   of int
 
     //Transforms string into string [], deleting quotes in the progress and splitting at commas
     let private splitElementInfos (line:string) =
@@ -38,20 +38,22 @@ module GDF =
 
    //Returns a appropite function based on the value of the header, to change the corresponding values to their respective TypeDefinitoions type.
     let private getTypeInfoMapper (headerValue:string) =
-        let headerValueId = (headerValue.Split ' '|> Array.item 0)
-        if      headerValue.Trim().Contains "VARCHAR"   then (fun x -> match x with |" "| "" ->  headerValueId,(VARCHAR "")                 |_ -> headerValueId,(VARCHAR x))
-        elif    headerValue.Trim().Contains "INT"       then (fun x -> match x with |" "| "" ->  headerValueId,(INT 0)                      |_ -> headerValueId,(INT (int x)))
-        elif    headerValue.Trim().Contains "DOUBLE"    then (fun x -> match x with |" "| "" ->  headerValueId,(DOUBLE 0.0)                 |_ -> (headerValueId,(DOUBLE (float x))))
-        elif    headerValue.Trim().Contains "BOOLEAN"   then (fun x -> match x with |" "| "" ->  headerValueId,(BOOLEAN false)              |"true" -> headerValueId,(BOOLEAN true)|"false" -> headerValueId,(BOOLEAN false)|_ -> failwith"unknown value in visible")
+        let headerValueId = ( headerValue.Trim().Split ' ' |> Array.item 0)
+
+        if      headerValue.Trim().Contains "VARCHAR"                                       then (fun x -> match x with |" "| "" ->  headerValueId,(VARCHAR "")                 |_ -> headerValueId,(VARCHAR x))
+        elif    headerValue.Trim().Contains "INT"                                           then (fun x -> match x with |" "| "" ->  headerValueId,(INTEGER 0)                  |_ -> headerValueId,(INTEGER (int x)))
+        elif    headerValue.Trim().Contains "DOUBLE"                                        then (fun x -> match x with |" "| "" ->  headerValueId,(DOUBLE 0.0)                 |_ -> (headerValueId,(DOUBLE (float x))))
+        elif    headerValue.Trim().Contains "BOOLEAN"                                       then (fun x -> match x with |" "| "" ->  headerValueId,(BOOLEAN false)              |"true" -> headerValueId,(BOOLEAN true)|"false" -> headerValueId,(BOOLEAN false)|_ -> failwith"unknown value in visible")
+        elif    headerValue.Trim().Contains "node1" ||headerValue.Trim().Contains "node2"   then (fun x -> match x with |" "| "" ->  headerValueId,(VARCHAR "")                 |_ -> headerValueId,(VARCHAR x))
         else failwith "unknown typeAnnotation in header"
 
     //Reconstructs the intended Type of var x from TypeInfo         
     let private gdfValueToString (value:GDFValue) =    
            match value with
-               | VARCHAR     x   -> x
-               | BOOLEAN     x   -> sprintf "%b" x
-               | DOUBLE      x   -> sprintf "%f" x
-               | INT         x   -> sprintf "%i" x              
+               | VARCHAR    x   -> x
+               | BOOLEAN    x   -> sprintf "%b" x
+               | DOUBLE     x   -> sprintf "%f" x
+               | INTEGER    x   -> sprintf "%i" x              
 
     //Searches for the "name" identifier of the Vertex Map(header,TypeDefiniton), if found returns (string name),Map tupel
     let private getVertexOfInfos (infos : Map<string,GDFValue>) : LVertex<GDFValue,Map<string,GDFValue>> =
@@ -141,10 +143,10 @@ module GDF =
     //Returns the GDFValue-type as string
     let private gdfTypeToString (value:GDFValue) =    
         match value with
-            | VARCHAR     x   -> "VARCHAR"
-            | BOOLEAN     x   -> "BOOLEAN"
-            | DOUBLE      x   -> "DOUBLE"
-            | INT         x   -> "INT"      
+            | VARCHAR       x   -> "VARCHAR"
+            | BOOLEAN       x   -> "BOOLEAN"
+            | DOUBLE        x   -> "DOUBLE"
+            | INTEGER       x   -> "INT"      
 
     //Applies typeOfGDFValue on all GDF Values of a given Map
     let private getGDFValue (value:Map<'key,GDFValue>) =
@@ -178,14 +180,14 @@ module GDF =
     //Returns the appropriate default value to the given GDF Type
     let private getGDFDefaultValue (headerValue:string) =
         if      headerValue.Trim().Contains "VARCHAR"   then (VARCHAR " ") 
-        elif    headerValue.Trim().Contains "INT"       then (INT 0)
+        elif    headerValue.Trim().Contains "INT"       then (INTEGER 0)
         elif    headerValue.Trim().Contains "DOUBLE"    then (DOUBLE 0.0)
         elif    headerValue.Trim().Contains "BOOLEAN"   then (BOOLEAN false)
         else failwith "unknown typeAnnotation in header"
 
     //Takes a Value Map(Vertex or Edge) and compares its keys with a Map of the header to find Missing keys. If there are any, it adds these values to the value Map.
     let private addEmptyValuesIfNeeded (value:Map<string,GDFValue>) (headerMap:Map<string,string>) =
-        if (Map.toList value|>List.map fst|>List.sort) = (Map.toList headerMap|>List.map fst|>List.sort) then
+        if (Map.toList value|>List.map fst|>List.sort) <> (Map.toList headerMap|>List.map fst|>List.sort) then
             let getMissingValues (a,b)  =   match a with|true ->false|_ ->true 
             let headerStrings           =   Map.toList headerMap|>List.map fst
             let missingValues           =   List.map (fun x -> Map.containsKey x value) headerStrings
@@ -224,7 +226,7 @@ module GDF =
         let edgeList    = 
             match edgesDirected with 
             |true   -> Directed.Edges.toEdgeList graph
-            |_      -> Directed.Edges.toEdgeList graph(***Add function, that removes the return edges?***)  
+            |_      -> Directed.Edges.toEdgeList graph (***Add function, that removes the return edges?***)  
 
         let vertexHeaderMap = reconstructVerticesHeader vertexList
         let edgeHeaderMap   = reconstructEdgesHeader edgeList
@@ -232,7 +234,7 @@ module GDF =
         let vertexHeader    = 
             let headerStringList    = headerMapToString vertexHeaderMap 
             let name                = headerStringList|>List.findIndex(fun x -> x.Contains "name")
-            let headerIndex         = "nodedef>name VARCHAR"
+            let headerIndex         = "nodedef> name VARCHAR"
             headerStringList.[name]::headerIndex::headerStringList
                 |>List.distinct
                 |>List.tail
@@ -241,11 +243,12 @@ module GDF =
         let edgeHeader      = 
             let headerStringList    = headerMapToString edgeHeaderMap     
             let node1               = headerStringList|>List.findIndex(fun x -> x.Contains "node1")
-            let node1Index          = "edgedef>node1 VARCHAR"
+            let node1Index          = "edgedef> node1"
             let node2               = headerStringList|>List.findIndex(fun x -> x.Contains "node2")
-            headerStringList.[node1]::node1Index::headerStringList.[node2]::headerStringList
+            let node2Index          = "node2"
+            headerStringList.[node1]::headerStringList.[node2]::node1Index::node2Index::headerStringList
                 |>List.distinct
-                |>List.tail
+                |>List.tail |> List.tail
                 |>String.concat ","
         
         let vertexData      = List.map(fun x -> reconstructVertex x vertexHeaderMap) vertexList     |>List.map(String.concat ",")
@@ -255,5 +258,5 @@ module GDF =
         let edges           = edgeHeader::edgeData
 
         let content         = vertices@edges|>String.concat "\n"
-        System.IO.File.WriteAllText(path,content)   
+        System.IO.File.WriteAllText(path,content)    
         
