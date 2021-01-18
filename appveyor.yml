@@ -15,15 +15,15 @@ for:
       - image: Visual Studio 2019
 
   build_script:
-  - cmd: build.cmd -t fullBuildChainCI
+  - cmd: fake.cmd -t fullBuildChainCI
 -
   matrix:
     only:
       - image: Ubuntu
 
   build_script:
-  - chmod +x ./build.sh
-  - sh: ./build.sh -t dotnetBuildChainCI
+  - chmod +x ./fake.sh
+  - sh: ./fake.sh -t dotnetBuildChainCI
   - sh: bash <(curl -s https://codecov.io/bash)
 
 test: off
