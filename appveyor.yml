@@ -15,7 +15,7 @@ for:
       - image: Visual Studio 2019
 
   build_script:
-  - cmd: fake.cmd -t fullBuildChainCI
+  - cmd: fake.cmd build -t fullBuildChainCI
 -
   matrix:
     only:
@@ -23,7 +23,7 @@ for:
 
   build_script:
   - chmod +x ./fake.sh
-  - sh: ./fake.sh -t dotnetBuildChainCI
+  - sh: ./fake.sh build -t dotnetBuildChainCI
   - sh: bash <(curl -s https://codecov.io/bash)
 
 test: off
