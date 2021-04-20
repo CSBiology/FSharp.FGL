@@ -68,6 +68,7 @@ let testGDFWriterFuntions =
     let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
     let testReadFilePath = System.IO.Path.Combine(testDirectory,"TestFileRead.txt")
     let testWriteFilePath = System.IO.Path.Combine(testDirectory,"TestFileWrite.txt")
+    let testWriteFilePath2 = System.IO.Path.Combine(testDirectory,"TestFileWrite2.txt")
 
     testList "GDFWriter"[
         testCase "IsWrittenFileIdenticalToInformationInSource" (fun () ->
@@ -87,5 +88,40 @@ let testGDFWriterFuntions =
                 testGraphWritten
                 "written file does not equal the source file"
         )
-    
+        testCase "CanMissingValuesBeAdded" (fun () ->
+            
+            let testRead                = GDF.fromFile testReadFilePath
+            let (vertexList,edgeList)   = testRead
+            let testGraph               = Directed.Graph.create vertexList edgeList
+
+            let (vertexListHead,vertexListTail) = (List.head vertexList),(List.tail vertexList)
+            let (edgeListHead,edgeListTail) = (List.head edgeList),(List.tail edgeList)
+
+            let modifiedVertexHead = 
+                let (vertexId,lableMap) = vertexListHead 
+                let updatedLableMap = lableMap |> Map.toList |> List.tail |> Map.ofList
+                (vertexId,updatedLableMap)
+
+            let modifiedEdgeHead =
+                let (edgeId1,edgeId2,lableMap) = edgeListHead 
+                let updatedLableMap = lableMap |> Map.toList |> List.tail |> Map.ofList
+                (edgeId1,edgeId2,updatedLableMap)
+
+            let vertexListUpdated   = modifiedVertexHead::vertexListTail
+            let edgeListUpdated     = modifiedEdgeHead::edgeListTail
+
+            let testGraphUpdated = Directed.Graph.create vertexListUpdated edgeListUpdated
+
+            let testWrite = GDF.toFile testGraphUpdated true testWriteFilePath2
+        
+            let testRead2 = GDF.fromFile testWriteFilePath2
+            let (vertexList2,edgeList2)   = testRead2
+
+
+
+            Expect.equal
+                (vertexList     |> List.head |> snd |> Map.toList |> List.head |> fst)
+                (vertexList2    |> List.head |> snd |> Map.toList |> List.head |> fst)
+                "written graph did not add missing values that were noted in the header"
+        )
     ]

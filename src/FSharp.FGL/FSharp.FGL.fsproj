@@ -9,6 +9,7 @@
     <Compile Include="Models.fs" />
     <Compile Include="Directed.fs" />
     <Compile Include="Undirected.fs" />
+    <Compile Include="ArrayAdjacencyGraph.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
