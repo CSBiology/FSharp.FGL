@@ -3,9 +3,7 @@
 open System.Collections.Generic
 open FSharp.FGL //For our Graph method
 
-//  An immutable directed graph data structure efficient for large sparse
-//  graph representation where out-edge need to be enumerated only.
-//  Adaptation of https://github.com/YaccConstructor/QuickGraph.
+
 
 module internal Dictionary = 
 
@@ -25,11 +23,9 @@ module internal Dictionary =
             newDict.Add(kv.Key,innerCopyF kv.Value)
         newDict
 
-//----- Louvain ----------
-//                         \
-//----- Graph -> PR FGL ->  -> Louvain auf AA Graph
-//
 
+///  A mutable directed graph data structure efficient for large sparse graph representations
+//  Adaptation of https://github.com/YaccConstructor/QuickGraph.
 type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge : equality> internal (vertexEdges:Dictionary<'Vertex,LEdge<'Vertex,'Edge>[]>, labels:Dictionary<'Vertex,'Label>) =
     
     // Dictionary of the labels belonging to the vertices with (k,v) k-> vertex, v-> label.
@@ -216,7 +212,6 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
                | Some x    -> x                    
                | None      -> failwithf "The target vertex %O of the edge does not exist in this graph." t
    
-       // Array.append benutzen
        vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
        vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
        this
@@ -253,7 +248,6 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
            this.RemoveEdge edge |> ignore
        this
     
-    //
     //Vertices
     ///Returns true, if the graph contains the vertex, else false.
     member this.ContainsVertex(vertex:'Vertex) :bool =
@@ -294,7 +288,6 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         this.TryGetOutEdges v
         |> Option.map (Array.length)
 
-    // Weight kann auch Union type sein -> get weight
     ///Returns the weighted degree of the vertex v.
     member this.WeightedDegree(weightingF : LEdge<'Vertex,'Edge> [] -> 'T,v:'Vertex) :'T =
         match (Dictionary.tryGetValue v vertexOutEdges) with
@@ -380,7 +373,6 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
          |Some x -> x
          |None   -> failwithf "The vertex %O does not exist in the graph." v
 
-    //
     //Label
     ///Returns Some label, if a label for the vertex v exists, else none.
     member this.TryGetLabel(v:'Vertex) :'Label option =        
