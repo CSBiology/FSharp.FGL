@@ -57,36 +57,7 @@ module Vertices =
 
 ///Functions for edges of undirected Graphs
  module Edges =
-     (* Add and remove *)
-
-    ///Adds a labeled, undirected edge to the graph.
-    let add ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) =
-        let g1 = 
-            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
-            let adjListMapping = Map.add v2 edge
-            (Optic.map composedPrism adjListMapping) g
-        let composedPrism = Compose.prism (Map.key_ v2) Lenses.msucc_
-        let adjListMapping = Map.add v1 edge
-        (Optic.map composedPrism adjListMapping) g1
-
-    ///Adds a list of labeled, undirected edges to the graph.
-    let addMany (edges : list<LEdge<'Vertex,'Edge>>) (g: Graph<'Vertex,'Label,'Edge>) =
-        List.fold (fun g e -> add e g) g edges
-
-    ///Removes an edge from the graph.
-    let remove ((v1, v2): Edge<'Vertex>) (g: Graph<'Vertex,'Label,'Edge>) =
-        let g1 = 
-            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
-            let adjListMapping = Map.remove v2
-            (Optic.map composedPrism adjListMapping) g
-        let composedPrism = Compose.prism (Map.key_ v2) Lenses.msucc_
-        let adjListMapping = Map.remove v1
-        (Optic.map composedPrism adjListMapping) g1
-                
-    ///Removes a list of edges from the graph.
-    let removeMany (edges : list<Edge<'Vertex>>) (g: Graph<'Vertex,'Label,'Edge>) =
-        List.fold (fun g e -> remove e g) g edges
-
+     
     (* Properties *)
 
     ///Evaluates the number of edges in the graph.
@@ -116,6 +87,57 @@ module Vertices =
             |> Option.bind (fun (_, _, s) -> Map.tryFind v2 s)
             |> Option.map (fun e -> (v1,v2,e))
     
+    (* Add and remove *)
+    
+    ///Adds a labeled, undirected edge to the graph.
+    let tryAdd ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> option =
+        if (Vertices.contains v1 g |> not) || (Vertices.contains v2 g |> not) || contains v1 v2 g then
+            None
+        else
+            let g1 = 
+                let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
+                let adjListMapping = Map.add v2 edge
+                (Optic.map composedPrism adjListMapping) g
+            let composedPrism = Compose.prism (Map.key_ v2) Lenses.msucc_
+            let adjListMapping = Map.add v1 edge
+            (Optic.map composedPrism adjListMapping) g1
+            |> Some
+
+    ///Adds a labeled, undirected edge to the graph.
+    let add ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        if Vertices.contains v1 g |> not then failwithf "Source Vertex %O does not exist" v1 
+        if Vertices.contains v2 g |> not then failwithf "Target Vertex %O does not exist" v2
+        if contains v1 v2 g then failwithf "Edge between Source vertex %O Target Vertex %O does not exist" v1 v2
+        let g1 = 
+            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
+            let adjListMapping = Map.add v2 edge
+            (Optic.map composedPrism adjListMapping) g
+        let composedPrism = Compose.prism (Map.key_ v2) Lenses.msucc_
+        let adjListMapping = Map.add v1 edge
+        (Optic.map composedPrism adjListMapping) g1
+    
+    ///Adds a list of labeled, undirected edges to the graph.
+    let tryAddMany (edges : list<LEdge<'Vertex,'Edge>>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> option =
+        List.fold (fun g e -> Option.bind (tryAdd e) g) (Some g) edges
+
+    ///Adds a list of labeled, undirected edges to the graph.
+    let addMany (edges : list<LEdge<'Vertex,'Edge>>) (g: Graph<'Vertex,'Label,'Edge>) =
+        List.fold (fun g e -> add e g) g edges
+    
+    ///Removes an edge from the graph.
+    let remove ((v1, v2): Edge<'Vertex>) (g: Graph<'Vertex,'Label,'Edge>) =
+        let g1 = 
+            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
+            let adjListMapping = Map.remove v2
+            (Optic.map composedPrism adjListMapping) g
+        let composedPrism = Compose.prism (Map.key_ v2) Lenses.msucc_
+        let adjListMapping = Map.remove v1
+        (Optic.map composedPrism adjListMapping) g1
+                    
+    ///Removes a list of edges from the graph.
+    let removeMany (edges : list<Edge<'Vertex>>) (g: Graph<'Vertex,'Label,'Edge>) =
+        List.fold (fun g e -> remove e g) g edges
+
     ///Creates a list of all edges and their labels.
     let toEdgeList (g:Graph<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list = 
         let sourceList = 
