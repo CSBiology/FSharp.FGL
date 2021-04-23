@@ -2,7 +2,7 @@
 namespace System
 open System.Reflection
 
-[<assembly: AssemblyTitleAttribute("FSharp.FGL")>]
+[<assembly: AssemblyTitleAttribute("FSharp.FGL.IO")>]
 [<assembly: AssemblyProductAttribute("FSharp.FGL")>]
 [<assembly: AssemblyDescriptionAttribute("Functional graph-library written in F#")>]
 [<assembly: AssemblyVersionAttribute("0.0.1")>]
@@ -11,7 +11,7 @@ open System.Reflection
 do ()
 
 module internal AssemblyVersionInformation =
-    let [<Literal>] AssemblyTitle = "FSharp.FGL"
+    let [<Literal>] AssemblyTitle = "FSharp.FGL.IO"
     let [<Literal>] AssemblyProduct = "FSharp.FGL"
     let [<Literal>] AssemblyDescription = "Functional graph-library written in F#"
     let [<Literal>] AssemblyVersion = "0.0.1"

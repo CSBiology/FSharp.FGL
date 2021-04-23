@@ -1,30 +1,13 @@
 ﻿namespace FSharp.FGL.Directed
 
+open System
 open Aether
 open FSharp.FGL
 
 
 ///Functions for vertices of directed Graphs
 module Vertices = 
-    //Add and remove
 
-    ///Adds a labeled vertex to the graph.
-    let add ((v, l): LVertex<'Vertex,'Label>) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
-        Map.add v (Map.empty, l, Map.empty) g
-
-    ///Adds a list of labeled vertices to the graph.
-    let addMany (vertices:list<LVertex<'Vertex,'Label>>) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
-        List.fold (fun g vertex -> add vertex g) g vertices  
-
-    ///Removes a vertex from the graph.
-    let remove (v:'Vertex) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
-        Graph.decompose v g
-        |> snd
-
-    ///Removes a list of vertices from the graph.
-    let removeMany nList (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
-        List.fold (fun g' v -> remove v g') g nList     
-    
     //Neighbours
 
     ///Lists the vertices which have edges pointing to the vertex.
@@ -79,101 +62,33 @@ module Vertices =
                     ) 0 neighbours
                 let degree = List.length neighbours
                 ((float neighbourEdges) / (float (degree * (degree - 1)))) / 2.
-
-    ///Evaluates the number of vertices in the graph.
-    let count (g: Graph<'Vertex,'Label,'Edge>) : int = 
-        g.Count
     
+    /// Returns all edges pointing to the given vertex
+    let inwardEdges (c:Context<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list =
+        match c with
+        | (p, v, _, _) ->
+            p |> List.map (fun (v2,e) -> v2,v,e)
+
+    /// Returns all edges pointing away from the given vertex
+    let outwardEdges (c:Context<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list =
+        match c with
+        | (_, v, _, s) ->
+            s |> List.map (fun (v2,e) -> v,v2,e)
 
     //General
 
     ///Creates a list of all vertices and their labels.
+    [<Obsolete("Corrected Typo in function name: Use toVertexList instead")>]
     let tovertexList (g:Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> list=
             Map.toList g
             |> List.map (fun (v, (_, l, _)) -> v, l)
 
-    ///Returns true, if the vertex v is contained in the graph. Otherwise, it returns false.
-    let contains v (g: Graph<'Vertex,'Label,'Edge>) : bool =
-        Map.containsKey v g
-
-    ///Lookup a labeled vertex in the graph. Raising KeyNotFoundException if no binding exists in the graph.
-    let find (v: 'Vertex) (g: Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> = 
-        Map.find v g
-        |> fun (_, l, _) -> v, l
-
-    ///Lookup a labeled vertex in the graph, returning a Some value if a binding exists and None if not.
-    let tryFind (v: 'Vertex) (g: Graph<'Vertex,'Label,'Edge>) : LVertex<'Vertex,'Label> option = 
-        Map.tryFind v g
-        |> Option.map (fun (_, l, _) -> v, l)    
      
-                        
-    //Iterative
-
-    ///Maps the vertexlabels of the graph.
-    let map (mapping: 'Vertex -> 'Label -> 'RLabel) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'RLabel,'Edge>=
-        g
-        |> Map.map (fun vertex (p, l, s) ->
-            p, mapping vertex l, s)
-
-    ///Maps the vertexlabels of the graph. The mapping function also receives an ascending integer index.
-    let mapi (mapping: int -> 'Vertex -> 'Label -> 'RLabel) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'RLabel,'Edge> =
-        g
-        |> Map.toArray
-        |> Array.mapi (fun i (v,c) -> v,(i,c))
-        |> Map.ofArray
-        |> Map.map (fun vertex (i,(p, l, s)) ->
-            p, mapping i vertex l, s)
-    
-    ///Performs a given function on every vertex and its label of a graph.
-    let iter (action: 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit=
-        g
-        |> Graph.iterContexts (fun (_, v, l, _) -> action v l)
-
-    let iteri (action: int -> 'Vertex -> 'Label -> unit) (g: Graph<'Vertex,'Label,'Edge>) : unit =
-        let mutable i = 0
-        g
-        |> Map.iter (fun vertex (_, l, _) ->
-            action i vertex l
-            i <- i + 1)
-    
-    let fold (state: 'T) (folder: 'T -> 'Vertex -> 'Label -> 'T) (g: Graph<'Vertex,'Label,'Edge>) : 'T = 
-        g
-        |> Graph.foldContexts state (fun acc (_, v, l, _) -> folder acc v l)
+                       
 
 ///Functions for edges of directed Graphs
 module Edges = 
-
-    //Add and remove
-
-    ///Adds a labeled, directed edge to the graph.
-    let add ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) =
-        let g1 = 
-            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
-            let adjListMapping = Map.add v2 edge
-            (Optic.map composedPrism adjListMapping) g
-        let composedPrism = Compose.prism (Map.key_ v2) Lenses.mpred_
-        let adjListMapping = Map.add v1 edge
-        (Optic.map composedPrism adjListMapping) g1
-
-    ///Adds a list of labeled, directed edges to the graph.
-    let addMany (edges : list<LEdge<'Vertex,'Edge>>) (g: Graph<'Vertex,'Label,'Edge>) =
-        List.fold (fun g e -> add e g) g edges
-
-    ///Removes an edge from the graph.
-    let remove ((v1, v2): Edge<'Vertex>) (g: Graph<'Vertex,'Label,'Edge>) =
-        let g1 = 
-            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
-            let adjListMapping = Map.remove v2
-            (Optic.map composedPrism adjListMapping) g
-        let composedPrism = Compose.prism (Map.key_ v2) Lenses.mpred_
-        let adjListMapping = Map.remove v1
-        (Optic.map composedPrism adjListMapping) g1  
-
-    ///Removes a list of edges from the graph.
-    let removeMany (edges : list<Edge<'Vertex>>) (g: Graph<'Vertex,'Label,'Edge>) =
-        List.fold (fun g e -> remove e g) g edges
     
-
     //Properties
 
     ///Evaluates the number of edges in the graph.
@@ -201,6 +116,7 @@ module Edges =
             Map.tryFind v1 g
             |> Option.bind (fun (_, _, s) -> Map.tryFind v2 s)
             |> Option.map (fun e -> (v1,v2,e))
+
     ///Transforms a directed graph to an undirected graph.
     let undirect (computeEdge: 'Edge -> 'Edge -> 'Edge) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
         g
@@ -219,6 +135,66 @@ module Edges =
     let rev (g: Graph<'Vertex,'Label,'Edge>) : (Graph<'Vertex,'Label,'Edge>)= 
         Map.map (fun _ (p,l,s) -> (s,l,p)) g
 
+    
+    //Add and remove
+
+    ///Adds a labeled, directed edge to the graph.
+    let tryAdd ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> option =
+        if (Vertices.contains v1 g |> not) || (Vertices.contains v2 g |> not) || contains v1 v2 g then
+            None
+        else 
+            let g1 = 
+                let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
+                let adjListMapping = Map.add v2 edge
+                (Optic.map composedPrism adjListMapping) g
+            let composedPrism = Compose.prism (Map.key_ v2) Lenses.mpred_
+            let adjListMapping = Map.add v1 edge
+            (Optic.map composedPrism adjListMapping) g1
+            |> Some
+
+    ///Adds a labeled, directed edge to the graph.
+    let add ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        if Vertices.contains v1 g |> not then failwithf "Source Vertex %O does not exist" v1 
+        if Vertices.contains v2 g |> not then failwithf "Target Vertex %O does not exist" v2
+        if contains v1 v2 g then failwithf "Edge between Source vertex %O Target Vertex %O does not exist" v1 v2
+        let g1 = 
+            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
+            let adjListMapping = Map.add v2 edge
+            (Optic.map composedPrism adjListMapping) g
+        let composedPrism = Compose.prism (Map.key_ v2) Lenses.mpred_
+        let adjListMapping = Map.add v1 edge
+        (Optic.map composedPrism adjListMapping) g1
+
+    ///Adds a list of labeled, directed edges to the graph.
+    let tryAddMany (edges : list<LEdge<'Vertex,'Edge>>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> option =
+        List.fold (fun g e -> Option.bind (tryAdd e) g) (Some g) edges
+
+    ///Adds a list of labeled, directed edges to the graph.
+    let addMany (edges : list<LEdge<'Vertex,'Edge>>) (g: Graph<'Vertex,'Label,'Edge>) =
+        List.fold (fun g e -> add e g) g edges
+
+    ///Removes an edge from the graph.
+    let remove ((v1, v2): Edge<'Vertex>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        let g1 = 
+            let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
+            let adjListMapping = Map.remove v2
+            (Optic.map composedPrism adjListMapping) g
+        let composedPrism = Compose.prism (Map.key_ v2) Lenses.mpred_
+        let adjListMapping = Map.remove v1
+        (Optic.map composedPrism adjListMapping) g1  
+
+    ///Removes a list of edges from the graph.
+    let removeMany (edges : list<Edge<'Vertex>>) (g: Graph<'Vertex,'Label,'Edge>) =
+        List.fold (fun g e -> remove e g) g edges
+
+    ///Creates a list of all edges and their labels.
+    let toEdgeList (g:Graph<'Vertex,'Label,'Edge>) : LEdge<'Vertex,'Edge> list = 
+       g
+       |> Graph.mapContexts (fun (p,v,l,s) -> s)
+       |> Map.toList
+       |> List.collect (fun (v,es) -> 
+            es
+            |> List.map (fun (v2,e) -> v,v2,e))
 
     //Iterative 
 
@@ -264,6 +240,19 @@ module Edges =
             | (None,_) -> st
         recurse state graph
 
+    /// Returns a new graph containing only the edges for which the given predicate returns true.
+    let filter (predicate : 'Vertex -> 'Vertex -> 'Edge -> bool) (g:Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
+        g
+        |> Graph.mapContexts (fun (p, v, l, s) -> 
+            (
+            p |> List.filter (fun (v2,e) -> predicate v2 v e),
+            v,
+            l,
+            s |> List.filter (fun (v2,e) -> predicate v v2 e)
+            )
+            |> Graph.fromContext
+            )
+
 module Graph =
 
     ///Creates a directed graph from a list of vertices and a list of edges
@@ -282,7 +271,7 @@ module Graph =
                 | Some (_,v,_,_),g -> 
                     hashMap.[v] <- i
                     loop g (i+1)        
-                | None, _ -> i+1
+                | None, _ -> i
             loop g 0
         //Create the matrix
         let adj : 'Edge [][] = Array.init n (fun _ -> 
