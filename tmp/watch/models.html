@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Testing with models
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="HLWeil,LibraChris,WalternativE,CSBiology">
+    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+<script type="text/javascript">
+    var wsUri = "ws://localhost:8901/websocket";
+    function init()
+    {
+        websocket = new WebSocket(wsUri);
+        websocket.onclose = function(evt) { onClose(evt) };
+    }
+    function onClose(evt)
+    {
+        console.log('closing');
+        websocket.close();
+        document.location.reload();
+    }
+    window.addEventListener("load", init, false);
+</script>
+
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="csbiology.github.io/FSharp.FGL/">
+                        <figure class="image is-128x128 container">
+                            <img src="http://localhost:8901/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">FSharp.FGL</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right searchbox" id="fsdocs-searchbox">
+                                <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.md">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
+                        <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/GDF.html">
+    GDF Format
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/models.html">
+    Testing with models
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/newgraph.html">
+    Working with FSharp.FGL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/terminology.html">
+    terminology
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/tutorial.html">
+    Introduction
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/GDF.html">
+    GDF Format
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/models.html">
+    Testing with models
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/newgraph.html">
+    Working with FSharp.FGL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/terminology.html">
+    terminology
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/tutorial.html">
+    Introduction
+
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="Testing-with-models" class="anchor" href="#Testing-with-models">Testing with models</a></h1>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;FSharp.FGL&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span class="id">FGL</span><span class="pn">.</span><span class="id">Directed</span>
+</code></pre>
+<h2><a name="Motivation-and-overview" class="anchor" href="#Motivation-and-overview">Motivation and overview</a></h2>
+<p>In every implementation workflow, there comes the point where you have to test wether everything works as expexted or not.
+For this, a matching test set is necessary. In some cases (e.g. List sorting algorithms) creating those test sets is done in a matter of seconds.
+In other cases, especially if the data you work with is more than one dimensional, it can get quite tedious.
+To this effect, FSharp.FGl comes equipped with implementations of random graph generation models.<br />
+In this tutorial I want to introduce you to the models implemented and how to generate graphs with the given functions:</p>
+<ul>
+<li><p><a href="models.html#Gilbert-model">Gilbert model</a> (not scale free)</p></li>
+<li><p><a href="models.html#Erdős–Rényi-model">Erdős–Rényi model</a> (not scale free)</p></li>
+<li>Barabási–Albert model (scale free; work in progress)</li>
+</ul>
+<p>Afterwards I'll give a quick intro about <a href="models.html#Genericity">how to use the implementations to create graphs of any type</a>.</p>
+<h2><a name="Models" class="anchor" href="#Models">Models</a></h2>
+<h3><a name="Gilbert-model" class="anchor" href="#Gilbert-model">Gilbert model</a></h3>
+<p>The gilbert model (or G(N,p) model) was introduced by Edgar Gilbert in 1959. In this model, you assign a fixed amount of vertices N and a probability p.
+p denotes the probality, that edge between two vertices exists or not.<br />
+The function is located in the Models module and can be used in the following way:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">N</span> <span class="o">=</span> <span class="n">50</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">p</span> <span class="o">=</span> <span class="n">0.5</span>
+<span class="c">//This function takes an int and creates a labeled vertex ((id,label) tuple)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">vertexCreator</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">i</span> <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="fn">i</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="fn">sprintf</span> <span class="s">&quot;Call me Vertex nr. </span><span class="pf">%i</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="fn">i</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">myGilbertGraph</span> <span class="o">=</span> <span class="id">Models</span><span class="pn">.</span><span class="id">gilbert</span> <span onmouseout="hideTip(event, 'fs4', 10)" onmouseover="showTip(event, 'fs4', 10)" class="id">vertexCreator</span> <span onmouseout="hideTip(event, 'fs2', 11)" onmouseover="showTip(event, 'fs2', 11)" class="id">N</span> <span onmouseout="hideTip(event, 'fs3', 12)" onmouseover="showTip(event, 'fs3', 12)" class="id">p</span>
+</code></pre>
+<h3><a name="Erdős-Rényi-model" class="anchor" href="#Erdős-Rényi-model">Erdős–Rényi model</a></h3>
+<p>The Erdős–Rényi model (or G(N,L) model) as used by Pál Erdős and Alfréd Rényi is a graph model where you assign a fixed vertex count and also a random edge count.
+Those edges then get randomly distributed between the given edges.
+The function is located in the Models module and can be used in the following way:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 13)" onmouseover="showTip(event, 'fs8', 13)" class="id">L</span> <span class="o">=</span> <span class="n">200</span>
+<span class="c">//We just use the vertexCreator and the nodeCount N assigned above</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="id">myErdosRenyiGraph</span> <span class="o">=</span> <span class="id">Models</span><span class="pn">.</span><span class="id">erdosRenyi</span> <span onmouseout="hideTip(event, 'fs4', 15)" onmouseover="showTip(event, 'fs4', 15)" class="id">vertexCreator</span> <span onmouseout="hideTip(event, 'fs2', 16)" onmouseover="showTip(event, 'fs2', 16)" class="id">N</span> <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="id">L</span>
+</code></pre>
+<h2><a name="Genericity" class="anchor" href="#Genericity">Genericity</a></h2>
+<p>work in progress</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">Namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs2">val N : int</div>
+<div class="fsdocs-tip" id="fs3">val p : float</div>
+<div class="fsdocs-tip" id="fs4">val vertexCreator : i:int -&gt; int * string</div>
+<div class="fsdocs-tip" id="fs5">val i : int</div>
+<div class="fsdocs-tip" id="fs6">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs7">val myGilbertGraph : obj</div>
+<div class="fsdocs-tip" id="fs8">val L : int</div>
+<div class="fsdocs-tip" id="fs9">val myErdosRenyiGraph : obj</div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

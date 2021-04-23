@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Introduction
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="HLWeil,LibraChris,WalternativE,CSBiology">
+    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+<script type="text/javascript">
+    var wsUri = "ws://localhost:8901/websocket";
+    function init()
+    {
+        websocket = new WebSocket(wsUri);
+        websocket.onclose = function(evt) { onClose(evt) };
+    }
+    function onClose(evt)
+    {
+        console.log('closing');
+        websocket.close();
+        document.location.reload();
+    }
+    window.addEventListener("load", init, false);
+</script>
+
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="csbiology.github.io/FSharp.FGL/">
+                        <figure class="image is-128x128 container">
+                            <img src="http://localhost:8901/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">FSharp.FGL</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right searchbox" id="fsdocs-searchbox">
+                                <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.md">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
+                        <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/GDF.html">
+    GDF Format
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/models.html">
+    Testing with models
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/newgraph.html">
+    Working with FSharp.FGL
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/terminology.html">
+    terminology
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/content/tutorial.html">
+    Introduction
+
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="http://localhost:8901/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <h1><a name="Introduction" class="anchor" href="#Introduction">Introduction</a></h1>
+<hr>
+<a name="InductiveGraph"></a>
+<h2><a name="Inductive-Graph" class="anchor" href="#Inductive-Graph">Inductive Graph</a></h2>
+<p>The general aim of this FSharp.FGL is to provide an environment for F# programmers to functionally work with graphs. Besides the basic functions a graph-structure has to fulfill (like adding/removing vertices or counting edges), there are also functionalities needed which are not as elegantly and efficiently implementable in functional graphs (e.g. marking vertices as visited). This is tackled by Martin Erwig's <a href="https://web.engr.oregonstate.edu/~erwig/papers/InductiveGraphs_JFP01.pdf">Inductive Graph Model</a>.</p>
+<p>The inductive graph consists of so called contexts. Every context carries the information about one vertex in the form (pred, id, l, succ) where:<br>
+<p class="indent">-<b>pred</b> is a collection of all vertices pointing to this vertex</p>
+<p class="indent">-<b>id</b> is the identifier of the vertex</p>
+<p class="indent">-<b>l</b> is the label of the vertex</p>
+<p class="indent">-<b>succ</b> is a collection of all vertices this vertex points to</p>
+In this structure, both pred and succ are of type adjacency. This type consists of the id of the other vertex and the edgelabel.</p>
+<p>Working with the inductive graph model allows easy recursive walking through the graph because every vertex contains the information of it's edges to the other vertices. The so called <a href="">decompose-function</a> then solves the problem of remembering which vertices were already visited by removing them from the graph.</p>
+<a name="Features"></a>
+<h2><a name="Features" class="anchor" href="#Features">Features</a></h2>
+<p>The basic structure of the implementation is done as in the <a href="https://github.com/xyncro/hekate">Hekate graph library</a>. Building a new library has many reasons:
+<p class="indent">-FSharp.FGL was built with the intent to have easily readable code, so users can -if needed- design their own functions with the given structure more easily</p>
+<p class="indent">-The aforementioned decompose function is publicly accessible in FSharp.FGL. This is important for using path search algorithms more efficiently</p>
+<p class="indent">-The functions in FSharp.FGL are sorted into the Undirected and the Directed module. By this, users can more intuitively pick the right function for their purpose</p>
+<p class="indent">-FSharp.FGL aims to provide a thorough set of graph related functions, including path search functions and different graph models.</p></p>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>
