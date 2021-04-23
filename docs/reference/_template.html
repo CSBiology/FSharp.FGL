@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <title>terminology</title>
+    <title>{{fsdocs-page-title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="HLWeil,LibraChris,WalternativE,CSBiology">
-    <link rel="shortcut icon" type="image/x-icon" href="http://localhost:8901//img/favicon.ico">
+    <meta name="author" content="{{fsdocs-authors}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{root}}/img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
 
-    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-default.css" />
-    <link type="text/css" rel="stylesheet" href="http://localhost:8901/content/fsdocs-custom.css" />
-    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-tips.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{root}}content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="{{root}}content/fsdocs-custom.css" />
+    <script type="text/javascript" src="{{root}}content/fsdocs-tips.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,23 +21,7 @@
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
     <!-- END SEARCH BOX: this adds support for the search box -->
-    
-<script type="text/javascript">
-    var wsUri = "ws://localhost:8901/websocket";
-    function init()
-    {
-        websocket = new WebSocket(wsUri);
-        websocket.onclose = function(evt) { onClose(evt) };
-    }
-    function onClose(evt)
-    {
-        console.log('closing');
-        websocket.close();
-        document.location.reload();
-    }
-    window.addEventListener("load", init, false);
-</script>
-
+    {{fsdocs-watch-script}}
 </head> 
 
 <body>
@@ -45,12 +29,12 @@
         <div id="fsdocs-menu" class="column is-2 is-paddingless">
             <aside class="menu">
                 <div class="container is-paddingless is-marginless has-background-dark">
-                    <a href="csbiology.github.io/FSharp.FGL/">
+                    <a href="{{fsdocs-logo-link}}">
                         <figure class="image is-128x128 container">
-                            <img src="http://localhost:8901/img/logo.png">
+                            <img src="{{fsdocs-logo-src}}">
                         </figure>
                     </a>
-                    <h2 class="title has-text-centered has-text-white pb-4">FSharp.FGL</h2>
+                    <h2 class="title has-text-centered has-text-white pb-4">{{fsdocs-collection-name}}</h2>
                 </div>
                 <div class="content">
                     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
@@ -67,49 +51,10 @@
                     <!-- END SEARCH BOX: this adds support for the search box -->
                     <ul class="navbar-nav">
                         <li class="nav-header">Links</li>
-                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/LICENSE.md">License (MIT)</a></li>
-                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
-                        <li class="nav-header">
-  Documentation
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/content/GDF.html">
-    GDF Format
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/content/models.html">
-    Testing with models
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/content/newgraph.html">
-    Working with FSharp.FGL
-
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/content/terminology.html">
-    terminology
-  </a>
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/content/tutorial.html">
-    Introduction
-
-  </a>
-</li>
-                        <li class="nav-header">
-  API Reference
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="http://localhost:8901/reference/index.html">
-    All Namespaces
-  </a>
-</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                        {{fsdocs-list-of-namespaces}}
                     </ul>
                 </div>
             </aside>
@@ -117,20 +62,19 @@
         <div class="column is-10 is-paddingless">
             <div class="section pt-4">
                 <div class="container" id="fsdocs-content">
-                    <p>coming soon</p>
-
+                    {{fsdocs-content}}
                 </div>
             </div>
         </div>
-        
+        {{fsdocs-tooltips}}
     </div>
 
     <!-- BEGIN SEARCH BOX: this adds support for the search box -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
-    <script type="text/javascript">var fsdocs_search_baseurl = 'http://localhost:8901/'</script>
+    <script type="text/javascript">var fsdocs_search_baseurl = '{{root}}'</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
-    <script type="text/javascript" src="http://localhost:8901/content/fsdocs-search.js"></script>
+    <script type="text/javascript" src="{{root}}content/fsdocs-search.js"></script>
     <!-- END SEARCH BOX: this adds support for the search box -->
 </body>
 

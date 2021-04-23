@@ -182,6 +182,5 @@ localpackages/
 paket-files
 *.orig
 .fake
-docsrc/tools/FSharp.Formatting.svclog
-docs
-/temp
+tmp
+pkg
