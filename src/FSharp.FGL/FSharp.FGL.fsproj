@@ -12,6 +12,11 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Tailcalls>true</Tailcalls>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
   
   
 
@@ -21,6 +26,7 @@
     <Compile Include="Directed.fs" />
     <Compile Include="Undirected.fs" />
     <Compile Include="ArrayAdjacencyGraph.fs" />
+    <Compile Include="Louvain.fs" />
   </ItemGroup>
   
   

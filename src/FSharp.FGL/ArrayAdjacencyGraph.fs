@@ -77,9 +77,11 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
              
     ///Return the first edge in the graph that matches the conditions.
     member this.GetEdge((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> =
-        match (this.TryGetEdge(source,target)) with
-            |Some x -> x
-            |None   -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
+        try 
+            vertexOutEdges.Item source
+            |> Array.find (fun (s,t,e) -> s = source && t = target)
+        with
+        | _ -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
 
     ///Lookup all edges in the graph that matches the conditions, returning a Some value if it exists and None if not.
     member this.TryGetEdges((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> [] option=       
@@ -96,7 +98,7 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         |None   -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
 
     ///Returns all edges of the graph.
-    member this.Edges :LEdge<'Vertex,'Edge>[]=
+    member this.Edges() :LEdge<'Vertex,'Edge>[]=
         let result = Array.zeroCreate vertexOutEdges.Count
         let mutable i = 0
         for group in vertexOutEdges do
@@ -108,7 +110,7 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
     ///Number of edges in the graph
     member this.EdgeCount    :int   = 
-        this.Edges
+        this.Edges()
         |> Array.length
 
     ///Returns true, if there are no edges in the graph, else false.
@@ -130,9 +132,11 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
        
     ///Lookup all edges connected to the vertex v in the graph, returning an array of connected edges.
     member this.GetConnectedEdges((v:'Vertex)) :LEdge<'Vertex,'Edge> [] =
-        match (this.TryGetConnectedEdges(v)) with
-        |Some x -> x
-        |None   -> failwithf "The vertex %O does not exist in the graph." v
+        try
+           vertexOutEdges.Item v
+        with
+        | _ -> failwithf "The vertex %O does not exist in the graph." v
+
 
     ///Lookup all edges that target the vertex v in the graph, returning a Some value if a binding exists and None if not.
     member this.TryGetInEdges((v:'Vertex)) :LEdge<'Vertex,'Edge> [] option=      
@@ -262,7 +266,7 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         vertexOutEdges.Count
 
     ///Returns the vertices of the graph.
-    member this.Vertices  :'Vertex[]=
+    member this.Vertices()  :'Vertex[]=
         let result = Array.zeroCreate vertexOutEdges.Count
         let mutable i = 0
         for group in vertexOutEdges do
@@ -290,12 +294,12 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
     ///Returns the weighted degree of the vertex v.
     member this.WeightedDegree(weightingF : LEdge<'Vertex,'Edge> [] -> 'T,v:'Vertex) :'T =
-        match (Dictionary.tryGetValue v vertexOutEdges) with
-        |Some x -> 
-            x 
+        try
+            vertexOutEdges.Item v
             |> weightingF
-        |None   -> failwithf "The vertex %O does not exist in the graph." v
-   
+        with
+        | _ -> failwithf "The vertex %O does not exist in the graph." v
+
     ///Returns true, if the vertex v does not have edges connected to it. Otherwise, it returns false.
     member this.IsOutEdgesEmpty(v:'Vertex) :bool =
         this.Degree(v) = 0
@@ -380,17 +384,18 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
    
     ///Returns the label for the vertex v.
     member this.GetLabel(v:'Vertex) :'Label = 
-        match (this.TryGetLabel(v)) with
-            |Some x     -> x
-            |None       -> failwithf "The vertex %O does not exist in the graph." v
-   
+        try 
+            labels.Item v            
+        with
+        | _ -> failwithf "The vertex %O does not exist in the graph." v
+
     ///Sets the label for the vertex v.
     member this.SetLabel((v:'Vertex),(l:'Label)) = 
         labels.Item v <- (l)
         this
 
     ///Returns all labels of the graph.
-    member this.Labels :'Label []=
+    member this.Labels() :'Label []=
         let result = Array.zeroCreate labels.Count
         let mutable i = 0
         for group in labels do

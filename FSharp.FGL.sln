@@ -14,6 +14,8 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.IO", "src\FSharp
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.Tests", "tests\FSharp.FGL.Tests\FSharp.FGL.Tests.fsproj", "{AF68A6B7-83AC-4946-8F32-0CC6236B3964}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LouvainGenericApp", "LouvainGenericApp\LouvainGenericApp.fsproj", "{3C451883-94C0-455F-9564-BACD7268B690}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,14 @@ Global
 		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Mono|Any CPU.Build.0 = Debug|Any CPU
 		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.DotnetCore|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.DotnetCore|Any CPU.Build.0 = Debug|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.Mono|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.Mono|Any CPU.Build.0 = Debug|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C451883-94C0-455F-9564-BACD7268B690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
