@@ -2,91 +2,9 @@
 
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
-open System
 open Aether
-open FSharp.FGL.Undirected
-open System.Diagnostics
-open System.Text
 open System.Collections.Generic
 
-
-module Sources =
-    //let source5000 =
-    //    let source = FSharp.FGL.IO.GDF.fromFile @"C:\Users\lux-c\OneDrive\Desktop\Projekt\speedTest\5000.gdf"
-    //    let vertexList = (fst source |> List.map(fun (a,x) -> (a,Map.find "label" x)) |> List.map( fun (FSharp.FGL.IO.GDF.GDFValue.VARCHAR a,FSharp.FGL.IO.GDF.GDFValue.VARCHAR x) -> (a,x))) 
-    //    let edgeList = (snd source  |> List.map(fun (a,b,x) -> (a,b,Map.find "weight" x)) |> List.map( fun (FSharp.FGL.IO.GDF.GDFValue.VARCHAR a,FSharp.FGL.IO.GDF.GDFValue.VARCHAR b,FSharp.FGL.IO.GDF.GDFValue.DOUBLE x) -> (a,b,x))) 
-    //    Graph.create vertexList edgeList 
-    let source50        = 
-       let textfile                    = System.IO.File.ReadAllLines @"C:\Users\lux-c\OneDrive\Desktop\Projekt\speedTest\data\50.txt"
-       let getVertexListFromTxt        =   textfile |> Array.map (fun x -> x.Split '\t') |> Array.concat |> Array.distinct |> Array.map (fun x -> (int x,int x))
-       let getEdgeListFromTxt          =   
-           textfile 
-           |> Array.map (fun x -> x.Split '\t') 
-           |> Array.map(fun x -> (
-               let v1 = (int x.[0])
-               let v2 =(int x.[1])
-               if v1 < v2 then (v1,v2,1.)
-               else (v2,v1,1.)
-           )
-           )|> Array.distinct  
-       ArrayAdjacencyGraph(
-           (getVertexListFromTxt|>List.ofArray),
-           (getEdgeListFromTxt|>List.ofArray))
-
-    let source500       = 
-        let textfile                    = System.IO.File.ReadAllLines @"C:\Users\lux-c\OneDrive\Desktop\Projekt\speedTest\data\500.txt"
-        let getVertexListFromTxt        =   textfile |> Array.map (fun x -> x.Split '\t') |> Array.concat |> Array.distinct |> Array.map (fun x -> (int x,int x))
-        let getEdgeListFromTxt          =   
-            textfile 
-            |> Array.map (fun x -> x.Split '\t') 
-            |> Array.map(fun x -> (
-                let v1 = (int x.[0])
-                let v2 =(int x.[1])
-                if v1 < v2 then (v1,v2,1.)
-                else (v2,v1,1.)
-            )
-            )|> Array.distinct  
-        ArrayAdjacencyGraph(
-            (getVertexListFromTxt|>List.ofArray),
-            (getEdgeListFromTxt|>List.ofArray))
-
-    let sourceCelegans  = 
-        let textfile                    = System.IO.File.ReadAllLines @"C:\Users\lux-c\OneDrive\Desktop\Projekt\speedTest\data\celegans.txt" 
-        let getVertexListFromTxt        =   textfile |> Array.map (fun x -> x.Split '\t') |> Array.concat |> Array.distinct |> Array.map (fun x -> (int x,int x))
-        let getEdgeListFromTxt          =   
-            textfile 
-            |> Array.map (fun x -> x.Split '\t') 
-            |> Array.map(fun x -> (
-                let v1 = (int x.[0])
-                let v2 =(int x.[1])
-                if v1 < v2 then (v1,v2,1.)
-                else (v2,v1,1.)
-            )
-            )|> Array.distinct  
-        ArrayAdjacencyGraph(
-            (getVertexListFromTxt|>List.ofArray),
-            (getEdgeListFromTxt|>List.ofArray))
-
-    let sourceYeast     =         
-        let textfile                    = System.IO.File.ReadAllLines @"C:\Users\lux-c\OneDrive\Desktop\Projekt\speedTest\data\yeast.txt"   
-        let getVertexListFromTxt        =   textfile |> Array.map (fun x -> x.Split '\t') |> Array.concat |> Array.distinct |> Array.map (fun x -> (int x,int x))
-        let getEdgeListFromTxt          =   
-            textfile 
-            |> Array.map (fun x -> x.Split '\t') 
-            |> Array.map(fun x -> (
-                let v1 = (int x.[0])
-                let v2 =(int x.[1])
-                if v1 < v2 then (v1,v2,1.)
-                else (v2,v1,1.)
-            )
-            )|> Array.distinct  
-        ArrayAdjacencyGraph(
-            (getVertexListFromTxt|>List.ofArray),
-            (getEdgeListFromTxt|>List.ofArray))
-                           
-    //let sourceMarvel    = 
-    //    let a = HelpingFuntions.getGraphOfTxt @"C:\Users\lux-c\OneDrive\Desktop\Projekt\speedTest\data\marvelEasy.txt"
-    //    ArrayAdjacencyGraph((Vertices.toVertexList a),(Edges.toEdgeList a))
     
 module Louvain =                   
     module internal Dictionary = 
