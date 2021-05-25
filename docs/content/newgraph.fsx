@@ -25,8 +25,8 @@ Keep in mind that FSharp.FGL does not support unlabeled edges and unlabeled vert
 
 //Creating a list of labeled vertices
 let vertexList : LVertex<int,string> list = List.init 4 (fun i -> 
-        i,
-        sprintf "VertexNr. %i" i)
+        i + 1,
+        sprintf "VertexNr. %i" i + 1)
 
 //Creating a list of labeled edges
 let edgeList : LEdge<int,float> list = [(1,2,1.);(2,1,1.);(1,3,0.5);(3,4,0.8);(4,3,0.8)]
