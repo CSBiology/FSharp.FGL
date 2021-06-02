@@ -1,10 +1,8 @@
 ﻿namespace Louvain
 
-open FSharp.FGL
-open FSharp.FGL.ArrayAdjacencyGraph
+open FSharp.ArrayAdjacencyGraph.Graph
 open Aether
 open System.Collections.Generic
-
     
 module Louvain =                   
     module private Dictionary = 
@@ -40,8 +38,7 @@ module Louvain =
 
         // shuffle an array (in-place)
         let shuffle a =
-            Array.iteri (fun i _ -> swap a i (rand.Next(i, Array.length a))) a
-            
+            Array.iteri (fun i _ -> swap a i (rand.Next(i, Array.length a))) a           
     module private GroupingFunctions =
         // Group values of an array by the groupingF and sum the values of each group after applying the valueF on each of them.
         let inline sumGroupBy (groupingF : 'T -> 'group) (valueF : 'T -> 'V) (input : ('T) []) =
@@ -76,7 +73,7 @@ module Louvain =
                 | Some x    -> (x|> snd)
                 | None      -> 0.
            
-    let private louvainMethod (g1:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized:bool) : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = 
+    let private louvainMethod (g1:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized:bool) (modularityIncreaseThreshold: float) : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = 
         
         let vertices,vertices2 : Dictionary<'Vertex,'Label*int>*Dictionary<'Vertex,int*int>=
             let vertices = g1.LabelMap().Keys
@@ -112,7 +109,7 @@ module Louvain =
         let g : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = ArrayAdjacencyGraph(edges,vertices)
         let g2 :(ArrayAdjacencyGraph<int,int*int,float>)        = ArrayAdjacencyGraph(edges2,verticesUpdated)
 
-        let louvainCycleInPlace (graph:ArrayAdjacencyGraph<int,int*int,float>) (randomized:bool) :(int*ArrayAdjacencyGraph<int,int*int,float>)=
+        let louvainCycleInPlace (graph:ArrayAdjacencyGraph<int,int*int,float>) (randomized:bool) (modularityIncreaseThreshold: float) :(int*ArrayAdjacencyGraph<int,int*int,float>)=
         
                let verti =
                    graph.GetVertices()
@@ -131,6 +128,9 @@ module Louvain =
                    result
                    |> Array.concat
                    |> Array.sumBy (fun (source,target,weight) -> weight)
+                   //|> (/) (2.)
+               
+               //printfn "total weight %A" totalWeight
 
                let neighbours =
                     [|
@@ -151,7 +151,7 @@ module Louvain =
                    [|
                         for vertex in verti do 
                             graph.GetConnectedEdges(vertex)
-                            |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w else 0.) 
+                            |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.) 
                    |]
 
                let communitySumtotalSumintern =
@@ -161,6 +161,9 @@ module Louvain =
                        let originalLabel,label = graph.GetLabel vertex
                        let communityWeightTotalStart =  ki.[i]
                        let selfLoopsStart = selfLoops.[i] 
+                       //printfn "vertex = %A, sumIntern = %A, totalSumC = %A" vertex communityWeightTotalStart selfLoopsStart
+                       //printfn "Edges = %A" (graph.GetConnectedEdges vertex)
+                       //printfn "ki = %A" (ki.[i])
                        output.Add(label,(communityWeightTotalStart,selfLoopsStart))
                    output       
            
@@ -171,19 +174,25 @@ module Louvain =
                        let (totalSumC,sumIntern) = i.Value
                        if totalSumC > 0. then 
                            let calculation = (sumIntern - (totalSumC*totalSumC) / totalWeight)
-                           q <- q + (calculation)
+                           //printfn "counter = %A, sumIntern = %A, totalSumC = %A, change = %A" i.Key sumIntern totalSumC calculation
+                           q <- (q+(calculation))
                    (q/totalWeight)
 
                //Minimal increase in modularity Quality that has to be achieved. If the increase in modularity is lower, then the first phase of the louvain Algorithm ends and a new iteration can begin.
-               let increaseMin = 0.000001
+               let increaseMin = modularityIncreaseThreshold //0.000001
 
+
+               let mutable counterForLoops = 0
                //Runs once over all vertices in the graph and move the vertex into the community to which the modularity gain is maximal. In case of no positive gain, the original community is kept.
                let rec louvainOneLevel (counter:int) (nbOfMoves:int) =
                    //Do until
                    if counter = graph.VertexCount then 
+                       counterForLoops <- counterForLoops+1
+                       //printfn "number of Loops %A" counterForLoops 
                        nbOfMoves > 0
 
                    else            
+                       
                        //Vertex that is looked at.
                        let node                                 = verti.[counter]
                    
@@ -377,6 +386,10 @@ module Louvain =
                            )
 
                    let qualityNew = modularityQuality 0.
+                   
+                   //printfn "oldMod = %A, new Mod = %A" currentQuality qualityNew
+                   //printfn "change in modularity-quality %A" (qualityNew-currentQuality)
+                   
                    if nbOfMoves = 0 then 
                  
                        let hasImProved = louvainOneLevel 0 0
@@ -404,11 +417,11 @@ module Louvain =
                loop 0 (modularityQuality 0.) false
 
         //The louvainLoop combines the two phases of the louvain Algorithm. As long as improvments can be performed, the louvainApplication is executed.
-        let rec louvainInPlace_ nbOfLoops (newG:ArrayAdjacencyGraph<int,int*int,float>) =
+        let rec louvainInPlace_ nbOfLoops (newG:ArrayAdjacencyGraph<int,int*int,float>) (modularityIncreaseThreshold: float) =
         
             let (nbOfMoves,newGraph) = 
             
-                louvainCycleInPlace newG randomized           
+                louvainCycleInPlace newG randomized modularityIncreaseThreshold           
 
             if nbOfMoves < 2 then 
             
@@ -416,13 +429,13 @@ module Louvain =
 
             else 
 
-                louvainInPlace_ (nbOfLoops+1) newGraph
+                louvainInPlace_ (nbOfLoops+1) newGraph modularityIncreaseThreshold
 
 
-        louvainInPlace_ 0 g2
-    
-    let louvain (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
-        louvainMethod graph false
+        louvainInPlace_ 0 g2 modularityIncreaseThreshold
+   
+    let louvain (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
+        louvainMethod graph false modularityIncreaseThreshold
 
-    let louvainRandom (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
-        louvainMethod graph true
+    let louvainRandom (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
+        louvainMethod graph true modularityIncreaseThreshold
