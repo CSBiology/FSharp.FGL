@@ -1,8 +1,7 @@
-﻿namespace FSharp.FGL.ArrayAdjacencyGraph
+﻿namespace FSharp.ArrayAdjacencyGraph.Graph
 
 open System.Collections.Generic
-open FSharp.FGL //For our Graph method
-
+open FSharp.Graph
 
 
 module internal Dictionary = 
@@ -44,7 +43,7 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
         for i=0 to vertexArray.Length-1 do
             let (vertex,label)  = vertexArray.[i]
-            let edges           = Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
+            let edges           = Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         //Über edges drübermappen und die einträge dementsprechend einfügen
             
             labelDict.Add (vertex,label)                                  
             vertexEdges.Add (vertex,edges)
@@ -214,22 +213,32 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     
     ///Adds a labeled, edge to the graph.
     member this.AddEdge((s, t, w): LEdge<'Vertex,'Edge>) =
+        if s = t then 
+            let edgeArraySource = 
+                try
+                    vertexOutEdges.Item s
+                with 
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-        let edgeArraySource = 
-            try
-                vertexOutEdges.Item s
-            with 
-            |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
+            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w);(s,t,w)|];edgeArraySource])
 
-        let edgeArrayTarget = 
-            try
-                vertexOutEdges.Item t
-            with
-            |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
+        else
+            let edgeArraySource = 
+                try
+                    vertexOutEdges.Item s
+                with 
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
+            let edgeArrayTarget = 
+                try
+                    vertexOutEdges.Item t
+                with
+                |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
 
-        vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
-        vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
+        
+            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
+            vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
+
         this
     
     ///Adds an array of labeled, edges to the graph.
@@ -296,13 +305,17 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
     ///Returns the number of edges that originate from the vertex v.
     member this.InDegree((v:'Vertex)) =
-        this.TryGetInEdges v
-        |> Option.map (Array.length)
-
+        //this.TryGetInEdges v
+        //|> Option.map (Array.length)
+        this.GetInEdges v
+        |> Array.length
+        
     ///Returns the number of edges that target the vertex v.
     member this.OutDegree((v:'Vertex)) =
-        this.TryGetOutEdges v
-        |> Option.map (Array.length)
+        //this.TryGetOutEdges v
+        //|> Option.map (Array.length)
+        this.GetOutEdges v
+        |> Array.length
 
     ///Returns the weighted degree of the vertex v.
     member this.WeightedDegree(weightingF : LEdge<'Vertex,'Edge> [] -> 'T,v:'Vertex) :'T =
@@ -423,3 +436,102 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
             result.[i] <- group.Value
             i <- i+1
         result       
+
+    member this.gilbert (numberOfNodes: int) (probability: float) (isDirected: bool) (fVertexKey: int -> 'Vertex) (fLabel: 'Vertex -> 'Label) (fWeight: 'Vertex -> 'Edge) =
+        if probability > 1. || probability < 0. then failwithf "The stated probability %F is outside the expected range of 0. to 1." probability
+
+        let rnd         = new System.Random()
+        let vertexEdges = System.Collections.Generic.Dictionary<'Vertex,LEdge<'Vertex,'Edge>[]>()
+        let labelDict   = System.Collections.Generic.Dictionary<'Vertex,'Label>()
+
+        let vertices = 
+             [|
+                for i=0 to (numberOfNodes-1) do
+                    fVertexKey i
+             |]
+
+        for i=0 to (numberOfNodes-1) do
+            //let vertex  = fVertexKey i
+            let vertex = vertices.[i]
+            let label   = fLabel vertex
+            labelDict.Add(vertex,label)
+            vertexEdges.Add(vertex,[||])
+
+
+        if isDirected then
+            for s in vertices do
+            
+                printfn "%A" s
+
+                for t in vertices do
+
+                    printfn "%A" t
+
+                    if rnd.NextDouble() < probability then
+                    
+                        printfn "rnd"
+
+                        if s=t then                                            
+                            let w       = fWeight s
+                            let valueS  = vertexEdges.Item s 
+                            vertexEdges.Item s <- (Array.concat[[|(s,s,w);(s,s,w)|];valueS])
+                        else
+                            let w       = fWeight s
+                            let valueS  = vertexEdges.Item s 
+                            let valueT  = vertexEdges.Item t
+                            vertexEdges.Item s <- (Array.concat[[|s,t,w|];valueS]) 
+                            vertexEdges.Item t <- (Array.concat[[|s,t,w|];valueT])                  
+        else
+            for i=0 to vertices.Length-1 do 
+                let s = vertices.[i]
+    
+                for j=i to vertices.Length-1 do
+                    if rnd.NextDouble() < probability then
+                        let t = vertices.[j]
+        
+                        if s=t then 
+                            let w       = fWeight s
+                            let valueS  = vertexEdges.Item s 
+                            vertexEdges.Item s <- (Array.concat[[|(s,s,w);(s,s,w)|];valueS]) 
+                        else
+                            let w       = fWeight s
+                            let valueS  = vertexEdges.Item s 
+                            let valueT  = vertexEdges.Item t
+                            vertexEdges.Item s <- (Array.concat[[|s,t,w|];valueS]) 
+                            vertexEdges.Item t <- (Array.concat[[|s,t,w|];valueT])      
+    
+        ArrayAdjacencyGraph(vertexEdges,labelDict)
+
+
+    //member this.BarabasiAlbert (numberOfNodes: int) (isDirected: bool) (fVertexKey: int -> 'Vertex) (fLabel: 'Vertex -> 'Label) (fWeight: 'Vertex -> 'Edge) =
+    //    let rnd         = new System.Random()
+        
+    //    let vertexEdgesOG = this.AdjacencyGraph()
+    //    let labelDictOG   = this.LabelMap()
+               
+
+    //    let vertexEdges = System.Collections.Generic.Dictionary<'Vertex,LEdge<'Vertex,'Edge>[]>()
+    //    let labelDict   = System.Collections.Generic.Dictionary<'Vertex,'Label>()
+    //    let kiIndexDict = System.Collections.Generic.Dictionary<'Vertex,int>()
+    //    let mutable kj  = 0
+    //    let p i = ((kiIndexDict.Item i) /kj)
+    
+    //    let vertices = 
+    //        [|
+    //            for i=0 to numberOfNodes-1 do
+    //            fVertexKey i 
+    //        |]
+
+    //    for i=0 to numberOfNodes-1 do
+    //        let vertex  = vertices.[i]
+    //        let label   = fLabel vertex
+    //        labelDict.Add(vertex,label)
+    //        vertexEdges.Add(vertex,[||])
+    //        kiIndexDict.Add(vertex,0)
+
+    //    for v in vertices do
+            
+        
+
+
+    //    ArrayAdjacencyGraph(vertexEdges,labelDict)

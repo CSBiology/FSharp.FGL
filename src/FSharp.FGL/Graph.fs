@@ -1,18 +1,19 @@
 namespace FSharp.FGL
 
 open Aether
+open FSharp.Graph
 
-///Labeled vertex
-type LVertex<'Vertex,'Label> =
-    'Vertex * 'Label
+/////Labeled vertex
+//type LVertex<'Vertex,'Label> =
+//    'Vertex * 'Label
 
-///Unlabeled edge
-type Edge<'Vertex> =
-    'Vertex * 'Vertex
+/////Unlabeled edge
+//type Edge<'Vertex> =
+//    'Vertex * 'Vertex
 
-///Labeled edge
-type LEdge<'Vertex,'Edge> =
-    'Vertex * 'Vertex * 'Edge
+/////Labeled edge
+//type LEdge<'Vertex,'Edge> =
+//    'Vertex * 'Vertex * 'Edge
 
 ///Tuple list of adjacent vertices and the linking edges
 type Adj<'Vertex,'Edge> when 'Vertex: comparison =

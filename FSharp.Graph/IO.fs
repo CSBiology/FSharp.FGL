@@ -1,7 +1,6 @@
-﻿namespace FSharp.FGL.IO
+﻿namespace FSharp.Graph.IO
 
 open Aether
-open FSharp.FGL
 open System.Text
 open FSharp.Graph
 
