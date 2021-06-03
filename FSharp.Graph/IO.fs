@@ -219,13 +219,11 @@ module GDF =
             |>List.map(fun x -> gdfValueToString x)
             |>List.map(addQuotationsIfNeeded)
 
-    //Takes a graph and transforms it into a .txt file that is readable with the fromFile function.
-    let toFile (graph:Graph<GDFValue,Map<string,GDFValue>,Map<string,GDFValue>>) (edgesDirected:bool) (path:string) =
-        let vertexList  = Vertices.toVertexList graph
-        let edgeList    = 
-            match edgesDirected with 
-            |true   -> Directed.Edges.toEdgeList graph
-            |_      -> Directed.Edges.toEdgeList graph (***Add function, that removes the return edges?***)  
+
+    //Takes a vertexList and an edgeList and transform them into a .txt file that is readable with the fromFile function.
+    let toFile  (vertexList: LVertex<GDFValue,Map<string,GDFValue>> list) (edgeList: LEdge<GDFValue,Map<string,GDFValue>> list) (path:string) =
+        let vertexList  = vertexList 
+        let edgeList    = edgeList
 
         let vertexHeaderMap = reconstructVerticesHeader vertexList
         let edgeHeaderMap   = reconstructEdgesHeader edgeList
