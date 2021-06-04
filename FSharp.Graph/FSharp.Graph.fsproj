@@ -10,4 +10,8 @@
     <Compile Include="IO.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Aether" Version="8.3.1" />
+  </ItemGroup>
+
 </Project>
