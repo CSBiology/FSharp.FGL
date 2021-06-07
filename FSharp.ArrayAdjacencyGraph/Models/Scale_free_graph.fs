@@ -1,39 +1,39 @@
 ﻿namespace Models.Scale_free_graph
 
-open FSharp.Graph
 open FSharp.ArrayAdjacencyGraph.Graph
 
-
+// Creating a random generated network based on NetworkX, a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks. Based on the scale free network method,NetworkX ReferenceRelease 2.5, page 630.
+// https://networkx.org/
 module Scale_free_graph =
-       
-    let scale_free_graph (n: int) (alpha: float) (beta: float) (gamma: float) (delta_in: float) (delta_out: float) (create_using:ArrayAdjacencyGraph<int,int,float>)(* (seed)*) =
-        //Parameters
-        //   ----------
-        //   n : integer
-        //       Number of nodes in graph
-        //   alpha : float
-        //       Probability for adding a new node connected to an existing node
-        //       chosen randomly according to the in-degree distribution.
-        //   beta : float
-        //       Probability for adding an edge between two existing nodes.
-        //       One existing node is chosen randomly according the in-degree
-        //       distribution and the other chosen randomly according to the out-degree
-        //       distribution.
-        //   gamma : float
-        //       Probability for adding a new node connected to an existing node
-        //       chosen randomly according to the out-degree distribution.
-        //   delta_in : float
-        //       Bias for choosing nodes from in-degree distribution.
-        //   delta_out : float
-        //       Bias for choosing nodes from out-degree distribution.
-        //   create_using : NetworkX graph constructor, optional
-        //       The default is a MultiDiGraph 3-cycle.
-        //       If a graph instance, use it without clearing first.
-        //       If a graph constructor, call it to construct an empty graph.
-        //   seed : integer, random_state, or None (default)
-        //       Indicator of random number generation state.
-        //       See :ref:`Randomness<randomness>`.          
-        //The sum of `alpha`, `beta`, and `gamma` must be 1.
+    /// Returns a randomly generated, directed, scale free ArrayAdjacencyGraph, based on the given paramters.
+    ///
+    ///   n : integer
+    ///       Number of nodes in graph
+    ///
+    ///   alpha : float
+    ///       Probability for adding a new node connected to an existing node
+    ///       chosen randomly according to the in-degree distribution.
+    ///
+    ///   beta : float
+    ///       Probability for adding an edge between two existing nodes.
+    ///       One existing node is chosen randomly according the in-degree
+    ///       distribution and the other chosen randomly according to the out-degree
+    ///       distribution.
+    ///
+    ///   gamma : float
+    ///       Probability for adding a new node connected to an existing node
+    ///       chosen randomly according to the out-degree distribution.
+    ///
+    ///   delta_in : float
+    ///       Bias for choosing nodes from in-degree distribution.
+    ///
+    ///   delta_out : float
+    ///       Bias for choosing nodes from out-degree distribution.
+    ///
+    ///   create_using : an ArrayAdjacencyGraph, that can be used as basis for the graph generation. If the given graph has less than 3 vertices, a hard-coded example is used instead. 
+    ///The sum of `alpha`, `beta`, and `gamma` must be 1. 
+    let scale_free_graph (n: int) (alpha: float) (beta: float) (gamma: float) (delta_in: float) (delta_out: float) (create_using:ArrayAdjacencyGraph<int,int,float>) =
+        
         if alpha+beta+gamma <> 1. then 
             failwithf "The sum of alpha, beta, and gamma must be 1., but here is %A" (alpha+beta+gamma)
     
@@ -55,12 +55,7 @@ module Scale_free_graph =
     
         let _choose_node(distribution, delta, psum) =
             let mutable cumsum = 0.0
-            //normalization
             let r = rnd.NextDouble()
-            //for n, d in distribution do
-            //    cumsum <- (cumsum)+((d+delta) / psum)
-            //    if r < cumsum then break
-            //n
             let mutable n = 0
             let mutable threshold = false
             if distribution = "in" then
