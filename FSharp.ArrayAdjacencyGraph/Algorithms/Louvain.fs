@@ -4,6 +4,7 @@ open FSharp.ArrayAdjacencyGraph.Graph
 open System.Collections.Generic
 
 ///Louvain method for community detection
+//Blondel, Vincent D; Guillaume, Jean-Loup; Lambiotte, Renaud; Lefebvre, Etienne (9 October 2008). "Fast unfolding of communities in large networks". Journal of Statistical Mechanics: Theory and Experiment. 2008
 module Louvain =                   
     
     //All functions connected to dictionaries used.
@@ -447,10 +448,24 @@ module Louvain =
 
         louvainInPlace_ 0 g2 modularityIncreaseThreshold 0.
    
+    /// Takes an ArrayAdjacencyGraph and returns a new graph whose Labels have been transformed into tupels, where the second part is the community accorging to modularity-optimization. 
+    /// Parameters:
     ///
+    /// graph : ArrayAdjacencyGraph, that is used as the template for the modularity optimization.
+    ///
+    /// modularityIncreaseThreshold : Threshold of modularity-difference that has to be exceeded in order to be recognized as a modularity-increase.
+    /// The value has to be between 0. and 1. to get a meaningful result. The smaller the value, the longer the calculation takes.
     let louvain (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
         louvainMethod graph false modularityIncreaseThreshold
     
+    /// Takes an ArrayAdjacencyGraph and returns a new graph whose Labels have been transformed into tupels, where the second part is the community accorging to modularity-optimization.
+    /// In addition, the modularity optimization is carried out in a random order
     ///
+    /// Parameters:
+    ///
+    /// graph : ArrayAdjacencyGraph, that is used as the template for the modularity optimization.
+    ///
+    /// modularityIncreaseThreshold : Threshold of modularity-difference that has to be exceeded in order to be recognized as a modularity-increase.
+    /// The value has to be between 0. and 1. to get a meaningful result. The smaller the value, the longer the calculation takes.
     let louvainRandom (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
         louvainMethod graph true modularityIncreaseThreshold
