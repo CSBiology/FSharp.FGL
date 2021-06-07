@@ -1,6 +1,5 @@
 ﻿namespace FSharp.Graph.IO
 
-open Aether
 open System.Text
 open FSharp.Graph
 
