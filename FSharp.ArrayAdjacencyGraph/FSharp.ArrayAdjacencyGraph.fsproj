@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aether" Version="8.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FSharp.Graph\FSharp.Graph.fsproj" />
   </ItemGroup>
 

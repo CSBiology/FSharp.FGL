@@ -178,7 +178,6 @@ module Louvain =
                     let (totalSumC,sumIntern) = i.Value
                     if totalSumC > 0. then 
                         let calculation = (sumIntern - (totalSumC*totalSumC) / totalWeight)
-                        //printfn "counter = %A, sumIntern = %A, totalSumC = %A, change = %A" i.Key sumIntern totalSumC calculation
                         q <- (q+(calculation))
                 (q/totalWeight)
 
@@ -199,7 +198,7 @@ module Louvain =
                     let node                                 = verti.[counter]
                     
                     //The weighted degree of the node.
-                    let ki                                   = ki.[counter] //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> w)),node)
+                    let ki                                   = ki.[counter] 
 
                     //The weight of all self-referencing loops of the vertex.
                     let selfloopNode                         = selfLoops.[counter]
@@ -423,7 +422,6 @@ module Louvain =
                     nbOfMoves,
                     graph,
                     qualityNew
-                    //build true
 
                 else 
                     build true
@@ -440,7 +438,7 @@ module Louvain =
 
             if nbOfMoves < 2 || ((nbOfLoops>0) && (newModularity<modulartiy)) then 
             
-                (*modulartiy,*)g
+                g
 
             else 
 
@@ -450,9 +448,9 @@ module Louvain =
         louvainInPlace_ 0 g2 modularityIncreaseThreshold 0.
    
     ///
-    let louvain (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(*(float)**)(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
+    let louvain (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
         louvainMethod graph false modularityIncreaseThreshold
     
     ///
-    let louvainRandom (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(*(float)**)(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
+    let louvainRandom (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
         louvainMethod graph true modularityIncreaseThreshold
