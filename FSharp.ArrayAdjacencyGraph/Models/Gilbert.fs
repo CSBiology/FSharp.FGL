@@ -1,7 +1,7 @@
 ﻿namespace Models.Gilbert
 
 open FSharp.Graph
-open FSharp.ArrayAdjacencyGraph.Graph
+open FSharp.ArrayAdjacencyGraph
 
 // Adaptation of the gilbert random plane networks
 // Gilbert, E.N., 1961. Random plane networks. Journal of the society for industrial and applied mathematics, 9(4), pp.533-543.

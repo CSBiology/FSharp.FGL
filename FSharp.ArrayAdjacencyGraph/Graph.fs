@@ -1,4 +1,4 @@
-﻿namespace FSharp.ArrayAdjacencyGraph.Graph
+﻿namespace FSharp.ArrayAdjacencyGraph
 
 open System.Collections.Generic
 open FSharp.Graph
@@ -43,7 +43,7 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
         for i=0 to vertexArray.Length-1 do
             let (vertex,label)  = vertexArray.[i]
-            let edges           = Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         //Über edges drübermappen und die einträge dementsprechend einfügen
+            let edges           = Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
             
             labelDict.Add (vertex,label)                                  
             vertexEdges.Add (vertex,edges)

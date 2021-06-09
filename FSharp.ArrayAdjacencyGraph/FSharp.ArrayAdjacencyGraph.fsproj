@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <Compile Include="Graph.fs" />
-    <Compile Include="Models\Scale_free_graph.fs" />
+    <Compile Include="Models\BollobasRiordan.fs" />
     <Compile Include="Models\BarabasiAlbert.fs" />
     <Compile Include="Models\Gilbert.fs" />
     <Compile Include="Algorithms\Louvain.fs" />

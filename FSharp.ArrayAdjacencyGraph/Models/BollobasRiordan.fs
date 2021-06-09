@@ -1,10 +1,10 @@
 ﻿namespace Models.Scale_free_graph
 
-open FSharp.ArrayAdjacencyGraph.Graph
+open FSharp.ArrayAdjacencyGraph
 
 // Creating a random generated network based on NetworkX, a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks. Based on the scale free network method,NetworkX ReferenceRelease 2.5, page 630.
 // https://networkx.org/
-module Scale_free_graph =
+module BollobasRiordan =
     /// Returns a randomly generated, directed, scale free ArrayAdjacencyGraph, based on the given paramters.
     ///
     ///   n : integer
@@ -32,7 +32,7 @@ module Scale_free_graph =
     ///
     ///   create_using : an ArrayAdjacencyGraph, that can be used as basis for the graph generation. If the given graph has less than 3 vertices, a hard-coded example is used instead. 
     ///The sum of `alpha`, `beta`, and `gamma` must be 1. 
-    let scale_free_graph (n: int) (alpha: float) (beta: float) (gamma: float) (delta_in: float) (delta_out: float) (create_using:ArrayAdjacencyGraph<int,int,float>) =
+    let bollobasRiordan (n: int) (alpha: float) (beta: float) (gamma: float) (delta_in: float) (delta_out: float) (create_using:ArrayAdjacencyGraph<int,int,float>) =
         
         if alpha+beta+gamma <> 1. then 
             failwithf "The sum of alpha, beta, and gamma must be 1., but here is %A" (alpha+beta+gamma)
