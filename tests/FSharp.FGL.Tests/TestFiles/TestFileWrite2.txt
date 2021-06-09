@@ -5,5 +5,5 @@ s3,webpage,'192,208,223',10.986123,SiteC,true,true,10.986123,8.598924,-26.867584
 edgedef> node1,node2,color VARCHAR,directed BOOLEAN
 s1,s2, ,true
 s2,s3,'219,116,251',true
-s3,s1,'192,208,223',true
 s3,s2,'192,208,223',true
+s3,s1,'192,208,223',true

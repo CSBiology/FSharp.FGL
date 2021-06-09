@@ -8,4 +8,6 @@ let main argv =
     //FSharp.FGL core tests
     Tests.runTestsWithCLIArgs [] argv IOTests.testGDFReaderFuntions |>ignore
     Tests.runTestsWithCLIArgs [] argv IOTests.testGDFWriterFuntions |>ignore
+    Tests.runTestsWithCLIArgs [] argv ArrayAdjacencyGraphTests.testInitializeGraph |>ignore
+    Tests.runTestsWithCLIArgs [] argv ArrayAdjacencyGraphTests.testEdges |>ignore
     0
