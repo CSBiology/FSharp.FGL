@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FSharp.FGL.IO\FSharp.FGL.IO.fsproj" />
     <ProjectReference Include="..\..\src\FSharp.FGL\FSharp.FGL.fsproj" />
   </ItemGroup>
 </Project>

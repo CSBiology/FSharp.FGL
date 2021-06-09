@@ -1,7 +1,7 @@
 ﻿module IOTests
 
 open FSharp.FGL
-open FSharp.FGL.IO  
+open FSharp.Graph.IO
 open Expecto
 
 
@@ -77,7 +77,11 @@ let testGDFWriterFuntions =
 
             let testGraph = Directed.Graph.create (fst testRead) (snd testRead)
 
-            let testWrite = GDF.toFile testGraph true testWriteFilePath
+            let vertexList = Vertices.toVertexList testGraph
+            
+            let edgeList = Directed.Edges.toEdgeList testGraph
+
+            let testWrite = GDF.toFile vertexList edgeList testWriteFilePath
 
             let testWriteRead = GDF.fromFile testWriteFilePath
 
@@ -110,9 +114,9 @@ let testGDFWriterFuntions =
             let vertexListUpdated   = modifiedVertexHead::vertexListTail
             let edgeListUpdated     = modifiedEdgeHead::edgeListTail
 
-            let testGraphUpdated = Directed.Graph.create vertexListUpdated edgeListUpdated
+            //let testGraphUpdated = Directed.Graph.create vertexListUpdated edgeListUpdated
 
-            let testWrite = GDF.toFile testGraphUpdated true testWriteFilePath2
+            let testWrite = GDF.toFile vertexListUpdated edgeListUpdated testWriteFilePath2
         
             let testRead2 = GDF.fromFile testWriteFilePath2
             let (vertexList2,edgeList2)   = testRead2

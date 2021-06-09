@@ -1,5 +1,7 @@
 ﻿namespace FSharp.FGL.Algorithm
 
+open FSharp.Graph
+
 ///Contains generic functions for creating model graphs
 module Models =
     

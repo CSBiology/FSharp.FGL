@@ -1,8 +1,7 @@
-﻿namespace FSharp.FGL.ArrayAdjacencyGraph
+﻿namespace FSharp.ArrayAdjacencyGraph
 
 open System.Collections.Generic
-open FSharp.FGL //For our Graph method
-
+open FSharp.Graph
 
 
 module internal Dictionary = 
@@ -214,22 +213,32 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     
     ///Adds a labeled, edge to the graph.
     member this.AddEdge((s, t, w): LEdge<'Vertex,'Edge>) =
+        if s = t then 
+            let edgeArraySource = 
+                try
+                    vertexOutEdges.Item s
+                with 
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-        let edgeArraySource = 
-            try
-                vertexOutEdges.Item s
-            with 
-            |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
+            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w);(s,t,w)|];edgeArraySource])
 
-        let edgeArrayTarget = 
-            try
-                vertexOutEdges.Item t
-            with
-            |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
+        else
+            let edgeArraySource = 
+                try
+                    vertexOutEdges.Item s
+                with 
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
+            let edgeArrayTarget = 
+                try
+                    vertexOutEdges.Item t
+                with
+                |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
 
-        vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
-        vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
+        
+            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
+            vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
+
         this
     
     ///Adds an array of labeled, edges to the graph.
@@ -296,13 +305,17 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
     ///Returns the number of edges that originate from the vertex v.
     member this.InDegree((v:'Vertex)) =
-        this.TryGetInEdges v
-        |> Option.map (Array.length)
-
+        //this.TryGetInEdges v
+        //|> Option.map (Array.length)
+        this.GetInEdges v
+        |> Array.length
+        
     ///Returns the number of edges that target the vertex v.
     member this.OutDegree((v:'Vertex)) =
-        this.TryGetOutEdges v
-        |> Option.map (Array.length)
+        //this.TryGetOutEdges v
+        //|> Option.map (Array.length)
+        this.GetOutEdges v
+        |> Array.length
 
     ///Returns the weighted degree of the vertex v.
     member this.WeightedDegree(weightingF : LEdge<'Vertex,'Edge> [] -> 'T,v:'Vertex) :'T =
