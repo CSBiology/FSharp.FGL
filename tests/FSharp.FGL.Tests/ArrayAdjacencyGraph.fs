@@ -7,9 +7,6 @@ open Expecto
 [<Tests>]
 let testInitializeGraph =
     
-    let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
-    let testReadFilePath = System.IO.Path.Combine(testDirectory,"TestFileRead.txt")
-
     testList "AAG.initialize Graph" [
         
         testCase "from LVertex and LEdge to Graph" (fun () ->
@@ -44,17 +41,21 @@ let testInitializeGraph =
                 |]           
                 |> Array.concat
                 |> Array.toList
-
-            
-            Expect.isTrue 
-                (((verticesG)=(vertexList))&&((edges|>List.distinct|>List.sort)=(edgesGraph|>List.distinct|>List.sort)))
-                "The data used to generate the graph is not equal to the data in the graph"
+                        
+            Expect.sequenceEqual 
+                verticesG
+                vertexList
+                "The vertexList of the graph does not match the data used to create the graph"
+        
+            Expect.sequenceEqual
+                (edgesGraph|>List.distinct|>List.sort)              
+                (edges|>List.distinct|>List.sort)
+                "the edgeList of the graph does not match the data used to create the graph"
         )   
     ]   
 
 [<Tests>]
 let testEdges =
-    let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
     let rnd = System.Random()
               
     let arrayAdjacencyGraphRnd =       
@@ -133,6 +134,28 @@ let testEdges =
                 exampleGraphEdges
                 "getEdge does not yield the correct edge."
         )
+        
+        testCase "GetEdge FAIL" (fun () ->
+            
+            let impossibleEdge =
+                let x = 
+                    exampleGraphVertices
+                    |> List.last
+                    |> fst
+
+                x+1
+
+            let GetEdgeFAIL =
+                try
+                    testGraph.GetEdge (impossibleEdge,impossibleEdge) |> ignore
+                    Result.Ok "Did get connected Edges"
+                with
+                | err -> Result.Error "Could not get connected Edges"
+    
+            Expect.isError
+                GetEdgeFAIL
+                "getEdge does yield an edge that doesn´t exist"
+        )
 
         testCase "TryGetEdges" (fun () ->
             
@@ -185,7 +208,7 @@ let testEdges =
 
         testCase "GetEdges()" (fun () ->
                              
-            Expect.equal
+            Expect.sequenceEqual
                 (exampleGraphEdges|>List.distinct)
                 (testGraph.GetEdges()|>Array.toList)
                 "getEdges() does not yield the correct edges."
@@ -208,8 +231,11 @@ let testEdges =
         
         testCase "ContainsEdgeTrue" (fun () ->
             
+            let (s,t,w) =
+                exampleGraphEdges.[0]
+
             Expect.isTrue 
-                (testGraph.ContainsEdge(0,2,1))
+                (testGraph.ContainsEdge(s,t,w))
                 "ContainsEdge returns true for edges that don´t exist"
         )
 
@@ -220,7 +246,7 @@ let testEdges =
                     for i in exampleGraphVertices do
                         testGraph.TryGetConnectedEdges (fst i)
                 |]
-                |> Array.map (fun x -> match x with |Some y -> y |None -> failwith "TryGetConnectedEdges does not yield all expected edges")
+                |> Array.choose (id)
                 |> Array.concat 
                 |> Array.distinct
 
@@ -301,7 +327,7 @@ let testEdges =
                 |> Array.toList
                 |> List.sort
 
-            Expect.equal
+            Expect.sequenceEqual
                 edges
                 (exampleGraphEdges|>List.sort)
                 "TryGetInEdges does not return the expected Value"
@@ -319,7 +345,7 @@ let testEdges =
                 |> Array.toList
                 |> List.sort
 
-            Expect.equal
+            Expect.sequenceEqual
                 edges
                 (exampleGraphEdges|>List.sort)
                 "TryGetInEdges does not return the expected Value"
@@ -327,7 +353,7 @@ let testEdges =
 
         testCase "GetInEdges " (fun () ->
             
-            Expect.equal
+            Expect.sequenceEqual
                 (testGraph.GetInEdges 0)
                 [||]
                 "GetInEdges was supposed to yield an empty array, yet returned values"
@@ -355,7 +381,7 @@ let testEdges =
                 |> Array.toList
                 |> List.sort
 
-            Expect.equal
+            Expect.sequenceEqual
                 edges
                 (exampleGraphEdges|>List.sort)
                 "TryGetOutEdges does not return the expected Value"
@@ -444,8 +470,21 @@ let testEdges =
                 (newSourceDegree-oldSourceDegree) = (newTargetDegree-oldTargetDegree)
             
             Expect.isTrue
-                (isEdgeNew&&inEdge&&outEdge&&isDegreeChangeSame)
-                "AddEdge does not add an edge correctly"
+                (isEdgeNew)
+                "The added edge is not new"
+        
+            Expect.isTrue
+                (inEdge)
+                "The added edge is not found as inEdge"
+
+            Expect.isTrue
+                (outEdge)
+                "The added edge is not found as outEdge"
+
+            Expect.isTrue
+                (isDegreeChangeSame)
+                "The added edge does not change the Degree of the connected vertices"
+            
         )
         
         testCase "RemoveEdge" (fun () ->
@@ -481,15 +520,21 @@ let testEdges =
                 (newSourceDegree-oldSourceDegree) = (newTargetDegree-oldTargetDegree)
             
             Expect.isTrue
-                (inEdge&&outEdge&&isDegreeChangeSame)
-                "RemoveEdge does not remove an edge correctly"
+                (inEdge)
+                "RemoveEdge does not remove the inedge correctly"
+            Expect.isTrue
+                (outEdge)
+                "RemoveEdge does not remove the outedge correctly"
+            Expect.isTrue
+                (isDegreeChangeSame)
+                "RemoveEdge does change the degree of the connected vertices"
+               
         )
 
     ]
 
 [<Tests>]
 let testVertices =
-    let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
     let rnd = System.Random()
     
     let arrayAdjacencyGraphRnd =       
@@ -561,7 +606,7 @@ let testVertices =
 
         testCase "GetVertices()" (fun () ->
             
-            Expect.equal
+            Expect.sequenceEqual
                 (testGraph.GetVertices()|>Array.sort|>List.ofArray)
                 (exampleGraphVertices|>List.map fst|>List.sort)
                 "GetVertices() does not return the correct sequence"
@@ -620,7 +665,7 @@ let testVertices =
                             
                     ]
 
-                Expect.equal
+                Expect.sequenceEqual
                     inDegreeActual
                     inDegreeExpected
                     "InDegree does not return the correct value"
@@ -650,7 +695,7 @@ let testVertices =
                                 
                 ]
 
-            Expect.equal
+            Expect.sequenceEqual
                 outDegreeActual
                 outDegreeExpected
                 "OutDegree does not return the correct value"
@@ -668,7 +713,7 @@ let testVertices =
                         (testGraph.WeightedDegree ((Array.sumBy (fun (s,t,w) -> w)),v))
                 ]
                 |> List.sum
-
+            
             Expect.equal
                 weightedDegreeTotal
                 (exampleGraphEdges|>List.sumBy (fun (s,t,w) -> 2*w))
@@ -687,9 +732,13 @@ let testVertices =
             newGraph.AddVertex (newVertex,newVertex) |> ignore
           
             Expect.isTrue
-                (((newGraph.VertexCount-vertexCountOld)=1)&&(newGraph.ContainsVertex newVertex))
-                "AddVertex does not add vertices correctly"
-        
+                ((newGraph.VertexCount-vertexCountOld)=1)
+                "AddVertex does not add the correct amount of vertices"
+            
+            Expect.isTrue
+                (newGraph.ContainsVertex newVertex)
+                "AddVertex does not add the vertex correctly"
+
         )
 
         testCase "RemoveVertex" (fun () ->
@@ -704,7 +753,11 @@ let testVertices =
             newGraph.RemoveVertex (fst toBeRemovesVertex) |> ignore
             
             Expect.isTrue
-                (((vertexCountOld-newGraph.VertexCount)=1)&&(not(newGraph.ContainsVertex (fst toBeRemovesVertex))))
+                (((vertexCountOld-newGraph.VertexCount)=1))
+                "RemoveVertex does not remove the correct amount of vertices"
+            
+            Expect.isFalse
+                (((newGraph.ContainsVertex (fst toBeRemovesVertex))))
                 "RemoveVertex does not remove vertices correctly"
         ) 
                 
@@ -712,7 +765,7 @@ let testVertices =
 
 [<Tests>]
 let testLabels =
-    let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
+    
     let rnd = System.Random()
    
     let arrayAdjacencyGraphRnd =       
@@ -782,7 +835,7 @@ let testLabels =
             let x = 
                exampleGraphVertices
                |> List.map (fun (v,l) -> (v,l),(testGraph.GetLabel v))
-
+                      
             Expect.isFalse
                 (List.contains false getLabelAll)
                 (sprintf "GetLabel does not get the expected label %A" x)
