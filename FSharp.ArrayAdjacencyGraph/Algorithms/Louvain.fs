@@ -1,6 +1,6 @@
 ﻿namespace Algorithms.Louvain
 
-open FSharp.ArrayAdjacencyGraph.Graph
+open FSharp.ArrayAdjacencyGraph
 open System.Collections.Generic
 
 ///Louvain method for community detection

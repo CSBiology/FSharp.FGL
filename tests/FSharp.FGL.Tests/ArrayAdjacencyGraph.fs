@@ -10,7 +10,7 @@ let testInitializeGraph =
     let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
     let testReadFilePath = System.IO.Path.Combine(testDirectory,"TestFileRead.txt")
 
-    testList "initialize Graph" [
+    testList "AAG.initialize Graph" [
         
         testCase "from LVertex and LEdge to Graph" (fun () ->
             let rnd = System.Random()
@@ -30,7 +30,7 @@ let testInitializeGraph =
                         i,rnd.Next(0,100),1
                 ]
             
-            let arrayAdjacencyGraph = FSharp.ArrayAdjacencyGraph.Graph.ArrayAdjacencyGraph(vertexList,edges)
+            let arrayAdjacencyGraph = FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
 
             let graphVertices   = arrayAdjacencyGraph.GetVertices()
             let graphLabels     = arrayAdjacencyGraph.GetLabels()
@@ -72,7 +72,7 @@ let testEdges =
                     i,rnd.Next(0,100),1
                     i,rnd.Next(0,100),1
             ]
-        FSharp.ArrayAdjacencyGraph.Graph.ArrayAdjacencyGraph(vertexList,edges)
+        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
     
     let exampleGraphVertices =
         [ for i=0 to 9 do (i,i) ]
@@ -99,9 +99,9 @@ let testEdges =
     
     let testGraph =
     
-        FSharp.ArrayAdjacencyGraph.Graph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
-    testList "Edges" [
+    testList "AAG.Edges" [
         
         testCase "TryGetEdge" (fun () ->
             
@@ -111,9 +111,9 @@ let testEdges =
                         let (s,t,w) = i
                         testGraph.TryGetEdge (s,t)
                 ]
-                |> List.map (fun x -> match x with |Some y -> y|None -> failwith "ArrayAdjacencyGraph.TryGetEdge Error")
-
-            Expect.equal
+                |> List.choose (id)
+    
+            Expect.sequenceEqual
                 edgeTry
                 exampleGraphEdges
                 "tryGetEdge does not yield the correct edge."
@@ -128,7 +128,7 @@ let testEdges =
                         testGraph.GetEdge (s,t)
                 ]
             
-            Expect.equal 
+            Expect.sequenceEqual 
                 getEdge
                 exampleGraphEdges
                 "getEdge does not yield the correct edge."
@@ -153,7 +153,7 @@ let testEdges =
                 |>Array.concat
                 |>Array.toList
 
-            Expect.equal
+            Expect.sequenceEqual
                 getEdge
                 getEdges
                 "tryGetEdges does not yield the correct edges."
@@ -177,7 +177,7 @@ let testEdges =
                 |>Array.concat
                 |>Array.toList
 
-            Expect.equal
+            Expect.sequenceEqual
                 getEdge
                 getEdges
                 "getEdges does not yield the correct edges."
@@ -259,18 +259,25 @@ let testEdges =
                 "GetConnectedEdges does not yield all expected edges"
         )
 
-        //testCase "GetConnectedEdgesFail" (fun () ->
-            
-        //    let vertex =
-        //        exampleGraphVertices
-        //        |> List.last
-        //        |> fst
-        //        |> (+) (1)                    
+        testCase "GetConnectedEdgesFail" (fun () ->
+           
+            let vertex =
+                exampleGraphVertices
+                |> List.last
+                |> fst
+                |> (+) (1)  
 
-        //    Expect.isEmpty
-        //        (testGraph.GetConnectedEdges vertex)
-        //        "GetConnectedEdges does yield edges where none should exist"
-        //)
+            let getConnectedEdgesFail =
+                try
+                    testGraph.GetConnectedEdges vertex |>ignore
+                    Result.Ok "Did get connected Edges"
+                with
+                | err -> Result.Error "Could not get connected Edges"
+                
+            Expect.isError
+                getConnectedEdgesFail
+                "GetConnectedEdges does yield edges where none should exist"
+        )
 
         testCase "TryGetInEdges None" (fun () ->
             
@@ -384,33 +391,423 @@ let testEdges =
                 let position = rnd.Next((0),(exampleGraphEdges.Length-1))
                 exampleGraphEdges.[position]
             
-
+            testGraph.SetWeight (s,t,(w+w)) |> ignore
 
             Expect.equal
                 ((testGraph.GetWeight (s,t)))
-                (w)
+                (w+w)
                 "GetWeight does not yield the expected weight"
         )
 
-    
+        testCase "AddEdge" (fun () ->
+            
+            let newGraph =
+                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+            
+            let createNewEdge weight =
+                    
+                let rec differentTarget source =
+                    let v = rnd.Next((exampleGraphVertices|>List.head|>fst),(exampleGraphVertices|>List.last|>fst))
+                    if v <> source && not (List.contains (source,v,weight) exampleGraphEdges) then
+                        source,v,weight
+                    else 
+                        differentTarget source
+            
+                let s  = rnd.Next((exampleGraphVertices|>List.head|>fst),(exampleGraphVertices|>List.last|>fst))
+                differentTarget s
+                
+            let (s,t,w) = 
+                createNewEdge (rnd.Next((0),(10)))
+            
+            let oldSourceDegree = newGraph.Degree s
+                
+            let oldTargetDegree = newGraph.Degree t
+
+            newGraph.AddEdge (s,t,w) |> ignore
+            
+            let newSourceDegree = newGraph.Degree s
+                
+            let newTargetDegree = newGraph.Degree t
+
+            let isEdgeNew =
+                not (List.contains (s,t,w) exampleGraphEdges)
+
+            let inEdge =
+                (newGraph.GetInEdges t)
+                |> Array.contains (s,t,w)
+            
+            let outEdge =
+                (newGraph.GetOutEdges s)
+                |> Array.contains (s,t,w)
+
+            let isDegreeChangeSame =
+                (newSourceDegree-oldSourceDegree) = (newTargetDegree-oldTargetDegree)
+            
+            Expect.isTrue
+                (isEdgeNew&&inEdge&&outEdge&&isDegreeChangeSame)
+                "AddEdge does not add an edge correctly"
+        )
+        
+        testCase "RemoveEdge" (fun () ->
+            
+            let newGraph =
+                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+
+            let (s,t,w) = 
+                let position = rnd.Next((0),(exampleGraphEdges.Length-1))
+                exampleGraphEdges.[position]
+
+            let oldSourceDegree = newGraph.Degree s
+                 
+            let oldTargetDegree = newGraph.Degree t
+
+            newGraph.RemoveEdge (s,t,w) |> ignore
+             
+            let newSourceDegree = newGraph.Degree s
+                 
+            let newTargetDegree = newGraph.Degree t          
+
+            let inEdge =
+                (newGraph.GetInEdges t)
+                |> Array.contains (s,t,w)
+                |> not
+
+            let outEdge =
+                (newGraph.GetOutEdges s)
+                |> Array.contains (s,t,w)
+                |> not 
+
+            let isDegreeChangeSame =
+                (newSourceDegree-oldSourceDegree) = (newTargetDegree-oldTargetDegree)
+            
+            Expect.isTrue
+                (inEdge&&outEdge&&isDegreeChangeSame)
+                "RemoveEdge does not remove an edge correctly"
+        )
+
     ]
 
 [<Tests>]
 let testVertices =
     let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
-    let testReadFilePath = System.IO.Path.Combine(testDirectory,"TestFileRead.txt")
+    let rnd = System.Random()
+    
+    let arrayAdjacencyGraphRnd =       
+        let vertexList = 
+            [
+              for i=0 to 100 do
+                  (i,i)
+            ]
+         
+        let edges =
+            [
+                for i=0 to 100 do
+                    i,rnd.Next(0,100),1  
+                    i,rnd.Next(0,100),1
+                    i,rnd.Next(0,100),1
+                    i,rnd.Next(0,100),1
+            ]
+        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
+    
+    let exampleGraphVertices =
+        [ for i=0 to 9 do (i,i) ]
+    
+    let exampleGraphEdges =
+        [
+            0,2,1;
+            0,6,1;
+            0,7,1;
+            0,9,1;
+            1,2,1;
+            1,5,1;
+            1,6,1;
+            1,7,1;
+            1,9,1;
+            2,5,1;
+            2,8,1;
+            3,5,1;
+            3,6,1;
+            4,5,1;
+            4,9,1;
+            8,9,1
+        ]
+    
+    let testGraph =
+    
+        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
-    testList "Vertices" [
-    
-    
+    testList "AAG.Vertices" [
+        
+        testCase "ContainsVertex" (fun () ->
+        
+            let allVerticesContained =
+                [
+                    for (v,l) in exampleGraphVertices do
+                        testGraph.ContainsVertex v
+                ]
+            
+            Expect.isFalse
+                (List.contains false allVerticesContained)
+                "ContainsVertex does not return the correct value"
+        )
+
+        testCase "VertexCount" (fun () ->
+            
+            Expect.equal
+                testGraph.VertexCount
+                exampleGraphVertices.Length
+                "VertexCount does not return the correct number of vertices"
+        )
+
+        testCase "GetVertices()" (fun () ->
+            
+            Expect.equal
+                (testGraph.GetVertices()|>Array.sort|>List.ofArray)
+                (exampleGraphVertices|>List.map fst|>List.sort)
+                "GetVertices() does not return the correct sequence"
+        )
+        
+        testCase "Degree" (fun () ->
+        
+            let vertices =
+                exampleGraphVertices
+                |> List.map fst
+            
+            let degreeActual = 
+                [
+                    for i in vertices do
+                        testGraph.Degree i
+                ]
+
+            let degreeExpected =
+                [
+                    for i in vertices do
+                       
+                        exampleGraphEdges
+                        |> List.filter (fun (s,t,w) -> (s=i) || (t=i))
+                        |> List.length
+                        
+                        
+                ]
+
+            Expect.equal
+                degreeActual
+                degreeExpected
+                "degree does not return the correct value"
+
+        )
+        
+        testCase "InDegree" (fun () ->
+            
+                let vertices =
+                    exampleGraphVertices
+                    |> List.map fst
+                
+                let inDegreeActual = 
+                    [
+                        for i in vertices do
+                            testGraph.InDegree i
+                    ]
+
+                let inDegreeExpected =
+                    [
+                        for i in vertices do
+                           
+                            exampleGraphEdges
+                            |> List.filter (fun (s,t,w) -> (t=i))
+                            |> List.length
+                            
+                            
+                    ]
+
+                Expect.equal
+                    inDegreeActual
+                    inDegreeExpected
+                    "InDegree does not return the correct value"
+
+        )
+            
+        testCase "OutDegree" (fun () ->
+                
+            let vertices =
+                exampleGraphVertices
+                |> List.map fst
+                    
+            let outDegreeActual = 
+                [
+                    for i in vertices do
+                        testGraph.OutDegree i
+                ]
+
+            let outDegreeExpected =
+                [
+                    for i in vertices do
+                               
+                        exampleGraphEdges
+                        |> List.filter (fun (s,t,w) -> (s=i))
+                        |> List.length
+                                
+                                
+                ]
+
+            Expect.equal
+                outDegreeActual
+                outDegreeExpected
+                "OutDegree does not return the correct value"
+
+        )
+
+        //testCase "ConnectedEdgesEmpty" (fun () ->)
+        //Based on Degree. As long as Degree works this will too.
+
+        testCase "WeightedDegree Total" (fun () ->
+        
+            let weightedDegreeTotal = 
+                [
+                    for (v,l) in exampleGraphVertices do
+                        (testGraph.WeightedDegree ((Array.sumBy (fun (s,t,w) -> w)),v))
+                ]
+                |> List.sum
+
+            Expect.equal
+                weightedDegreeTotal
+                (exampleGraphEdges|>List.sumBy (fun (s,t,w) -> 2*w))
+                "WeightedDegree Total does not equal the weight of all edges combined"
+        )
+
+        testCase "AddVertex" (fun () ->
+        
+            let newGraph =
+                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+            
+            let newVertex = (List.length exampleGraphVertices)*2
+
+            let vertexCountOld = newGraph.VertexCount
+
+            newGraph.AddVertex (newVertex,newVertex) |> ignore
+          
+            Expect.isTrue
+                (((newGraph.VertexCount-vertexCountOld)=1)&&(newGraph.ContainsVertex newVertex))
+                "AddVertex does not add vertices correctly"
+        
+        )
+
+        testCase "RemoveVertex" (fun () ->
+            
+            let newGraph =
+                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+                
+            let toBeRemovesVertex = (List.last exampleGraphVertices)
+
+            let vertexCountOld = newGraph.VertexCount
+
+            newGraph.RemoveVertex (fst toBeRemovesVertex) |> ignore
+            
+            Expect.isTrue
+                (((vertexCountOld-newGraph.VertexCount)=1)&&(not(newGraph.ContainsVertex (fst toBeRemovesVertex))))
+                "RemoveVertex does not remove vertices correctly"
+        ) 
+                
     ]
 
 [<Tests>]
 let testLabels =
     let testDirectory = __SOURCE_DIRECTORY__ + @"/TestFiles/"
-    let testReadFilePath = System.IO.Path.Combine(testDirectory,"TestFileRead.txt")
+    let rnd = System.Random()
+   
+    let arrayAdjacencyGraphRnd =       
+        let vertexList = 
+            [
+                for i=0 to 100 do
+                    (i,i)
+            ]
+        
+        let edges =
+            [
+                for i=0 to 100 do
+                    i,rnd.Next(0,100),1  
+                    i,rnd.Next(0,100),1
+                    i,rnd.Next(0,100),1
+                    i,rnd.Next(0,100),1
+            ]
+        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
+   
+    let exampleGraphVertices =
+        [ for i=0 to 9 do (i,i) ]
+   
+    let exampleGraphEdges =
+        [
+            0,2,1;
+            0,6,1;
+            0,7,1;
+            0,9,1;
+            1,2,1;
+            1,5,1;
+            1,6,1;
+            1,7,1;
+            1,9,1;
+            2,5,1;
+            2,8,1;
+            3,5,1;
+            3,6,1;
+            4,5,1;
+            4,9,1;
+            8,9,1
+        ]
+   
+    let testGraph =
+   
+        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
-    testList "Labels" [
-    
-    
+
+    testList "AAG.Labels" [
+        
+        testCase "TryGetLabel" (fun () ->
+        
+            let tryGetLabelAll = 
+                exampleGraphVertices
+                |> List.map (fun (v,l) -> (testGraph.TryGetLabel v)=(Some l))
+
+            Expect.isFalse
+                (List.contains false tryGetLabelAll)              
+                "TryGetLabel does not return the correct label"
+        )
+
+        testCase "GetLabel" (fun () ->
+            
+            let getLabelAll = 
+                exampleGraphVertices
+                |> List.map (fun (v,l) -> (testGraph.GetLabel v)=(l))
+
+            let x = 
+               exampleGraphVertices
+               |> List.map (fun (v,l) -> (v,l),(testGraph.GetLabel v))
+
+            Expect.isFalse
+                (List.contains false getLabelAll)
+                (sprintf "GetLabel does not get the expected label %A" x)
+        )
+
+        testCase "SetLabel" (fun () ->
+            
+            let newGraph =
+                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+
+            exampleGraphVertices
+            |> List.map(fun (v,l) -> newGraph.SetLabel ((v),(l*l)))
+            |> ignore
+
+            let getLabelAll = 
+                exampleGraphVertices
+                |> List.map (fun (v,l) -> (newGraph.GetLabel v)=((l*l)))
+            
+            let x = 
+                exampleGraphVertices
+                |> List.map (fun (v,l) -> (v,l),(newGraph.GetLabel v))
+
+            Expect.isFalse
+                (List.contains false getLabelAll)            
+                (sprintf "SetLabel does not correctly change the label %A" x)
+        )
+
     ]
