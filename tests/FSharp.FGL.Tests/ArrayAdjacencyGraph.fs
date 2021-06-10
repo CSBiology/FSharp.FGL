@@ -759,10 +759,88 @@ let testVertices =
             Expect.isFalse
                 (((newGraph.ContainsVertex (fst toBeRemovesVertex))))
                 "RemoveVertex does not remove vertices correctly"
-        ) 
-                
-    ]
+        )         
 
+        testCase "TryPredecessors"  (fun () ->
+            Expect.equal
+                (testGraph.TryPredecessors 9)
+                (Some [|0; 1; 4; 8|])
+                "TryPredecessors does not return the expected values"
+            
+            Expect.equal
+                (testGraph.TryPredecessors 2)
+                (Some [|0;1|])
+                "TryPredecessors does not return the expected values"
+
+        )
+
+        testCase "Predecessors"     (fun () ->
+            Expect.equal
+                (testGraph.Predecessors 9)
+                ([|0; 1; 4; 8|])
+                "Predecessors does not return the expected values"
+            
+            Expect.equal
+                (testGraph.Predecessors 2)
+                ([|0;1|])
+                "Predecessors does not return the expected values"
+
+        )
+        
+        testCase "TrySuccessors"    (fun () ->
+            Expect.equal
+                (testGraph.TrySuccessors 9)
+                (Some [||])
+                "TrySuccessors does not return the expected values"
+            
+            Expect.equal
+                (testGraph.TrySuccessors 2)
+                (Some [|5;8|])
+                "TrySuccessors does not return the expected values"
+        )
+
+        testCase "Successors"       (fun () ->
+            Expect.equal
+                (testGraph.Successors 9)
+                ([||])
+                "Successors does not return the expected values"
+
+            Expect.equal
+                (testGraph.Successors 2)
+                ([|5;8|])
+                "Successors does not return the expected values"
+        )
+
+        testCase "TryNeighbours"    (fun () ->
+            Expect.equal
+                (testGraph.TryNeighbours 9)
+                (Some [|0; 1; 4; 8|])
+                "TryNeighbours does not return the expected values"
+            
+            Expect.equal
+                (testGraph.TryNeighbours 2)
+                (Some [|0; 1; 5; 8|])
+                "TryNeighbours does not return the expected values"
+
+        )
+
+
+        testCase "Neighbours"       (fun () ->
+            Expect.equal
+                (testGraph.Neighbours 9)
+                ([|0; 1; 4; 8|])
+                "Neighbours does not return the expected values"
+            
+            Expect.equal
+                (testGraph.Neighbours 2)
+                ([|0; 1; 5; 8|])
+                "Neighbours does not return the expected values"
+
+        )
+      
+
+    ]
+ 
 [<Tests>]
 let testLabels =
     
