@@ -13,6 +13,7 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="IOTests.fs" />
+    <Compile Include="ArrayAdjacencyGraph.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
 
@@ -24,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\FSharp.ArrayAdjacencyGraph\FSharp.ArrayAdjacencyGraph.fsproj" />
+    <ProjectReference Include="..\..\FSharp.Graph\FSharp.Graph.fsproj" />
     <ProjectReference Include="..\..\src\FSharp.FGL\FSharp.FGL.fsproj" />
   </ItemGroup>
 </Project>

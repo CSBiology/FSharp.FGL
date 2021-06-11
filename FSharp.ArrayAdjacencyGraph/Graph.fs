@@ -326,7 +326,7 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         | _ -> failwithf "The vertex %O does not exist in the graph." v
 
     ///Returns true, if the vertex v does not have edges connected to it. Otherwise, it returns false.
-    member this.IsOutEdgesEmpty(v:'Vertex) :bool =
+    member this.ConnectedEdgesEmpty(v:'Vertex) :bool =
         this.Degree(v) = 0
 
      ///Adds a labeled vertex to the graph.
