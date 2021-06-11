@@ -40,7 +40,7 @@
   
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FSharp.Graph\FSharp.Graph.fsproj" />
+    <ProjectReference Include="..\FSharp.Graph\FSharp.Graph.fsproj" />
   </ItemGroup>
 
 </Project>
