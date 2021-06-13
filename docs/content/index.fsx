@@ -1,7 +1,8 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin/FSharp.FGL/net47/"
+#I @"../../bin/FSharp.FGL/netstandard2.0/"
+#I @"../../bin/FSharp.Graph/netstandard2.0/"
 
 (**
 # FSharp.FGL
@@ -14,10 +15,12 @@ This example demonstrates using a function defined in this sample library.
 <br>
 *)
 #r "FSharp.FGL.dll"
+#r "FSharp.Graph"
 open FSharp.FGL 
+open FSharp.Graph
 
 Graph.empty
-|> Undirected.Vertices.addMany [(1,"Look At Me Im VertexOne");(2,"Look At Me Im VertexTwo")]
+|> Vertices.addMany [(1,"Look At Me Im VertexOne");(2,"Look At Me Im VertexTwo")]
 |> Undirected.Edges.add (1,2,"Im An Edge Between VertexOne And VertexTwo ")
 |> Undirected.Edges.tryFind 1 2
 //Returns Some (1,2,"Im An Edge Between VertexOne And VertexTwo ")
