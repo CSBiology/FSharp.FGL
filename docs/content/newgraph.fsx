@@ -1,7 +1,8 @@
 (*** hide ***) 
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin/FSharp.FGL"
+#I @"../../bin/FSharp.FGL/netstandard2.0/"
+#I @"../../bin/FSharp.Graph/netstandard2.0/"
 
 (**
 #Working with FSharp.FGL
@@ -12,8 +13,11 @@ In this quick tutorial we will work with directed Graphs.
 *)
 
 #r "FSharp.FGL.dll"
+#r "FSharp.Graph"
+
 open FSharp.FGL
 open FSharp.FGL.Directed
+open FSharp.Graph
 
 (**
 ## Creating a Graph
