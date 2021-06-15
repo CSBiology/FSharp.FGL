@@ -1,4 +1,4 @@
-﻿namespace Models.Scale_free_graph
+﻿namespace ArrayAdjacencyGraph.Models.Scale_free_graph
 
 open FSharp.ArrayAdjacencyGraph
 
