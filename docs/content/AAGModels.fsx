@@ -30,7 +30,6 @@ open ArrayAdjacencyGraph.Models
 (**
 To create random graph models, ArrayAdjacenyGraph includes three different methods:
 <br>
-<p class="indent">-<b>[Bollobas-Riordan](https://onlinelibrary.wiley.com/doi/abs/10.1002/3527602755.ch1)</b> Bollobás-Riordan </p>
 
 *)
 
