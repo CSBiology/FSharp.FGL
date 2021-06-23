@@ -54,7 +54,7 @@ let vertexList : LVertex<int,string> list =
 //Creating a list of labeled edges
 let edgeList : LEdge<int,float> list =
     [
-        0,1,1.; 0,2,1.; 1,2,1.; 1,3,1.; 3,4,1.; 3,13,1.; 4,5,1.; 4,8,1.; 
+        0,1,1.; 0,2,1.; 1,2,1.; 1,3,1.;2,3,1.; 3,4,1.; 3,13,1.; 4,5,1.; 4,8,1.; 
         5,6,1.; 5,8,1.; 5,7,1.; 6,7,1.; 7,8,1.; 7,10,1.; 8,9,1.; 9,10,1.; 
         9,12,1.; 9,13,1.; 10,11,1.; 10,13,1.; 11,12,1.; 11,13,1.; 12,13,1.
     ]
@@ -75,37 +75,45 @@ The application of the louvain algorithm on the example graph would look like th
 let myGraphLouvain : ArrayAdjacencyGraph<int,string*int,float> =
     Louvain.Louvain.louvain myGraph 0.00001
 
-
 (*** hide ***)
-#r "nuget: Cyjs.NET, 0.0.2"
+// #r "nuget: Cyjs.NET, 0.0.3"
+#load @"C:\Users\lux-c\source\repos\LibraChris\paketAux\.paket\load\netstandard2.1\Cyjs.NET.fsx"
 open Cyjs.NET
-let inline toCyJS (g : Graph<'Vertex,'Label,float>) =
+let inline toCyJS (g : ArrayAdjacencyGraph<int,string*int,float>) =
     let vertices = 
-        g
-        |> Vertices.toVertexList
-        |> List.map (fun (id,name) -> Elements.node (string id) [CyParam.label (string name)])
-
+        Array.map2 (fun vertex label -> (vertex,label)) (g.GetVertices()) (g.GetLabels())
+        |> Array.map (fun (id,(ogLabel,newLabel)) -> 
+            match newLabel with
+                | 0 -> Elements.node (string id) [CyParam.label (string ogLabel); CyParam.color "red" ]
+                | 1 -> Elements.node (string id) [CyParam.label (string ogLabel); CyParam.color "green" ]
+                | 2 -> Elements.node (string id) [CyParam.label (string ogLabel); CyParam.color "blue" ]
+                | _ -> Elements.node (string id) [CyParam.label (string ogLabel)]
+                )
     let edges =
-        g
-        |> Edges.toEdgeList
-        |> List.map (fun (v1,v2,weight) -> Elements.edge (string v1 + string v2) (string v1) (string v2) [CyParam.weight (weight)])
-
+        edgeList
+        |> List.map (fun (v1,v2,weight) -> Elements.edge (string v1 + "_" + string v2) (string v1) (string v2) [CyParam.weight (weight)])
     CyGraph.initEmpty ()
-    |> CyGraph.withElements vertices
     |> CyGraph.withElements edges
-    |> CyGraph.withStyle "node" [CyParam.content =. CyParam.label]
-    |> CyGraph.withStyle "edge" [CyParam.content =. CyParam.weight]
-
-
+    |> CyGraph.withElements vertices    
+    |> CyGraph.withStyle "node" 
+        [
+            CyParam.content =. CyParam.label
+            CyParam.Text.Outline.color =. CyParam.color 
+            CyParam.Background.color   =. CyParam.color
+        ]
 
 (**
 ## Visualization
 
-The visualization of the graph is made possible by means of Cyassd and looks like this.
+The visualization of the graph is made possible by means of [Cyjs.NET](https://fslab.org/Cyjs.NET/) and looks like this.
 The different colors each represent their own community.
 
 *)
 
+(*** hide ***)
 myGraphLouvain
 |> toCyJS
-|> CyGraph.show
+|> CyGraph.withSize(600, 400) 
+|> CyGraph.withLayout (Layout.initCose id)
+|> Cyjs.NET.HTML.toEmbeddedHTML
+(*** include-it-raw ***)
