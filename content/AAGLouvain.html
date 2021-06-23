@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Louvain method for community detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="HLWeil,LibraChris,WalternativE,CSBiology">
+    <link rel="shortcut icon" type="image/x-icon" href="csbiology.github.io/FSharp.FGL//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="csbiology.github.io/FSharp.FGL/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="csbiology.github.io/FSharp.FGL/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="csbiology.github.io/FSharp.FGL/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="csbiology.github.io/FSharp.FGL/">
+                        <figure class="image is-128x128 container">
+                            <img src="csbiology.github.io/FSharp.FGL/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">FSharp.FGL</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right searchbox" id="fsdocs-searchbox">
+                                <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/main/LICENSE">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
+                        <li class="nav-header">
+  FSharp.Graph
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/GDF.html">
+    GDF format reader
+  </a>
+</li>             
+<li class="nav-header">
+  FSharp.FGL
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/tutorial.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/newgraph.html">
+    Basic functionality
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/models.html">
+    Random graph models
+  </a>
+</li>             
+<li class="nav-header">
+  ArrayAdjacencyGraph
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/ArrayAdjacencyGraph.html">
+    Basic functionality
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/AAGnewGraph.html">
+    Graph creation
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/AAGModels.html">
+    Random graph models
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/content/AAGLouvain.html">
+    Louvain method for community detection
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    
+<h1><a name="Louvain-method-for-community-detection" class="anchor" href="#Louvain-method-for-community-detection">Louvain method for community detection</a></h1>
+<hr>
+<a name="Louvain method for community detection"></a>
+<h2><a name="Louvain-method-for-community-detection-1" class="anchor" href="#Louvain-method-for-community-detection-1">Louvain method for community detection</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;FSharp.Graph&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;FSharp.ArrayAdjacencyGraph&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Graph</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 4)" onmouseover="showTip(event, 'fs3', 4)" class="id">ArrayAdjacencyGraph</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="id">ArrayAdjacencyGraph</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="id">Algorithms</span>
+</code></pre>
+<p><a href="https://iopscience.iop.org/article/10.1088/1742-5468/2008/10/P10008">The louvain method for communty detection</a> is a easy method to extract the community structure of large networks. It is based on the concept of modularity optimization.
+The algorithm is divided into two phases that are repeated iteratively:</p>
+<ul>
+<li><b>Modularity optimization</b>, in which every vertex is assigned its own community. After that, for each vertex its neighbours are used to calculate the gain of modularity by removing the vertex from its community and placing it in the community of a neighbour. The new commnuity for the vertex is the one with the biggest modularity gain. This is repeated until no furhter changes that increase the overall modularity can be done.</li>
+<li><b>Community aggregation</b>, in which the communities found are aggregated in order to build a new, reduced network of communities.</li>
+</ul>
+<p>These steps are repeated until no further increase of modularity is possible.</p>
+<a name="Example"></a>
+<h1><a name="Example" class="anchor" href="#Example">Example</a></h1>
+<h2><a name="Example-Graph" class="anchor" href="#Example-Graph">Example Graph</a></h2>
+<p>The first step of the tutorial is the creation of a graph that Louvain can analyse. In this case the graph was taken from <a href="https://en.wikipedia.org/wiki/Community_structure#/media/File:Network_Community_Structure.svg">wikipedia</a>.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//Creating a list of labeled vertices</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">vertexList</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="rt">LVertex</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="vt">int</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="rt">string</span><span class="pn">&gt;</span> <span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="rt">list</span> <span class="o">=</span>
+    <span class="pn">[</span>
+        <span class="k">for</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="fn">i</span><span class="o">=</span><span class="n">0</span> <span class="k">to</span> <span class="n">13</span> <span class="k">do</span>
+            <span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="fn">i</span><span class="pn">)</span><span class="pn">,</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="fn">sprintf</span> <span class="s">&quot;</span><span class="pf">%i</span><span class="s">&quot;</span><span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="fn">i</span><span class="pn">)</span>
+    <span class="pn">]</span>
+
+<span class="c">//Creating a list of labeled edges</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="id">edgeList</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="rt">LEdge</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs8', 18)" onmouseover="showTip(event, 'fs8', 18)" class="vt">int</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs15', 19)" onmouseover="showTip(event, 'fs15', 19)" class="vt">float</span><span class="pn">&gt;</span> <span onmouseout="hideTip(event, 'fs10', 20)" onmouseover="showTip(event, 'fs10', 20)" class="rt">list</span> <span class="o">=</span>
+    <span class="pn">[</span>
+        <span class="n">0</span><span class="pn">,</span><span class="n">1</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">0</span><span class="pn">,</span><span class="n">2</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">1</span><span class="pn">,</span><span class="n">2</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">1</span><span class="pn">,</span><span class="n">3</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span><span class="n">2</span><span class="pn">,</span><span class="n">3</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">3</span><span class="pn">,</span><span class="n">4</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">3</span><span class="pn">,</span><span class="n">13</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">4</span><span class="pn">,</span><span class="n">5</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">4</span><span class="pn">,</span><span class="n">8</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> 
+        <span class="n">5</span><span class="pn">,</span><span class="n">6</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">5</span><span class="pn">,</span><span class="n">8</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">5</span><span class="pn">,</span><span class="n">7</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">6</span><span class="pn">,</span><span class="n">7</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">7</span><span class="pn">,</span><span class="n">8</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">7</span><span class="pn">,</span><span class="n">10</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">8</span><span class="pn">,</span><span class="n">9</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">9</span><span class="pn">,</span><span class="n">10</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> 
+        <span class="n">9</span><span class="pn">,</span><span class="n">12</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">9</span><span class="pn">,</span><span class="n">13</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">10</span><span class="pn">,</span><span class="n">11</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">10</span><span class="pn">,</span><span class="n">13</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">11</span><span class="pn">,</span><span class="n">12</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">11</span><span class="pn">,</span><span class="n">13</span><span class="pn">,</span><span class="n">1.</span><span class="pn">;</span> <span class="n">12</span><span class="pn">,</span><span class="n">13</span><span class="pn">,</span><span class="n">1.</span>
+    <span class="pn">]</span>
+
+<span class="c">//Creating a graph out of the two lists </span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="id">myGraph</span> <span class="pn">:</span><span onmouseout="hideTip(event, 'fs4', 22)" onmouseover="showTip(event, 'fs4', 22)" class="rt">ArrayAdjacencyGraph</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs8', 23)" onmouseover="showTip(event, 'fs8', 23)" class="vt">int</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs9', 24)" onmouseover="showTip(event, 'fs9', 24)" class="rt">string</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs15', 25)" onmouseover="showTip(event, 'fs15', 25)" class="vt">float</span><span class="pn">&gt;</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs4', 26)" onmouseover="showTip(event, 'fs4', 26)" class="fn">ArrayAdjacencyGraph</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 27)" onmouseover="showTip(event, 'fs6', 27)" class="id">vertexList</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs13', 28)" onmouseover="showTip(event, 'fs13', 28)" class="id">edgeList</span><span class="pn">)</span>
+</code></pre>
+<h2><a name="Louvain-algorithm" class="anchor" href="#Louvain-algorithm">Louvain algorithm</a></h2>
+<p>The application of the louvain algorithm on the example graph would look like this:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">//Returns the graph with the louvain calculation on top of it</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 29)" onmouseover="showTip(event, 'fs17', 29)" class="id">myGraphLouvain</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 30)" onmouseover="showTip(event, 'fs4', 30)" class="rt">ArrayAdjacencyGraph</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs8', 31)" onmouseover="showTip(event, 'fs8', 31)" class="vt">int</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs9', 32)" onmouseover="showTip(event, 'fs9', 32)" class="rt">string</span><span class="pn">*</span><span onmouseout="hideTip(event, 'fs8', 33)" onmouseover="showTip(event, 'fs8', 33)" class="vt">int</span><span class="pn">,</span><span onmouseout="hideTip(event, 'fs15', 34)" onmouseover="showTip(event, 'fs15', 34)" class="vt">float</span><span class="pn">&gt;</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs18', 35)" onmouseover="showTip(event, 'fs18', 35)" class="id">Louvain</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="m">Louvain</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="id">louvain</span> <span onmouseout="hideTip(event, 'fs16', 38)" onmouseover="showTip(event, 'fs16', 38)" class="id">myGraph</span> <span class="n">0.00001</span>
+</code></pre>
+<h2><a name="Visualization" class="anchor" href="#Visualization">Visualization</a></h2>
+<p>The visualization of the graph is made possible by means of <a href="https://fslab.org/Cyjs.NET/">Cyjs.NET</a> and looks like this.
+The different colors each represent their own community.</p>
+<table class="pre"><tr><td><pre><code>No value returned by any evaluator</code></pre></td></tr></table>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">Multiple items<br />Namespace FSharp<br /><br />--------------------<br />Namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs2">Namespace FSharp.Graph</div>
+<div class="fsdocs-tip" id="fs3">Namespace FSharp.ArrayAdjacencyGraph</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />Namespace ArrayAdjacencyGraph<br /><br />--------------------<br />type ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge (requires equality and equality)&gt; =<br />&#160;&#160;private new : vertexEdges:Dictionary&lt;&#39;Vertex,LEdge&lt;&#39;Vertex,&#39;Edge&gt; []&gt; * labels:Dictionary&lt;&#39;Vertex,&#39;Label&gt; -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt; + 2 &#220;berladungen<br />&#160;&#160;member AddEdge : LEdge&lt;&#39;Vertex,&#39;Edge&gt; -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />&#160;&#160;member AddManyEdges : edgeArray:seq&lt;LEdge&lt;&#39;Vertex,&#39;Edge&gt;&gt; -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />&#160;&#160;member AddManyVertices : vertices:LVertex&lt;&#39;Vertex,&#39;Label&gt; [] -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />&#160;&#160;member AddVertex : LVertex&lt;&#39;Vertex,&#39;Label&gt; -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />&#160;&#160;member private AdjacencyGraph : unit -&gt; Dictionary&lt;&#39;Vertex,LEdge&lt;&#39;Vertex,&#39;Edge&gt; []&gt;<br />&#160;&#160;member ConnectedEdgesEmpty : v:&#39;Vertex -&gt; bool<br />&#160;&#160;member ContainsEdge : edge:LEdge&lt;&#39;Vertex,&#39;Edge&gt; -&gt; bool<br />&#160;&#160;member ContainsVertex : vertex:&#39;Vertex -&gt; bool<br />&#160;&#160;member Copy : unit -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />&#160;&#160;...<br /><br />--------------------<br />new : unit -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;<br />new : vertices:LVertex&lt;&#39;Vertex,&#39;Label&gt; list * edges:LEdge&lt;&#39;Vertex,&#39;Edge&gt; list -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,&#39;Edge&gt;</div>
+<div class="fsdocs-tip" id="fs5">Namespace ArrayAdjacencyGraph.Algorithms</div>
+<div class="fsdocs-tip" id="fs6">val vertexList : LVertex&lt;int,string&gt; list</div>
+<div class="fsdocs-tip" id="fs7">type LVertex&lt;&#39;Vertex,&#39;Label&gt; = &#39;Vertex * &#39;Label</div>
+<div class="fsdocs-tip" id="fs8">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />[&lt;Struct&gt;]<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =<br />&#160;&#160;int</div>
+<div class="fsdocs-tip" id="fs9">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />--------------------<br />type string = System.String</div>
+<div class="fsdocs-tip" id="fs10">type &#39;T list = List&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs11">val i : int</div>
+<div class="fsdocs-tip" id="fs12">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs13">val edgeList : LEdge&lt;int,float&gt; list</div>
+<div class="fsdocs-tip" id="fs14">type LEdge&lt;&#39;Vertex,&#39;Edge&gt; = &#39;Vertex * &#39;Vertex * &#39;Edge</div>
+<div class="fsdocs-tip" id="fs15">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />--------------------<br />[&lt;Struct&gt;]<br />type float = System.Double<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =<br />&#160;&#160;float</div>
+<div class="fsdocs-tip" id="fs16">val myGraph : ArrayAdjacencyGraph&lt;int,string,float&gt;</div>
+<div class="fsdocs-tip" id="fs17">val myGraphLouvain : ArrayAdjacencyGraph&lt;int,(string * int),float&gt;</div>
+<div class="fsdocs-tip" id="fs18">Namespace ArrayAdjacencyGraph.Algorithms.Louvain</div>
+<div class="fsdocs-tip" id="fs19">Modul Louvain<br /><br />aus ArrayAdjacencyGraph.Algorithms.Louvain</div>
+<div class="fsdocs-tip" id="fs20">val louvain : graph:ArrayAdjacencyGraph&lt;&#39;Vertex,&#39;Label,float&gt; -&gt; modularityIncreaseThreshold:float -&gt; ArrayAdjacencyGraph&lt;&#39;Vertex,(&#39;Label * int),float&gt; (requires equality)</div>
+<div class="fsdocs-tip" id="fs21">Namespace Cyjs</div>
+<div class="fsdocs-tip" id="fs22">Namespace Cyjs.NET</div>
+<div class="fsdocs-tip" id="fs23">val toCyJS : g:ArrayAdjacencyGraph&lt;int,(string * int),float&gt; -&gt; CyGraph.CyGraph</div>
+<div class="fsdocs-tip" id="fs24">val g : ArrayAdjacencyGraph&lt;int,(string * int),float&gt;</div>
+<div class="fsdocs-tip" id="fs25">val vertices : Elements.Node []</div>
+<div class="fsdocs-tip" id="fs26">Modul Array<br /><br />aus Microsoft.FSharp.Collections</div>
+<div class="fsdocs-tip" id="fs27">val map2 : mapping:(&#39;T1 -&gt; &#39;T2 -&gt; &#39;U) -&gt; array1:&#39;T1 [] -&gt; array2:&#39;T2 [] -&gt; &#39;U []</div>
+<div class="fsdocs-tip" id="fs28">val vertex : int</div>
+<div class="fsdocs-tip" id="fs29">val label : string * int</div>
+<div class="fsdocs-tip" id="fs30">member ArrayAdjacencyGraph.GetVertices : unit -&gt; &#39;Vertex []</div>
+<div class="fsdocs-tip" id="fs31">member ArrayAdjacencyGraph.GetLabels : unit -&gt; &#39;Label []</div>
+<div class="fsdocs-tip" id="fs32">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []</div>
+<div class="fsdocs-tip" id="fs33">val id : int</div>
+<div class="fsdocs-tip" id="fs34">val ogLabel : string</div>
+<div class="fsdocs-tip" id="fs35">val newLabel : int</div>
+<div class="fsdocs-tip" id="fs36">Modul Elements<br /><br />aus Cyjs.NET</div>
+<div class="fsdocs-tip" id="fs37">val node : id:string -&gt; dataAttributes:CyParam.CyStyleParam list -&gt; Elements.Node</div>
+<div class="fsdocs-tip" id="fs38">Modul CyParam<br /><br />aus Cyjs.NET</div>
+<div class="fsdocs-tip" id="fs39">val label : v:&#39;a -&gt; CyParam.CyStyleParam</div>
+<div class="fsdocs-tip" id="fs40">val color : v:&#39;a -&gt; CyParam.CyStyleParam</div>
+<div class="fsdocs-tip" id="fs41">val edges : Elements.Edge list</div>
+<div class="fsdocs-tip" id="fs42">Multiple items<br />Modul List<br /><br />aus Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetReverseIndex : rank:int * offset:int -&gt; int<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs43">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list</div>
+<div class="fsdocs-tip" id="fs44">val v1 : int</div>
+<div class="fsdocs-tip" id="fs45">val v2 : int</div>
+<div class="fsdocs-tip" id="fs46">val weight : float</div>
+<div class="fsdocs-tip" id="fs47">val edge : id:string -&gt; sourceId:string -&gt; targetId:string -&gt; dataAttributes:CyParam.CyStyleParam list -&gt; Elements.Edge</div>
+<div class="fsdocs-tip" id="fs48">val weight : v:&#39;a -&gt; CyParam.CyStyleParam</div>
+<div class="fsdocs-tip" id="fs49">Modul CyGraph<br /><br />aus Cyjs.NET</div>
+<div class="fsdocs-tip" id="fs50">val initEmpty : unit -&gt; CytoscapeModel.Cytoscape</div>
+<div class="fsdocs-tip" id="fs51">val withElements : elems:seq&lt;CytoscapeModel.Element&gt; -&gt; cy:CyGraph.CyGraph -&gt; CyGraph.CyGraph</div>
+<div class="fsdocs-tip" id="fs52">val withStyle : selector:string -&gt; cyStyles:seq&lt;CyParam.CyStyleParam&gt; -&gt; cy:CyGraph.CyGraph -&gt; CyGraph.CyGraph</div>
+<div class="fsdocs-tip" id="fs53">val content : v:&#39;a -&gt; CyParam.CyStyleParam</div>
+<div class="fsdocs-tip" id="fs54">Modul Text<br /><br />aus Cyjs.NET.CyParam</div>
+<div class="fsdocs-tip" id="fs55">Modul Outline<br /><br />aus Cyjs.NET.CyParam.Text</div>
+<div class="fsdocs-tip" id="fs56">Modul Background<br /><br />aus Cyjs.NET.CyParam</div>
+<div class="fsdocs-tip" id="fs57">val withSize : width:int * height:int -&gt; cy:CyGraph.CyGraph -&gt; CyGraph.CyGraph</div>
+<div class="fsdocs-tip" id="fs58">val withLayout : ly:Layout -&gt; cy:CyGraph.CyGraph -&gt; CyGraph.CyGraph</div>
+<div class="fsdocs-tip" id="fs59">Multiple items<br />Modul Layout<br /><br />aus Cyjs.NET<br /><br />--------------------<br />type Layout =<br />&#160;&#160;inherit DynamicObj<br />&#160;&#160;new : name:string -&gt; Layout<br />&#160;&#160;member name : string<br /><br />--------------------<br />new : name:string -&gt; Layout</div>
+<div class="fsdocs-tip" id="fs60">val initCose : applyOption:(Layout -&gt; Layout) -&gt; Layout</div>
+<div class="fsdocs-tip" id="fs61">val id : x:&#39;T -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs62">Modul HTML<br /><br />aus Cyjs.NET</div>
+<div class="fsdocs-tip" id="fs63">val toEmbeddedHTML : cy:CytoscapeModel.Cytoscape -&gt; string</div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = 'csbiology.github.io/FSharp.FGL/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="csbiology.github.io/FSharp.FGL/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>

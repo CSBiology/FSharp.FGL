@@ -1,0 +1,3599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ArrayAdjacencyGraph<'Vertex, 'Label, 'Edge> (FSharp.FGL)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="FSharp.ArrayAdjacencyGraph">
+    <link rel="shortcut icon" type="image/x-icon" href="csbiology.github.io/FSharp.FGL//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+
+    <link type="text/css" rel="stylesheet" href="csbiology.github.io/FSharp.FGL/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="csbiology.github.io/FSharp.FGL/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="csbiology.github.io/FSharp.FGL/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head> 
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="csbiology.github.io/FSharp.FGL/">
+                        <figure class="image is-128x128 container">
+                            <img src="csbiology.github.io/FSharp.FGL/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white pb-4">FSharp.FGL</h2>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right searchbox" id="fsdocs-searchbox">
+                                <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input"/>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="csbiology.github.io/FSharp.FGL/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    <div>
+  <h2>
+    ArrayAdjacencyGraph<'Vertex, 'Label, 'Edge> Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph.html">
+        FSharp.ArrayAdjacencyGraph
+      </a>
+    </dt>
+    <dt>
+      Assembly: FSharp.ArrayAdjacencyGraph.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code>obj</code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+  A mutable directed graph data structure efficient for large sparse graph representations
+
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+                <p>
+                  <a id="( .ctor )">
+                    <a href="#( .ctor )">
+                      <code><span>ArrayAdjacencyGraph<span><span>(<span>vertices,&#32;edges</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="94">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ArrayAdjacencyGraph<span><span>(<span>vertices,&#32;edges</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vertices
+                      </b>
+                      :
+                      <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-lvertex-2.html">LVertex</a>&lt;<span>'Vertex,&#32;'Label</span>&gt;</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        edges
+                      </b>
+                      :
+                      <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.#ctor``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.#ctor\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  vertices
+                </span>
+                :
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-lvertex-2.html">LVertex</a>&lt;<span>'Vertex,&#32;'Label</span>&gt;</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  edges
+                </span>
+                :
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+                <p>
+                  <a id="( .ctor )">
+                    <a href="#( .ctor )">
+                      <code><span>ArrayAdjacencyGraph<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="95">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ArrayAdjacencyGraph<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.#ctor``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.#ctor\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+                <p>
+                  <a id="AddEdge">
+                    <a href="#AddEdge">
+                      <code><span>this.AddEdge<span><span>(<span>arg1</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="96">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AddEdge<span><span>(<span>arg1</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        arg0
+                      </b>
+                      :
+                      <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddEdge``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddEdge\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Adds a labeled, edge to the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  arg0
+                </span>
+                :
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+                <p>
+                  <a id="AddManyEdges">
+                    <a href="#AddManyEdges">
+                      <code><span>this.AddManyEdges<span><span>(<span>edgeArray</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="97">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AddManyEdges<span><span>(<span>edgeArray</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        edgeArray
+                      </b>
+                      :
+                      <code><span>seq&lt;<span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddManyEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddManyEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Adds an array of labeled, edges to the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  edgeArray
+                </span>
+                :
+                <code><span>seq&lt;<span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
+                <p>
+                  <a id="AddManyVertices">
+                    <a href="#AddManyVertices">
+                      <code><span>this.AddManyVertices<span><span>(<span>vertices</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="98">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AddManyVertices<span><span>(<span>vertices</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vertices
+                      </b>
+                      :
+                      <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-lvertex-2.html">LVertex</a>&lt;<span>'Vertex,&#32;'Label</span>&gt;</span>[]</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddManyVertices``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddManyVertices\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Adds an array of labeled vertices to the graph.    
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  vertices
+                </span>
+                :
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-lvertex-2.html">LVertex</a>&lt;<span>'Vertex,&#32;'Label</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
+                <p>
+                  <a id="AddVertex">
+                    <a href="#AddVertex">
+                      <code><span>this.AddVertex<span><span>(<span>arg1</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="99">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AddVertex<span><span>(<span>arg1</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        arg0
+                      </b>
+                      :
+                      <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-lvertex-2.html">LVertex</a>&lt;<span>'Vertex,&#32;'Label</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddVertex``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.AddVertex\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Adds a labeled vertex to the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  arg0
+                </span>
+                :
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-lvertex-2.html">LVertex</a>&lt;<span>'Vertex,&#32;'Label</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
+                <p>
+                  <a id="ConnectedEdgesEmpty">
+                    <a href="#ConnectedEdgesEmpty">
+                      <code><span>this.ConnectedEdgesEmpty<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="100">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ConnectedEdgesEmpty<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.ConnectedEdgesEmpty``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.ConnectedEdgesEmpty\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns true, if the vertex v does not have edges connected to it. Otherwise, it returns false.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
+                <p>
+                  <a id="ContainsEdge">
+                    <a href="#ContainsEdge">
+                      <code><span>this.ContainsEdge<span><span>(<span>edge</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="101">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ContainsEdge<span><span>(<span>edge</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        edge
+                      </b>
+                      :
+                      <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.ContainsEdge``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.ContainsEdge\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns true, if the edge is found in the graph, else false.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  edge
+                </span>
+                :
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
+                <p>
+                  <a id="ContainsVertex">
+                    <a href="#ContainsVertex">
+                      <code><span>this.ContainsVertex<span><span>(<span>vertex</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="102">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ContainsVertex<span><span>(<span>vertex</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vertex
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.ContainsVertex``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.ContainsVertex\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns true, if the graph contains the vertex, else false.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  vertex
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
+                <p>
+                  <a id="Copy">
+                    <a href="#Copy">
+                      <code><span>this.Copy<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="103">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Copy<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Copy``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Copy\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Copys the given graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
+                <p>
+                  <a id="Degree">
+                    <a href="#Degree">
+                      <code><span>this.Degree<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="104">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Degree<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>int</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Degree``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Degree\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the degree of the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
+                <p>
+                  <a id="EdgeCount">
+                    <a href="#EdgeCount">
+                      <code><span>this.EdgeCount</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="105">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.EdgeCount</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>int</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:P:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.EdgeCount``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'P:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.EdgeCount\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Number of edges in the graph
+
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+                <p>
+                  <a id="GetConnectedEdges">
+                    <a href="#GetConnectedEdges">
+                      <code><span>this.GetConnectedEdges<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="106">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetConnectedEdges<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetConnectedEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetConnectedEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges connected to the vertex v in the graph, returning an array of connected edges.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '107', 107)" onmouseover="showTip(event, '107', 107)">
+                <p>
+                  <a id="GetEdge">
+                    <a href="#GetEdge">
+                      <code><span>this.GetEdge<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="107">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetEdge<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetEdge``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetEdge\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Return the first edge in the graph that matches the conditions.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '108', 108)" onmouseover="showTip(event, '108', 108)">
+                <p>
+                  <a id="GetEdges">
+                    <a href="#GetEdges">
+                      <code><span>this.GetEdges<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="108">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetEdges<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns all edges of the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '109', 109)" onmouseover="showTip(event, '109', 109)">
+                <p>
+                  <a id="GetEdges">
+                    <a href="#GetEdges">
+                      <code><span>this.GetEdges<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="109">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetEdges<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Return all edges in the graph that matches the conditions
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '110', 110)" onmouseover="showTip(event, '110', 110)">
+                <p>
+                  <a id="GetInEdges">
+                    <a href="#GetInEdges">
+                      <code><span>this.GetInEdges<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="110">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetInEdges<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetInEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetInEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges that target the vertex v in the graph, returning an array of connected edges.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '111', 111)" onmouseover="showTip(event, '111', 111)">
+                <p>
+                  <a id="GetLabel">
+                    <a href="#GetLabel">
+                      <code><span>this.GetLabel<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="111">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetLabel<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>'Label</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetLabel``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetLabel\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the label for the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>'Label</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '112', 112)" onmouseover="showTip(event, '112', 112)">
+                <p>
+                  <a id="GetLabels">
+                    <a href="#GetLabels">
+                      <code><span>this.GetLabels<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="112">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetLabels<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Label[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetLabels``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetLabels\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns all labels of the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Label[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '113', 113)" onmouseover="showTip(event, '113', 113)">
+                <p>
+                  <a id="GetOutEdges">
+                    <a href="#GetOutEdges">
+                      <code><span>this.GetOutEdges<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="113">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetOutEdges<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetOutEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetOutEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges that originate from the vertex v in the graph, returning an array of connected edges.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '114', 114)" onmouseover="showTip(event, '114', 114)">
+                <p>
+                  <a id="GetVertices">
+                    <a href="#GetVertices">
+                      <code><span>this.GetVertices<span>()</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="114">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetVertices<span>()</span></span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Vertex[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetVertices``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetVertices\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the vertices of the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Vertex[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '115', 115)" onmouseover="showTip(event, '115', 115)">
+                <p>
+                  <a id="GetWeight">
+                    <a href="#GetWeight">
+                      <code><span>this.GetWeight<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="115">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetWeight<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>'Edge</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetWeight``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.GetWeight\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Return the weight of the edge defined by source and vertex
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>'Edge</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '116', 116)" onmouseover="showTip(event, '116', 116)">
+                <p>
+                  <a id="InDegree">
+                    <a href="#InDegree">
+                      <code><span>this.InDegree<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="116">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.InDegree<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>int</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.InDegree``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.InDegree\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the number of edges that originate from the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '117', 117)" onmouseover="showTip(event, '117', 117)">
+                <p>
+                  <a id="Neighbours">
+                    <a href="#Neighbours">
+                      <code><span>this.Neighbours<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="117">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Neighbours<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Vertex[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Neighbours``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Neighbours\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the neighbouring edges of the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Vertex[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '118', 118)" onmouseover="showTip(event, '118', 118)">
+                <p>
+                  <a id="OutDegree">
+                    <a href="#OutDegree">
+                      <code><span>this.OutDegree<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="118">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.OutDegree<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>int</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.OutDegree``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.OutDegree\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the number of edges that target the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '119', 119)" onmouseover="showTip(event, '119', 119)">
+                <p>
+                  <a id="Predecessors">
+                    <a href="#Predecessors">
+                      <code><span>this.Predecessors<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="119">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Predecessors<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Vertex[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Predecessors``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Predecessors\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the preceding vertices of the vertex.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Vertex[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '120', 120)" onmouseover="showTip(event, '120', 120)">
+                <p>
+                  <a id="RemoveEdge">
+                    <a href="#RemoveEdge">
+                      <code><span>this.RemoveEdge<span><span>(<span>arg1</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="120">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.RemoveEdge<span><span>(<span>arg1</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        arg0
+                      </b>
+                      :
+                      <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveEdge``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveEdge\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Removes an edge from the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  arg0
+                </span>
+                :
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '121', 121)" onmouseover="showTip(event, '121', 121)">
+                <p>
+                  <a id="RemoveManyEdges">
+                    <a href="#RemoveManyEdges">
+                      <code><span>this.RemoveManyEdges<span><span>(<span>edges</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="121">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.RemoveManyEdges<span><span>(<span>edges</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        edges
+                      </b>
+                      :
+                      <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveManyEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveManyEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Removes an array of edges from the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  edges
+                </span>
+                :
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '122', 122)" onmouseover="showTip(event, '122', 122)">
+                <p>
+                  <a id="RemoveManyVertices">
+                    <a href="#RemoveManyVertices">
+                      <code><span>this.RemoveManyVertices<span><span>(<span>vertices</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="122">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.RemoveManyVertices<span><span>(<span>vertices</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        vertices
+                      </b>
+                      :
+                      <code><span>'Vertex[]</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveManyVertices``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveManyVertices\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Removes an array of vertices from the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  vertices
+                </span>
+                :
+                <code><span>'Vertex[]</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '123', 123)" onmouseover="showTip(event, '123', 123)">
+                <p>
+                  <a id="RemoveVertex">
+                    <a href="#RemoveVertex">
+                      <code><span>this.RemoveVertex<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="123">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.RemoveVertex<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveVertex``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.RemoveVertex\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Removes a vertex from the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '124', 124)" onmouseover="showTip(event, '124', 124)">
+                <p>
+                  <a id="SetLabel">
+                    <a href="#SetLabel">
+                      <code><span>this.SetLabel<span><span>(<span>v,&#32;l</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="124">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.SetLabel<span><span>(<span>v,&#32;l</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        l
+                      </b>
+                      :
+                      <code>'Label</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.SetLabel``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.SetLabel\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Sets the label for the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  l
+                </span>
+                :
+                <code>'Label</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '125', 125)" onmouseover="showTip(event, '125', 125)">
+                <p>
+                  <a id="SetWeight">
+                    <a href="#SetWeight">
+                      <code><span>this.SetWeight<span><span>(<span>source,&#32;target,&#32;weight</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="125">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.SetWeight<span><span>(<span>source,&#32;target,&#32;weight</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        weight
+                      </b>
+                      :
+                      <code>'Edge</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.SetWeight``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.SetWeight\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Set the weight of the LEdge defined by source and vertex to be equal weight.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  weight
+                </span>
+                :
+                <code>'Edge</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '126', 126)" onmouseover="showTip(event, '126', 126)">
+                <p>
+                  <a id="Successors">
+                    <a href="#Successors">
+                      <code><span>this.Successors<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="126">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Successors<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Vertex[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Successors``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.Successors\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the succeeding vertices of the vertex.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Vertex[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '127', 127)" onmouseover="showTip(event, '127', 127)">
+                <p>
+                  <a id="TryGetConnectedEdges">
+                    <a href="#TryGetConnectedEdges">
+                      <code><span>this.TryGetConnectedEdges<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="127">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetConnectedEdges<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetConnectedEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetConnectedEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges connected to the vertex v in the graph, returning a Some value if a binding exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '128', 128)" onmouseover="showTip(event, '128', 128)">
+                <p>
+                  <a id="TryGetEdge">
+                    <a href="#TryGetEdge">
+                      <code><span>this.TryGetEdge<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="128">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetEdge<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetEdge``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetEdge\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '129', 129)" onmouseover="showTip(event, '129', 129)">
+                <p>
+                  <a id="TryGetEdges">
+                    <a href="#TryGetEdges">
+                      <code><span>this.TryGetEdges<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="129">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetEdges<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges in the graph that matches the conditions, returning a Some value if it exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '130', 130)" onmouseover="showTip(event, '130', 130)">
+                <p>
+                  <a id="TryGetInEdges">
+                    <a href="#TryGetInEdges">
+                      <code><span>this.TryGetInEdges<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="130">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetInEdges<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetInEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetInEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges that target the vertex v in the graph, returning a Some value if a binding exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '131', 131)" onmouseover="showTip(event, '131', 131)">
+                <p>
+                  <a id="TryGetLabel">
+                    <a href="#TryGetLabel">
+                      <code><span>this.TryGetLabel<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="131">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetLabel<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Label&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetLabel``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetLabel\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns Some label, if a label for the vertex v exists, else none.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Label&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '132', 132)" onmouseover="showTip(event, '132', 132)">
+                <p>
+                  <a id="TryGetOutEdges">
+                    <a href="#TryGetOutEdges">
+                      <code><span>this.TryGetOutEdges<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="132">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetOutEdges<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetOutEdges``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetOutEdges\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges that originate from the vertex v in the graph, returning a Some value if a binding exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '133', 133)" onmouseover="showTip(event, '133', 133)">
+                <p>
+                  <a id="TryGetWeight">
+                    <a href="#TryGetWeight">
+                      <code><span>this.TryGetWeight<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="133">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetWeight<span><span>(<span>source,&#32;target</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Edge&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetWeight``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryGetWeight\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup the weight of the edge defined by source and vertex. If it exists, return Some value, else none.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Edge&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '134', 134)" onmouseover="showTip(event, '134', 134)">
+                <p>
+                  <a id="TryNeighbours">
+                    <a href="#TryNeighbours">
+                      <code><span>this.TryNeighbours<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="134">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryNeighbours<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>'Vertex[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryNeighbours``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryNeighbours\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns Some vertices if they are neighbours of the vertex, else None.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span>'Vertex[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '135', 135)" onmouseover="showTip(event, '135', 135)">
+                <p>
+                  <a id="TryPredecessors">
+                    <a href="#TryPredecessors">
+                      <code><span>this.TryPredecessors<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="135">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryPredecessors<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>'Vertex[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryPredecessors``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TryPredecessors\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns Some vertices if they are predecessors of the vertex, else None.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span>'Vertex[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '136', 136)" onmouseover="showTip(event, '136', 136)">
+                <p>
+                  <a id="TrySuccessors">
+                    <a href="#TrySuccessors">
+                      <code><span>this.TrySuccessors<span><span>(<span>v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="136">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TrySuccessors<span><span>(<span>v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>'Vertex[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TrySuccessors``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.TrySuccessors\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns Some vertices if they are successors of the vertex, else None.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span>'Vertex[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '137', 137)" onmouseover="showTip(event, '137', 137)">
+                <p>
+                  <a id="VertexCount">
+                    <a href="#VertexCount">
+                      <code><span>this.VertexCount</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="137">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.VertexCount</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>int</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('``cref:P:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.VertexCount``')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'P:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.VertexCount\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the number of vertices of the graph.
+
+              </p>
+            </div>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>int</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '138', 138)" onmouseover="showTip(event, '138', 138)">
+                <p>
+                  <a id="WeightedDegree">
+                    <a href="#WeightedDegree">
+                      <code><span>this.WeightedDegree<span><span>(<span>weightingF,&#32;v</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="138">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.WeightedDegree<span><span>(<span>weightingF,&#32;v</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        weightingF
+                      </b>
+                      :
+                      <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;->&#32;'T</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>'T</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.WeightedDegree``1```')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph`3.WeightedDegree``1\'/>')">
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Returns the weighted degree of the vertex v.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  weightingF
+                </span>
+                :
+                <code><span><span><span><a href="csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;->&#32;'T</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>'T</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = 'csbiology.github.io/FSharp.FGL/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="csbiology.github.io/FSharp.FGL/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>
