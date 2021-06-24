@@ -1,4 +1,4 @@
-﻿namespace Algorithms.Louvain
+﻿namespace ArrayAdjacencyGraph.Algorithms.Louvain
 
 open FSharp.ArrayAdjacencyGraph
 open System.Collections.Generic

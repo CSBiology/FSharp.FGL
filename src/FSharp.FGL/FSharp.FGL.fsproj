@@ -14,9 +14,14 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <FsDocsLicenseLink>https://github.com/CSBiology/FSharp.FGL/blob/main/LICENSE</FsDocsLicenseLink>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Tailcalls>true</Tailcalls>
     <Optimize>false</Optimize>
   </PropertyGroup>
+  
   
   
 

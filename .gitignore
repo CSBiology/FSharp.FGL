@@ -184,3 +184,7 @@ paket-files
 .fake
 tmp
 pkg
+
+
+# Documentation outputs
+/output/

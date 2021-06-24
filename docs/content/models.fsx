@@ -1,12 +1,22 @@
-﻿(*** hide ***) 
+﻿(**
+---
+title: Random graph models
+category: FSharp.FGL 
+categoryindex: 3
+index: 3
+---
+*)
+(*** hide ***) 
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I "../../bin/FSharp.FGL"
+#I @"../../bin/FSharp.FGL/netstandard2.0/"
+#I @"../../bin/FSharp.Graph/netstandard2.0/"
 
 (**
-#Testing with models
+#Random graph models
 *)
 #r "FSharp.FGL"
+#r "FSharp.Graph"
 open FSharp.FGL.Directed
 (**
 ## Motivation and overview
