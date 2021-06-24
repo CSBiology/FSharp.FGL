@@ -436,3 +436,178 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
             result.[i] <- group.Value
             i <- i+1
         result       
+  
+module Vertices =
+    //Vertices
+    ///Returns true, if the graph contains the vertex, else false.
+    let containsVertex (vertex:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :bool =
+        graph.ContainsVertex vertex
+
+    ///Returns the number of vertices of the graph.
+    let vertexCount (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
+        graph.VertexCount
+
+    ///Returns the vertices of the graph.
+    let getVertices (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[]=
+        graph.GetVertices()
+    
+    ///Returns the degree of the vertex v.
+    let degree (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
+        graph.Degree v
+
+    ///Returns the number of edges that originate from the vertex v.
+    let inDegree (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
+        graph.InDegree v
+        
+    ///Returns the number of edges that target the vertex v.
+    let outDegree (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
+        graph.OutDegree v
+
+    ///Returns the weighted degree of the vertex v.
+    let weightedDegree (weightingF : LEdge<'Vertex,'Edge> [] -> 'T) (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'T =
+        graph.WeightedDegree (weightingF,v)
+
+    ///Returns true, if the vertex v does not have edges connected to it. Otherwise, it returns false.
+    let connectedEdgesEmpty(v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :bool =
+        graph.ConnectedEdgesEmpty v
+
+    ///Returns a new graph with the given vertex added.
+    let addVertex ((v, l): LVertex<'Vertex,'Label>) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+        (graph.Copy()).AddVertex(v, l)
+
+    ///Returns a new graph with the given vertices added.    
+    let addManyVertices (vertices:LVertex<'Vertex,'Label>[]) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =       
+        (graph.Copy()).AddManyVertices(vertices)
+
+    ///Returns a new graph where the given vertex is removed.
+    let removeVertex (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =       
+        (graph.Copy()).RemoveVertex(v)
+
+    ///Returns a new graph where the given vertices are removed.
+    let removeManyVertices (vertices:'Vertex[]) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+        (graph.Copy()).RemoveManyVertices(vertices)
+ 
+    ///Returns Some vertices if they are predecessors of the vertex, else None.
+    let tryPredecessors (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[] option =
+        graph.TryPredecessors v
+    
+    ///Returns the preceding vertices of the vertex.
+    let predecessors (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[] =
+        graph.Predecessors v
+
+    ///Returns Some vertices if they are successors of the vertex, else None.
+    let trySuccessors (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[] option =
+        graph.TrySuccessors v
+
+    ///Returns the succeeding vertices of the vertex.
+    let successors (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[] =
+        graph.Successors v
+
+    ///Returns Some vertices if they are neighbours of the vertex, else None.
+    let tryNeighbours (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[] option =
+        graph.TryNeighbours v
+       
+    ///Returns the neighbouring edges of the vertex v.
+    let neighbours (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[] =
+        graph.Neighbours v
+      
+
+    //Label
+    ///Returns Some label, if a label for the vertex v exists, else none.
+    let tryGetLabel (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label option =        
+        graph.TryGetLabel v
+      
+    ///Returns the label for the vertex v.
+    let getLabel (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label = 
+        graph.GetLabel v
+
+    ///Retunrs a new graph where the label for the vertex v is the given label.
+    let setLabel (v:'Vertex) (l:'Label) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :ArrayAdjacencyGraph<'Vertex,'Label,'Edge> = 
+        (graph.Copy()).SetLabel(v,l)
+
+    ///Returns all labels of the graph.
+    let getLabels (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
+        graph.GetLabels()    
+
+module Edges =
+    //Edges
+    ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
+    let tryGetEdge (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> option =
+        graph.TryGetEdge(source,target)
+             
+    ///Return the first edge in the graph that matches the conditions.
+    let getEdge (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> =
+        graph.GetEdge(source,target)
+
+    ///Lookup all edges in the graph that matches the conditions, returning a Some value if it exists and None if not.
+    let tryGetEdges (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] option=       
+        graph.TryGetEdges(source,target)
+       
+    ///Return all edges in the graph that matches the conditions
+    let getEdges (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
+        graph.GetEdges(source,target)
+
+    ///Returns all edges of the graph.
+    let getAllEdges (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge>[]=
+        graph.GetEdges()
+
+    ///Number of edges in the graph
+    let edgeCount (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : int   = 
+        graph.EdgeCount
+     
+    ///Returns true, if the edge is found in the graph, else false.
+    let containsEdge (edge:LEdge<'Vertex,'Edge>) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :bool =            
+        graph.ContainsEdge edge
+
+    ///Lookup all edges connected to the vertex v in the graph, returning a Some value if a binding exists and None if not.
+    let tryGetConnectedEdges (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] option =
+       graph.TryGetConnectedEdges v
+       
+    ///Lookup all edges connected to the vertex v in the graph, returning an array of connected edges.
+    let getConnectedEdges (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
+        graph.GetConnectedEdges v
+
+    ///Lookup all edges that target the vertex v in the graph, returning a Some value if a binding exists and None if not.
+    let tryGetInEdges (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] option=      
+        graph.TryGetInEdges v
+
+    ///Lookup all edges that target the vertex v in the graph, returning an array of connected edges.
+    let getInEdges (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
+        graph.GetInEdges v
+
+    ///Lookup all edges that originate from the vertex v in the graph, returning a Some value if a binding exists and None if not.
+    let tryGetOutEdges (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] option=
+        graph.TryGetOutEdges v
+
+    ///Lookup all edges that originate from the vertex v in the graph, returning an array of connected edges.
+    let getOutEdges (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
+        graph.GetOutEdges v
+
+    ///Lookup the weight of the edge defined by source and vertex. If it exists, return Some value, else none.
+    let tryGetWeight (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Edge option=
+        graph.TryGetWeight(source,target)
+
+    ///Return the weight of the edge defined by source and vertex
+    let getWeight (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Edge =
+        graph.GetWeight(source,target)
+
+    //Problem, only returns first edge that equals the source and vertex
+    ///Return a new graph where the weight for the given edge was adapted.
+    let setWeight ((source:'Vertex),(target:'Vertex),(weight:'Edge)) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+        (graph.Copy()).SetWeight(source,target,weight)
+  
+    ///Returns a new graph where the given edge was added.
+    let addEdge ((s, t, w) : LEdge<'Vertex,'Edge>) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+        (graph.Copy()).AddEdge(s,t,w)
+    
+    ///Returns a new graph where the given edges were added.
+    let addManyEdges edgeArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+       (graph.Copy()).AddManyEdges(edgeArray)
+    
+    ///Returns a new graph where the given edge was removed from the original graph.
+    let removeEdge((s, t, w): LEdge<'Vertex,'Edge>) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+        (graph.Copy()).RemoveEdge(s, t, w)
+
+    ///Returns a new graph where the given edges were removed from the original graph.
+    let removeManyEdges (edges:LEdge<'Vertex,'Edge>[]) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+       (graph.Copy()).RemoveManyEdges(edges)
