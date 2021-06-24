@@ -76,8 +76,7 @@ let myGraphLouvain : ArrayAdjacencyGraph<int,string*int,float> =
     Louvain.Louvain.louvain myGraph 0.00001
 
 (*** hide ***)
-// #r "nuget: Cyjs.NET, 0.0.3"
-#load @"C:\Users\lux-c\source\repos\LibraChris\paketAux\.paket\load\netstandard2.1\Cyjs.NET.fsx"
+#r "nuget: Cyjs.NET, 0.0.3"
 open Cyjs.NET
 let inline toCyJS (g : ArrayAdjacencyGraph<int,string*int,float>) =
     let vertices = 
