@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Edges (FSharp.FGL)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="HLWeil,LibraChris,WalternativE,CSBiology">
+    <meta name="author" content="FSharp.ArrayAdjacencyGraph">
     <link rel="shortcut icon" type="image/x-icon" href="https://csbiology.github.io/FSharp.FGL//img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -51,9 +51,9 @@
                     <!-- END SEARCH BOX: this adds support for the search box -->
                     <ul class="navbar-nav">
                         <li class="nav-header">Links</li>
-                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/main/LICENSE">License (MIT)</a></li>
-                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
-                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="{{fsdocs-license-link}}">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="{{fsdocs-release-notes-link}}">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="{{fsdocs-repository-link}}">Source Repository</a></li>
                         <li class="nav-header">
   API Reference
 </li>             
@@ -76,20 +76,18 @@
   <dl class="fsdocs-metadata">
     <dt>
       Namespace: 
-      <a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-directed.html">
-        FSharp.FGL.Directed
+      <a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph.html">
+        FSharp.ArrayAdjacencyGraph
       </a>
     </dt>
     <dt>
-      Assembly: FSharp.FGL.dll
+      Assembly: FSharp.ArrayAdjacencyGraph.dll
     </dt>
   </dl>
   <div class="fsdocs-xmldoc">
     <div>
       <p class="fsdocs-summary">
         
-Functions for edges of directed Graphs
-
       </p>
     </div>
   </div>
@@ -112,19 +110,19 @@ Functions for edges of directed Graphs
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '80', 80)" onmouseover="showTip(event, '80', 80)">
+              <code onmouseout="hideTip(event, '6', 6)" onmouseover="showTip(event, '6', 6)">
                 <p>
-                  <a id="add">
-                    <a href="#add">
-                      <code><span>add&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;g</span></span></code>
+                  <a id="addEdge">
+                    <a href="#addEdge">
+                      <code><span>addEdge&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="80">
+              <div class="fsdocs-tip" id="6">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>add&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;g</span></span></code>
+                  <code><span>addEdge&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -155,17 +153,17 @@ Functions for edges of directed Graphs
                     <br/>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -174,21 +172,17 @@ Functions for edges of directed Graphs
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.add``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.addEdge``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.add``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.addEdge``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L157-157" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Adds a labeled, directed edge to the graph.
+Returns a new graph where the given edge was added.
 
               </p>
             </div>
@@ -219,10 +213,10 @@ Adds a labeled, directed edge to the graph.
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -231,7 +225,7 @@ Adds a labeled, directed edge to the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -240,44 +234,44 @@ Adds a labeled, directed edge to the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '81', 81)" onmouseover="showTip(event, '81', 81)">
+              <code onmouseout="hideTip(event, '7', 7)" onmouseover="showTip(event, '7', 7)">
                 <p>
-                  <a id="addMany">
-                    <a href="#addMany">
-                      <code><span>addMany&#32;<span>edges&#32;g</span></span></code>
+                  <a id="addManyEdges">
+                    <a href="#addManyEdges">
+                      <code><span>addManyEdges&#32;<span>edgeArray&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="81">
+              <div class="fsdocs-tip" id="7">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>addMany&#32;<span>edges&#32;g</span></span></code>
+                  <code><span>addManyEdges&#32;<span>edgeArray&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        edges
+                        edgeArray
                       </b>
                       :
-                      <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                      <code><span>seq&lt;<span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&gt;</span></code>
                     </span>
                     <br/>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -286,39 +280,35 @@ Adds a labeled, directed edge to the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.addMany``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.addManyEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.addMany``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.addManyEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L174-174" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Adds a list of labeled, directed edges to the graph.
+Returns a new graph where the given edges were added.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  edges
+                  edgeArray
                 </span>
                 :
-                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                <code><span>seq&lt;<span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -327,7 +317,7 @@ Adds a list of labeled, directed edges to the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -336,26 +326,26 @@ Adds a list of labeled, directed edges to the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '82', 82)" onmouseover="showTip(event, '82', 82)">
+              <code onmouseout="hideTip(event, '8', 8)" onmouseover="showTip(event, '8', 8)">
                 <p>
-                  <a id="contains">
-                    <a href="#contains">
-                      <code><span>contains&#32;<span>v1&#32;v2&#32;g</span></span></code>
+                  <a id="containsEdge">
+                    <a href="#containsEdge">
+                      <code><span>containsEdge&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="82">
+              <div class="fsdocs-tip" id="8">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>contains&#32;<span>v1&#32;v2&#32;g</span></span></code>
+                  <code><span>containsEdge&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        v1
+                        arg0
                       </b>
                       :
                       <code>'Vertex</code>
@@ -363,7 +353,7 @@ Adds a list of labeled, directed edges to the graph.
                     <br/>
                     <span>
                       <b>
-                        v2
+                        arg1
                       </b>
                       :
                       <code>'Vertex</code>
@@ -371,10 +361,18 @@ Adds a list of labeled, directed edges to the graph.
                     <br/>
                     <span>
                       <b>
-                        g
+                        arg2
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code>'Edge</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
@@ -390,28 +388,24 @@ Adds a list of labeled, directed edges to the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.contains``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.containsEdge``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.contains``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.containsEdge``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L104-104" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Returns true, if the edge from vertex v1 to vertex v2 is contained in the graph. Otherwise, it returns false.
+Returns true, if the edge is found in the graph, else false.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  v1
+                  arg0
                 </span>
                 :
                 <code>'Vertex</code>
@@ -419,7 +413,7 @@ Returns true, if the edge from vertex v1 to vertex v2 is contained in the graph.
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  v2
+                  arg1
                 </span>
                 :
                 <code>'Vertex</code>
@@ -427,10 +421,18 @@ Returns true, if the edge from vertex v1 to vertex v2 is contained in the graph.
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  arg2
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code>'Edge</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -448,29 +450,29 @@ Returns true, if the edge from vertex v1 to vertex v2 is contained in the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '83', 83)" onmouseover="showTip(event, '83', 83)">
+              <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
                 <p>
-                  <a id="count">
-                    <a href="#count">
-                      <code><span>count&#32;<span>g</span></span></code>
+                  <a id="edgeCount">
+                    <a href="#edgeCount">
+                      <code><span>edgeCount&#32;<span>graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="83">
+              <div class="fsdocs-tip" id="9">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>count&#32;<span>g</span></span></code>
+                  <code><span>edgeCount&#32;<span>graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
@@ -486,31 +488,27 @@ Returns true, if the edge from vertex v1 to vertex v2 is contained in the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.count``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.edgeCount``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.count``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.edgeCount``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L96-96" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Evaluates the number of edges in the graph.
+Number of edges in the graph
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -528,44 +526,36 @@ Evaluates the number of edges in the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '84', 84)" onmouseover="showTip(event, '84', 84)">
+              <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
                 <p>
-                  <a id="filter">
-                    <a href="#filter">
-                      <code><span>filter&#32;<span>predicate&#32;g</span></span></code>
+                  <a id="getAllEdges">
+                    <a href="#getAllEdges">
+                      <code><span>getAllEdges&#32;<span>graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="84">
+              <div class="fsdocs-tip" id="10">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>filter&#32;<span>predicate&#32;g</span></span></code>
+                  <code><span>getAllEdges&#32;<span>graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        predicate
+                        graph
                       </b>
                       :
-                      <code><span>'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;bool</span></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        g
-                      </b>
-                      :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
                   </span>
                   <br/>
                 </div>
@@ -574,39 +564,27 @@ Evaluates the number of edges in the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.filter``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getAllEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.filter``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getAllEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L245-245" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
- Returns a new graph containing only the edges for which the given predicate returns true.
+Returns all edges of the graph.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  predicate
+                  graph
                 </span>
                 :
-                <code><span>'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;bool</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  g
-                </span>
-                :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -615,7 +593,7 @@ Evaluates the number of edges in the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -624,26 +602,26 @@ Evaluates the number of edges in the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '85', 85)" onmouseover="showTip(event, '85', 85)">
+              <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
                 <p>
-                  <a id="find">
-                    <a href="#find">
-                      <code><span>find&#32;<span>v1&#32;v2&#32;g</span></span></code>
+                  <a id="getConnectedEdges">
+                    <a href="#getConnectedEdges">
+                      <code><span>getConnectedEdges&#32;<span>v&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="85">
+              <div class="fsdocs-tip" id="11">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>find&#32;<span>v1&#32;v2&#32;g</span></span></code>
+                  <code><span>getConnectedEdges&#32;<span>v&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        v1
+                        v
                       </b>
                       :
                       <code>'Vertex</code>
@@ -651,7 +629,91 @@ Evaluates the number of edges in the graph.
                     <br/>
                     <span>
                       <b>
-                        v2
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getConnectedEdges``3```')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getConnectedEdges``3\'/>')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges connected to the vertex v in the graph, returning an array of connected edges.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+                <p>
+                  <a id="getEdge">
+                    <a href="#getEdge">
+                      <code><span>getEdge&#32;<span>source&#32;target&#32;graph</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="12">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>getEdge&#32;<span>source&#32;target&#32;graph</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
                       </b>
                       :
                       <code>'Vertex</code>
@@ -659,10 +721,18 @@ Evaluates the number of edges in the graph.
                     <br/>
                     <span>
                       <b>
-                        g
+                        target
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
@@ -678,28 +748,24 @@ Evaluates the number of edges in the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.find``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getEdge``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.find``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getEdge``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L110-110" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Lookup a labeled edge in the graph. Raising KeyNotFoundException if no binding exists in the graph.
+Return the first edge in the graph that matches the conditions.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  v1
+                  source
                 </span>
                 :
                 <code>'Vertex</code>
@@ -707,7 +773,7 @@ Lookup a labeled edge in the graph. Raising KeyNotFoundException if no binding e
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  v2
+                  target
                 </span>
                 :
                 <code>'Vertex</code>
@@ -715,10 +781,10 @@ Lookup a labeled edge in the graph. Raising KeyNotFoundException if no binding e
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -736,396 +802,26 @@ Lookup a labeled edge in the graph. Raising KeyNotFoundException if no binding e
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '86', 86)" onmouseover="showTip(event, '86', 86)">
+              <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
                 <p>
-                  <a id="fold">
-                    <a href="#fold">
-                      <code><span>fold&#32;<span>folder&#32;state&#32;graph</span></span></code>
+                  <a id="getEdges">
+                    <a href="#getEdges">
+                      <code><span>getEdges&#32;<span>source&#32;target&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="86">
+              <div class="fsdocs-tip" id="13">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>fold&#32;<span>folder&#32;state&#32;graph</span></span></code>
+                  <code><span>getEdges&#32;<span>source&#32;target&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        folder
-                      </b>
-                      :
-                      <code><span>'State&#32;->&#32;'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;'State</span></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        state
-                      </b>
-                      :
-                      <code>'State</code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        graph
-                      </b>
-                      :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code>'State</code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.fold``4```')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.fold``4\'/>')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L230-230" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  folder
-                </span>
-                :
-                <code><span>'State&#32;->&#32;'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;'State</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  state
-                </span>
-                :
-                <code>'State</code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  graph
-                </span>
-                :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code>'State</code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '87', 87)" onmouseover="showTip(event, '87', 87)">
-                <p>
-                  <a id="iter">
-                    <a href="#iter">
-                      <code><span>iter&#32;<span>action&#32;g</span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="87">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>iter&#32;<span>action&#32;g</span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        action
-                      </b>
-                      :
-                      <code><span>'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;unit</span></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        g
-                      </b>
-                      :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.iter``3```')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.iter``3\'/>')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L211-211" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-Performs a given function on every edge of the graph.
-
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  action
-                </span>
-                :
-                <code><span>'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;unit</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  g
-                </span>
-                :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '88', 88)" onmouseover="showTip(event, '88', 88)">
-                <p>
-                  <a id="iteri">
-                    <a href="#iteri">
-                      <code><span>iteri&#32;<span>action&#32;graph</span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="88">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>iteri&#32;<span>action&#32;graph</span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        action
-                      </b>
-                      :
-                      <code><span>int&#32;->&#32;'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;unit</span></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        graph
-                      </b>
-                      :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.iteri``3```')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.iteri``3\'/>')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L217-217" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-Performs a given function on every edge of the graph, which also receives an ascending integer index.
-
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  action
-                </span>
-                :
-                <code><span>int&#32;->&#32;'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;unit</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  graph
-                </span>
-                :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '89', 89)" onmouseover="showTip(event, '89', 89)">
-                <p>
-                  <a id="map">
-                    <a href="#map">
-                      <code><span>map&#32;<span>mapping&#32;g</span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="89">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>map&#32;<span>mapping&#32;g</span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        mapping
-                      </b>
-                      :
-                      <code><span>'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;'REdge</span></code>
-                    </span>
-                    <br/>
-                    <span>
-                      <b>
-                        g
-                      </b>
-                      :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-                    </span>
-                    <br/>
-                  </ul>
-                  <br/>
-                  <span>
-                    Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'REdge</span>&gt;</span></code>
-                  </span>
-                  <br/>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td class="fsdocs-member-xmldoc">
-            <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.map``4```')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
-              </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.map``4\'/>')">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
-              </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L203-203" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
-              <p class="fsdocs-summary">
-                
-Maps edgelabels of the graph.
-
-              </p>
-            </div>
-            <dl class="fsdocs-params">
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  mapping
-                </span>
-                :
-                <code><span>'Vertex&#32;->&#32;'Vertex&#32;->&#32;'Edge&#32;->&#32;'REdge</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-              <dt class="fsdocs-param">
-                <span class="fsdocs-param-name">
-                  g
-                </span>
-                :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-param-docs"></dd>
-            </dl>
-            <dl class="fsdocs-returns">
-              <dt>
-                <span class="fsdocs-return-name">
-                  Returns: 
-                </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'REdge</span>&gt;</span></code>
-              </dt>
-              <dd class="fsdocs-return-docs"></dd>
-            </dl>
-          </td>
-        </tr>
-        <tr>
-          <td class="fsdocs-member-usage">
-            <div>
-              <code onmouseout="hideTip(event, '90', 90)" onmouseover="showTip(event, '90', 90)">
-                <p>
-                  <a id="remove">
-                    <a href="#remove">
-                      <code><span>remove&#32;<span><span>(<span>arg1,&#32;arg2</span>)</span>&#32;g</span></span></code>
-                    </a>
-                  </a>
-                </p>
-              </code>
-              <div class="fsdocs-tip" id="90">
-                <div class="member-tooltip">
-                  Full Usage: 
-                  <code><span>remove&#32;<span><span>(<span>arg1,&#32;arg2</span>)</span>&#32;g</span></span></code>
-                  <br/>
-                  <br/>
-                  Parameters: 
-                  <ul>
-                    <span>
-                      <b>
-                        arg0
+                        source
                       </b>
                       :
                       <code>'Vertex</code>
@@ -1133,7 +829,7 @@ Maps edgelabels of the graph.
                     <br/>
                     <span>
                       <b>
-                        arg1
+                        target
                       </b>
                       :
                       <code>'Vertex</code>
@@ -1141,17 +837,17 @@ Maps edgelabels of the graph.
                     <br/>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1160,28 +856,24 @@ Maps edgelabels of the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.remove``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.remove``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L178-178" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Removes an edge from the graph.
+Return all edges in the graph that matches the conditions
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  arg0
+                  source
                 </span>
                 :
                 <code>'Vertex</code>
@@ -1189,7 +881,7 @@ Removes an edge from the graph.
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  arg1
+                  target
                 </span>
                 :
                 <code>'Vertex</code>
@@ -1197,10 +889,10 @@ Removes an edge from the graph.
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1209,7 +901,7 @@ Removes an edge from the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1218,44 +910,44 @@ Removes an edge from the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '91', 91)" onmouseover="showTip(event, '91', 91)">
+              <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
                 <p>
-                  <a id="removeMany">
-                    <a href="#removeMany">
-                      <code><span>removeMany&#32;<span>edges&#32;g</span></span></code>
+                  <a id="getInEdges">
+                    <a href="#getInEdges">
+                      <code><span>getInEdges&#32;<span>v&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="91">
+              <div class="fsdocs-tip" id="14">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>removeMany&#32;<span>edges&#32;g</span></span></code>
+                  <code><span>getInEdges&#32;<span>v&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        edges
+                        v
                       </b>
                       :
-                      <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-edge-1.html">Edge</a>&lt;'Vertex&gt;</span>&#32;list</span></code>
+                      <code>'Vertex</code>
                     </span>
                     <br/>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1264,39 +956,35 @@ Removes an edge from the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.removeMany``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getInEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.removeMany``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getInEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L188-188" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Removes a list of edges from the graph.
+Lookup all edges that target the vertex v in the graph, returning an array of connected edges.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  edges
+                  v
                 </span>
                 :
-                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-edge-1.html">Edge</a>&lt;'Vertex&gt;</span>&#32;list</span></code>
+                <code>'Vertex</code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1305,7 +993,7 @@ Removes a list of edges from the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1314,36 +1002,44 @@ Removes a list of edges from the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '92', 92)" onmouseover="showTip(event, '92', 92)">
+              <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
                 <p>
-                  <a id="rev">
-                    <a href="#rev">
-                      <code><span>rev&#32;<span>g</span></span></code>
+                  <a id="getOutEdges">
+                    <a href="#getOutEdges">
+                      <code><span>getOutEdges&#32;<span>v&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="92">
+              <div class="fsdocs-tip" id="15">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>rev&#32;<span>g</span></span></code>
+                  <code><span>getOutEdges&#32;<span>v&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        g
+                        v
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1352,31 +1048,35 @@ Removes a list of edges from the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.rev``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getOutEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.rev``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getOutEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L136-136" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Reverses all edges in the graph.
+Lookup all edges that originate from the vertex v in the graph, returning an array of connected edges.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  v
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1385,7 +1085,7 @@ Reverses all edges in the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1394,36 +1094,52 @@ Reverses all edges in the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '93', 93)" onmouseover="showTip(event, '93', 93)">
+              <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
                 <p>
-                  <a id="toEdgeList">
-                    <a href="#toEdgeList">
-                      <code><span>toEdgeList&#32;<span>g</span></span></code>
+                  <a id="getWeight">
+                    <a href="#getWeight">
+                      <code><span>getWeight&#32;<span>source&#32;target&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="93">
+              <div class="fsdocs-tip" id="16">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>toEdgeList&#32;<span>g</span></span></code>
+                  <code><span>getWeight&#32;<span>source&#32;target&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        g
+                        source
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                    <code>'Edge</code>
                   </span>
                   <br/>
                 </div>
@@ -1432,31 +1148,43 @@ Reverses all edges in the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.toEdgeList``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.getWeight``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.toEdgeList``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.getWeight``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L192-192" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Creates a list of all edges and their labels.
+Return the weight of the edge defined by source and vertex
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  source
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1465,7 +1193,7 @@ Creates a list of all edges and their labels.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                <code>'Edge</code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1474,19 +1202,19 @@ Creates a list of all edges and their labels.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '94', 94)" onmouseover="showTip(event, '94', 94)">
+              <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
                 <p>
-                  <a id="tryAdd">
-                    <a href="#tryAdd">
-                      <code><span>tryAdd&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;g</span></span></code>
+                  <a id="removeEdge">
+                    <a href="#removeEdge">
+                      <code><span>removeEdge&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="94">
+              <div class="fsdocs-tip" id="17">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>tryAdd&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;g</span></span></code>
+                  <code><span>removeEdge&#32;<span><span>(<span>arg1,&#32;arg2,&#32;arg3</span>)</span>&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -1517,17 +1245,17 @@ Creates a list of all edges and their labels.
                     <br/>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span>&#32;option</span></code>
+                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1536,21 +1264,17 @@ Creates a list of all edges and their labels.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.tryAdd``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.removeEdge``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.tryAdd``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.removeEdge``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L143-143" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Adds a labeled, directed edge to the graph.
+Returns a new graph where the given edge was removed from the original graph.
 
               </p>
             </div>
@@ -1581,10 +1305,10 @@ Adds a labeled, directed edge to the graph.
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1593,7 +1317,7 @@ Adds a labeled, directed edge to the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span>&#32;option</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1602,19 +1326,19 @@ Adds a labeled, directed edge to the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '95', 95)" onmouseover="showTip(event, '95', 95)">
+              <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
                 <p>
-                  <a id="tryAddMany">
-                    <a href="#tryAddMany">
-                      <code><span>tryAddMany&#32;<span>edges&#32;g</span></span></code>
+                  <a id="removeManyEdges">
+                    <a href="#removeManyEdges">
+                      <code><span>removeManyEdges&#32;<span>edges&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="95">
+              <div class="fsdocs-tip" id="18">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>tryAddMany&#32;<span>edges&#32;g</span></span></code>
+                  <code><span>removeManyEdges&#32;<span>edges&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
@@ -1624,22 +1348,22 @@ Adds a labeled, directed edge to the graph.
                         edges
                       </b>
                       :
-                      <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                      <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
                     </span>
                     <br/>
                     <span>
                       <b>
-                        g
+                        graph
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span>&#32;option</span></code>
+                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1648,21 +1372,17 @@ Adds a labeled, directed edge to the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.tryAddMany``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.removeManyEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.tryAddMany``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.removeManyEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L170-170" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Adds a list of labeled, directed edges to the graph.
+Returns a new graph where the given edges were removed from the original graph.
 
               </p>
             </div>
@@ -1672,15 +1392,15 @@ Adds a list of labeled, directed edges to the graph.
                   edges
                 </span>
                 :
-                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>&#32;list</span></code>
+                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1689,7 +1409,7 @@ Adds a list of labeled, directed edges to the graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span>&#32;option</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
@@ -1698,26 +1418,26 @@ Adds a list of labeled, directed edges to the graph.
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '96', 96)" onmouseover="showTip(event, '96', 96)">
+              <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
                 <p>
-                  <a id="tryFind">
-                    <a href="#tryFind">
-                      <code><span>tryFind&#32;<span>v1&#32;v2&#32;g</span></span></code>
+                  <a id="setWeight">
+                    <a href="#setWeight">
+                      <code><span>setWeight&#32;<span><span>(<span>source,&#32;target,&#32;weight</span>)</span>&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="96">
+              <div class="fsdocs-tip" id="19">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>tryFind&#32;<span>v1&#32;v2&#32;g</span></span></code>
+                  <code><span>setWeight&#32;<span><span>(<span>source,&#32;target,&#32;weight</span>)</span>&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        v1
+                        source
                       </b>
                       :
                       <code>'Vertex</code>
@@ -1725,7 +1445,7 @@ Adds a list of labeled, directed edges to the graph.
                     <br/>
                     <span>
                       <b>
-                        v2
+                        target
                       </b>
                       :
                       <code>'Vertex</code>
@@ -1733,10 +1453,226 @@ Adds a list of labeled, directed edges to the graph.
                     <br/>
                     <span>
                       <b>
-                        g
+                        weight
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code>'Edge</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.setWeight``3```')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.setWeight``3\'/>')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Return a new graph where the weight for the given edge was adapted.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  weight
+                </span>
+                :
+                <code>'Edge</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
+                <p>
+                  <a id="tryGetConnectedEdges">
+                    <a href="#tryGetConnectedEdges">
+                      <code><span>tryGetConnectedEdges&#32;<span>v&#32;graph</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="20">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>tryGetConnectedEdges&#32;<span>v&#32;graph</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.tryGetConnectedEdges``3```')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.tryGetConnectedEdges``3\'/>')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges connected to the vertex v in the graph, returning a Some value if a binding exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+                <p>
+                  <a id="tryGetEdge">
+                    <a href="#tryGetEdge">
+                      <code><span>tryGetEdge&#32;<span>source&#32;target&#32;graph</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="21">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>tryGetEdge&#32;<span>source&#32;target&#32;graph</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
@@ -1752,28 +1688,24 @@ Adds a list of labeled, directed edges to the graph.
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.tryFind``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.tryGetEdge``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.tryFind``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.tryGetEdge``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L116-116" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Lookup a labeled edge in the graph, returning a Some value if a binding exists and None if not.
+Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  v1
+                  source
                 </span>
                 :
                 <code>'Vertex</code>
@@ -1781,7 +1713,7 @@ Lookup a labeled edge in the graph, returning a Some value if a binding exists a
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  v2
+                  target
                 </span>
                 :
                 <code>'Vertex</code>
@@ -1789,10 +1721,10 @@ Lookup a labeled edge in the graph, returning a Some value if a binding exists a
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  graph
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1810,44 +1742,52 @@ Lookup a labeled edge in the graph, returning a Some value if a binding exists a
         <tr>
           <td class="fsdocs-member-usage">
             <div>
-              <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+              <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
                 <p>
-                  <a id="undirect">
-                    <a href="#undirect">
-                      <code><span>undirect&#32;<span>computeEdge&#32;g</span></span></code>
+                  <a id="tryGetEdges">
+                    <a href="#tryGetEdges">
+                      <code><span>tryGetEdges&#32;<span>source&#32;target&#32;graph</span></span></code>
                     </a>
                   </a>
                 </p>
               </code>
-              <div class="fsdocs-tip" id="97">
+              <div class="fsdocs-tip" id="22">
                 <div class="member-tooltip">
                   Full Usage: 
-                  <code><span>undirect&#32;<span>computeEdge&#32;g</span></span></code>
+                  <code><span>tryGetEdges&#32;<span>source&#32;target&#32;graph</span></span></code>
                   <br/>
                   <br/>
                   Parameters: 
                   <ul>
                     <span>
                       <b>
-                        computeEdge
+                        source
                       </b>
                       :
-                      <code><span>'Edge&#32;->&#32;'Edge&#32;->&#32;'Edge</span></code>
+                      <code>'Vertex</code>
                     </span>
                     <br/>
                     <span>
                       <b>
-                        g
+                        target
                       </b>
                       :
-                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
                     </span>
                     <br/>
                   </ul>
                   <br/>
                   <span>
                     Returns: 
-                    <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
                   </span>
                   <br/>
                 </div>
@@ -1856,39 +1796,43 @@ Lookup a labeled edge in the graph, returning a Some value if a binding exists a
           </td>
           <td class="fsdocs-member-xmldoc">
             <div class="fsdocs-summary">
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.FGL.Directed.Edges.undirect``3```')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.tryGetEdges``3```')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
               </div>
-              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.FGL.Directed.Edges.undirect``3\'/>')">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.tryGetEdges``3\'/>')">
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
                 <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
               </div>
-              <a href="https://github.com/CSBiology/FSharp.FGL/tree/master/src/FSharp.FGL/Directed.fs#L122-122" class="fsdocs-source-link">
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github.png" class="normal"/>
-                <img src="https://csbiology.github.io/FSharp.FGL/content/img/github-blue.png" class="hover"/>
-              </a>
               <p class="fsdocs-summary">
                 
-Transforms a directed graph to an undirected graph.
+Lookup all edges in the graph that matches the conditions, returning a Some value if it exists and None if not.
 
               </p>
             </div>
             <dl class="fsdocs-params">
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  computeEdge
+                  source
                 </span>
                 :
-                <code><span>'Edge&#32;->&#32;'Edge&#32;->&#32;'Edge</span></code>
+                <code>'Vertex</code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
               <dt class="fsdocs-param">
                 <span class="fsdocs-param-name">
-                  g
+                  target
                 </span>
                 :
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
               </dt>
               <dd class="fsdocs-param-docs"></dd>
             </dl>
@@ -1897,7 +1841,299 @@ Transforms a directed graph to an undirected graph.
                 <span class="fsdocs-return-name">
                   Returns: 
                 </span>
-                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-fgl-graph-3.html">Graph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
+                <p>
+                  <a id="tryGetInEdges">
+                    <a href="#tryGetInEdges">
+                      <code><span>tryGetInEdges&#32;<span>v&#32;graph</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="23">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>tryGetInEdges&#32;<span>v&#32;graph</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.tryGetInEdges``3```')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.tryGetInEdges``3\'/>')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges that target the vertex v in the graph, returning a Some value if a binding exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
+                <p>
+                  <a id="tryGetOutEdges">
+                    <a href="#tryGetOutEdges">
+                      <code><span>tryGetOutEdges&#32;<span>v&#32;graph</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="24">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>tryGetOutEdges&#32;<span>v&#32;graph</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.tryGetOutEdges``3```')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.tryGetOutEdges``3\'/>')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup all edges that originate from the vertex v in the graph, returning a Some value if a binding exists and None if not.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><span><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-graph-ledge-2.html">LEdge</a>&lt;<span>'Vertex,&#32;'Edge</span>&gt;</span>[]</span>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
+                <p>
+                  <a id="tryGetWeight">
+                    <a href="#tryGetWeight">
+                      <code><span>tryGetWeight&#32;<span>source&#32;target&#32;graph</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="25">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>tryGetWeight&#32;<span>source&#32;target&#32;graph</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        source
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        target
+                      </b>
+                      :
+                      <code>'Vertex</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        graph
+                      </b>
+                      :
+                      <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>'Edge&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('```cref:M:FSharp.ArrayAdjacencyGraph.Edges.tryGetWeight``3```')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-md-blue.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.ArrayAdjacencyGraph.Edges.tryGetWeight``3\'/>')">
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy.png" class="normal"/>
+                <img src="https://csbiology.github.io/FSharp.FGL/content/img/copy-blue.png" class="hover"/>
+              </div>
+              <p class="fsdocs-summary">
+                
+Lookup the weight of the edge defined by source and vertex. If it exists, return Some value, else none.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  source
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  target
+                </span>
+                :
+                <code>'Vertex</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  graph
+                </span>
+                :
+                <code><span><a href="https://csbiology.github.io/FSharp.FGL/reference/fsharp-arrayadjacencygraph-arrayadjacencygraph-3.html">ArrayAdjacencyGraph</a>&lt;<span>'Vertex,&#32;'Label,&#32;'Edge</span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>'Edge&#32;option</span></code>
               </dt>
               <dd class="fsdocs-return-docs"></dd>
             </dl>
