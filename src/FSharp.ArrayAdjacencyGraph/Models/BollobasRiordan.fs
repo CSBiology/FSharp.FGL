@@ -1,6 +1,6 @@
 ﻿namespace ArrayAdjacencyGraph.Models.Scale_free_graph
 
-open FSharp.ArrayAdjacencyGraph
+open FSharp.FGL.ArrayAdjacencyGraph
 
 // Creating a random generated network based on NetworkX, a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks. Based on the scale free network method,NetworkX ReferenceRelease 2.5, page 630.
 // https://networkx.org/

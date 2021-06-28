@@ -1,7 +1,7 @@
-﻿namespace FSharp.Graph.IO
+﻿namespace FSharp.FGL.IO.GDF
 
 open System.Text
-open FSharp.Graph
+open FSharp.FGL
 
 module GDF =
     

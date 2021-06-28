@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FSharp.ArrayAdjacencyGraph\FSharp.ArrayAdjacencyGraph.fsproj" />
+    <ProjectReference Include="..\..\src\FSharp.ArrayAdjacencyGraph\FSharp.FGL.ArrayAdjacencyGraph.fsproj" />
     <ProjectReference Include="..\..\src\FSharp.FGL\FSharp.FGL.fsproj" />
+    <ProjectReference Include="..\..\src\FSharp.Graph\FSharp.FGL.IO.fsproj" />
   </ItemGroup>
 </Project>

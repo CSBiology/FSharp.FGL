@@ -1,7 +1,7 @@
 (**
 ---
-title: Basic functionality
-category: ArrayAdjacencyGraph
+title: Introduction
+category: FSharp.FGL.ArrayAdjacencyGraph
 categoryindex: 4
 index: 1
 ---
@@ -11,12 +11,10 @@ index: 1
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 #I @"../../bin/FSharp.FGL/netstandard2.0/"
-#I @"../../bin/FSharp.Graph/netstandard2.0/"
-#I @"../../bin/FSharp.ArrayAdjacencyGraph/netstandard2.0/"
+#I @"../../bin/FSharp.FGL.ArrayAdjacencyGraph/netstandard2.0/"
 
 #r "FSharp.FGL.dll"
-#r "FSharp.Graph"
-#r "FSharp.ArrayAdjacencyGraph"
+#r "FSharp.FGL.ArrayAdjacencyGraph"
 
 (**
 #ArrayAdjacencyGraph
@@ -24,10 +22,11 @@ index: 1
 <a name="Introduction"></a>
 ## Introduction
 FSharp.ArrayAdjacencyGraph is an adjacency list representation of a multigraph. It is a modified verion of the [YaccConstructor/QuickGraph/ArrayAdjacencyGraph](https://github.com/YaccConstructor/QuickGraph/blob/master/src/QuickGraph/ArrayAdjacencyGraph.cs). 
+In itself the model is a mutable fata type, but it can also be used in a functional, immutable style thanks to added functions.
 
 The model itself works on two different dictionaries, the label dictionary and the edge dictionary. Both feature vertices as keys. In case of the edge dictionary, the bound value is an array that includes all edges the vertex key is part of. 
 
-Working with this graph model allows for fast caculations on the edges 
+Working with this graph model allows for fast caculations on the edges. 
 <a name="Features"></a>
 ## Features
 The basic structure of the implementation is done as in [YaccConstructor/QuickGraph/ArrayAdjacencyGraph](https://github.com/YaccConstructor/QuickGraph/blob/master/src/QuickGraph/ArrayAdjacencyGraph.cs), with minor adjustments to fit FSharp better. 

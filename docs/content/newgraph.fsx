@@ -2,7 +2,7 @@
 ---
 title: Basic functionality
 category: FSharp.FGL 
-categoryindex: 3
+categoryindex: 2
 index: 2 
 ---
 *)
@@ -10,7 +10,6 @@ index: 2
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 #I @"../../bin/FSharp.FGL/netstandard2.0/"
-#I @"../../bin/FSharp.Graph/netstandard2.0/"
 
 (**
 #Basic functionality
@@ -21,11 +20,9 @@ In this quick tutorial we will work with directed Graphs.
 *)
 
 #r "FSharp.FGL.dll"
-#r "FSharp.Graph"
 
 open FSharp.FGL
 open FSharp.FGL.Directed
-open FSharp.Graph
 
 (**
 ## Creating a Graph
@@ -38,7 +35,7 @@ Keep in mind that FSharp.FGL does not support unlabeled edges and unlabeled vert
 //Creating a list of labeled vertices
 let vertexList : LVertex<int,string> list = List.init 4 (fun i -> 
         i + 1,
-        sprintf "VertexNr. %i" i + 1)
+        sprintf "VertexNr. %i" (i + 1))
 
 //Creating a list of labeled edges
 let edgeList : LEdge<int,float> list = [(1,2,1.);(2,1,1.);(1,3,0.5);(3,4,0.8);(4,3,0.8)]

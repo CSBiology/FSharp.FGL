@@ -1,15 +1,15 @@
 (**
 ---
 title: Graph creation
-category: ArrayAdjacencyGraph
+category: FSharp.FGL.ArrayAdjacencyGraph
 categoryindex: 4
 index: 2
 ---
 *)
 
 (*** hide ***) 
-#I @"../../bin/FSharp.Graph/netstandard2.0/"
-#I @"../../bin/FSharp.ArrayAdjacencyGraph/netstandard2.0/"
+#I @"../../bin/FSharp.FGL/netstandard2.0/"
+#I @"../../bin/FSharp.FGL.ArrayAdjacencyGraph/netstandard2.0/"
 
 
 (**
@@ -20,11 +20,11 @@ The graph creation in ArrayAdjacencyGraph can be achived via two differnet appro
 <br> The easiest method is relies on a vertex list and an edge list like this :
 *)
 
-#r "FSharp.Graph"
-#r "FSharp.ArrayAdjacencyGraph"
+#r "FSharp.FGL"
+#r "FSharp.FGL.ArrayAdjacencyGraph"
 
-open FSharp.Graph
-open FSharp.ArrayAdjacencyGraph
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 
 
 //Creating a list of labeled vertices
@@ -39,9 +39,19 @@ let edgeList : LEdge<int,float> list =
 
 //Creating a graph out of the two lists 
 let myGraph : ArrayAdjacencyGraph<int,string,float> =
-    ArrayAdjacencyGraph(vertexList,edgeList)
+    ArrayAdjacencyGraph.Graph.create vertexList edgeList
 
 (**
+The object oriented approach for this would look like this: 
+*)
+
+//Creating a graph out of the two lists 
+let myGraph' : ArrayAdjacencyGraph<int,string,float> =
+    ArrayAdjacencyGraph(vertexList,edgeList)
+
+
+(**
+<hr>
 Alternatively, an empty graph can be created and filled with vertices and edges after its creation.
 *)
 
@@ -56,7 +66,17 @@ let edgeArray : LEdge<int,float> [] =
     |> Array.ofList
 
 //Creating an empty graph and filling it afterwards
-let myGraph' : ArrayAdjacencyGraph<int,string,float> =
+let myGraph'' : ArrayAdjacencyGraph<int,string,float> =
+    ArrayAdjacencyGraph.Graph.create [] []
+    |> Vertices.addMany vertexArray
+    |> Edges.addMany edgeArray
+
+(**
+Again, the object oriented approach would look like this:
+*)
+
+//Creating an empty graph and filling it afterwards
+let myGraph''' : ArrayAdjacencyGraph<int,string,float> =
     
     //Create a new, empty graph
     let emptyGraph = ArrayAdjacencyGraph()
@@ -86,10 +106,21 @@ let newEdge : LEdge<int,float> =
     1,123,10.
 
 //Add newVertex to myGraph
-myGraph.AddVertex(newVertex)
+myGraph
+|> Vertices.add newVertex
 
 //Add newEdge to myGraph
-myGraph.AddEdge(newEdge)
+myGraph
+|> Edges.add newEdge
+
+(**
+Or alternatively:
+*)
+//Add newVertex to myGraph
+myGraph'.AddVertex(newVertex)
+
+//Add newEdge to myGraph
+myGraph'.AddEdge(newEdge)
 
 (**
 <br>
@@ -98,7 +129,19 @@ Removing vertices and edges is also very easy. If you remove a vertex from the G
 *)
 
 //Remove an edge from myGraph
-myGraph.RemoveEdge(1,2,1.)
+myGraph
+|> Edges.remove(1,2,1.)
 
 //Remove a vertex from myGraph
-myGraph.RemoveVertex(123)
+myGraph
+|> Vertices.remove(123)
+
+(**
+Or respectively :
+*)
+
+//Remove an edge from myGraph
+myGraph'.RemoveEdge(1,2,1.)
+
+//Remove a vertex from myGraph
+myGraph'.RemoveVertex(123)

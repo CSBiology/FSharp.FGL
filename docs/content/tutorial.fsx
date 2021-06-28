@@ -2,7 +2,7 @@
 ---
 title: Introduction
 category: FSharp.FGL 
-categoryindex: 3
+categoryindex: 2
 index: 1
 ---
 *)

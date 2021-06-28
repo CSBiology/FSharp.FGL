@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Graph.fs" />
-    <Compile Include="IO.fs" />
+    <Compile Include="GDF.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSharp.FGL\FSharp.FGL.fsproj" />
   </ItemGroup>
 
 </Project>

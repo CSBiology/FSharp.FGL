@@ -1,7 +1,7 @@
 (**
 ---
 title: Louvain method for community detection
-category: ArrayAdjacencyGraph
+category: FSharp.FGL.ArrayAdjacencyGraph
 categoryindex: 4
 index: 4
 ---
@@ -10,8 +10,8 @@ index: 4
 (*** hide ***) 
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I @"../../bin/FSharp.Graph/netstandard2.0/"
-#I @"../../bin/FSharp.ArrayAdjacencyGraph/netstandard2.0/"
+#I @"../../bin/FSharp.FGL/netstandard2.0/"
+#I @"../../bin/FSharp.FGL.ArrayAdjacencyGraph/netstandard2.0/"
 
 (**
 #Louvain method for community detection
@@ -20,11 +20,11 @@ index: 4
 ## Louvain method for community detection
 *)
 
-#r "FSharp.Graph"
-#r "FSharp.ArrayAdjacencyGraph"
+#r "FSharp.FGL"
+#r "FSharp.FGL.ArrayAdjacencyGraph"
 
-open FSharp.Graph
-open FSharp.ArrayAdjacencyGraph
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 open ArrayAdjacencyGraph.Algorithms
 
 (**

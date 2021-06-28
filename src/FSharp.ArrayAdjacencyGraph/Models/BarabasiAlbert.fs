@@ -1,6 +1,6 @@
 ﻿namespace ArrayAdjacencyGraph.Models.BarabasiAlbert
 
-open FSharp.ArrayAdjacencyGraph
+open FSharp.FGL.ArrayAdjacencyGraph
 
 
 // Adaption of the Barabási–Albert model for generating random scale-free networks using a preferential attachment mechanism.

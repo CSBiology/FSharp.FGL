@@ -3,7 +3,6 @@
 open System
 open Aether
 open FSharp.FGL
-open FSharp.Graph
 
 
 ///Functions for vertices of directed Graphs
