@@ -1,7 +1,7 @@
-﻿namespace FSharp.ArrayAdjacencyGraph
+﻿namespace FSharp.FGL.ArrayAdjacencyGraph
 
 open System.Collections.Generic
-open FSharp.Graph
+open FSharp.FGL
 
 
 module internal Dictionary = 

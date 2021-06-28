@@ -1,7 +1,7 @@
 ﻿module IOTests
 
 open FSharp.FGL
-open FSharp.Graph.IO
+open FSharp.FGL.IO.GDF
 open Expecto
 
 

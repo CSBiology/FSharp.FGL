@@ -1,6 +1,7 @@
 ﻿module ArrayAdjacencyGraphTests
 
-open FSharp.ArrayAdjacencyGraph
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 open Expecto
 
 
@@ -27,7 +28,7 @@ let testInitializeGraph =
                         i,rnd.Next(0,100),1
                 ]
             
-            let arrayAdjacencyGraph = FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
+            let arrayAdjacencyGraph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
 
             let graphVertices   = arrayAdjacencyGraph.GetVertices()
             let graphLabels     = arrayAdjacencyGraph.GetLabels()
@@ -73,7 +74,7 @@ let testEdges =
                     i,rnd.Next(0,100),1
                     i,rnd.Next(0,100),1
             ]
-        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
+        FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
     
     let exampleGraphVertices =
         [ for i=0 to 9 do (i,i) ]
@@ -100,7 +101,7 @@ let testEdges =
     
     let testGraph =
     
-        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+        FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
     testList "AAG.Edges" [
         
@@ -428,7 +429,7 @@ let testEdges =
         testCase "AddEdge" (fun () ->
             
             let newGraph =
-                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+                FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
             
             let createNewEdge weight =
                     
@@ -490,7 +491,7 @@ let testEdges =
         testCase "RemoveEdge" (fun () ->
             
             let newGraph =
-                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+                FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
             let (s,t,w) = 
                 let position = rnd.Next((0),(exampleGraphEdges.Length-1))
@@ -552,7 +553,7 @@ let testVertices =
                     i,rnd.Next(0,100),1
                     i,rnd.Next(0,100),1
             ]
-        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
+        FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
     
     let exampleGraphVertices =
         [ for i=0 to 9 do (i,i) ]
@@ -579,7 +580,7 @@ let testVertices =
     
     let testGraph =
     
-        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+        FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
     testList "AAG.Vertices" [
         
@@ -723,7 +724,7 @@ let testVertices =
         testCase "AddVertex" (fun () ->
         
             let newGraph =
-                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+                FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
             
             let newVertex = (List.length exampleGraphVertices)*2
 
@@ -744,7 +745,7 @@ let testVertices =
         testCase "RemoveVertex" (fun () ->
             
             let newGraph =
-                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+                FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
                 
             let toBeRemovesVertex = (List.last exampleGraphVertices)
 
@@ -861,7 +862,7 @@ let testLabels =
                     i,rnd.Next(0,100),1
                     i,rnd.Next(0,100),1
             ]
-        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
+        FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(vertexList,edges)
    
     let exampleGraphVertices =
         [ for i=0 to 9 do (i,i) ]
@@ -888,7 +889,7 @@ let testLabels =
    
     let testGraph =
    
-        FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+        FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
 
     testList "AAG.Labels" [
@@ -922,7 +923,7 @@ let testLabels =
         testCase "SetLabel" (fun () ->
             
             let newGraph =
-                FSharp.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+                FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
 
             exampleGraphVertices
             |> List.map(fun (v,l) -> newGraph.SetLabel ((v),(l*l)))

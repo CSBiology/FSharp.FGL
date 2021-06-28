@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FSharp.Graph\FSharp.Graph.fsproj" />
+    <ProjectReference Include="..\FSharp.FGL\FSharp.FGL.fsproj" />
   </ItemGroup>
 
 </Project>
