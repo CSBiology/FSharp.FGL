@@ -55,14 +55,6 @@
                         <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
                         <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
                         <li class="nav-header">
-  FSharp.Graph
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="https://csbiology.github.io/FSharp.FGL/content/GDF.html">
-    GDF format reader
-  </a>
-</li>             
-<li class="nav-header">
   FSharp.FGL
 </li>             
 <li class="nav-item">
@@ -81,11 +73,19 @@
   </a>
 </li>             
 <li class="nav-header">
-  ArrayAdjacencyGraph
+  FSharp.FGL.IO
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://csbiology.github.io/FSharp.FGL/content/GDF.html">
+    GDF format reader
+  </a>
+</li>             
+<li class="nav-header">
+  FSharp.FGL.ArrayAdjacencyGraph
 </li>             
 <li class="nav-item">
   <a class="nav-link" href="https://csbiology.github.io/FSharp.FGL/content/ArrayAdjacencyGraph.html">
-    Basic functionality
+    Introduction
   </a>
 </li>             
 <li class="nav-item">
@@ -146,53 +146,54 @@ s3,s1, 0.871
 <br>
 <h2><a name="Reading-GDF-files" class="anchor" href="#Reading-GDF-files">Reading GDF files</a></h2>
 <p>To read GDF files, just use the ofFile function located in the gdf module of the FSharp.FGL.IO namespace. It does not need anything but the file path ans will return the vertices and edges as a vertex list, edge list tupel.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Graph</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">IO</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">FGL</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">GDF</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">fileDir</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">fileDir</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span> <span class="o">+</span> <span class="s">&quot;/data/&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">path</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;GDFExample.txt&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">path</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 7)" onmouseover="showTip(event, 'fs5', 7)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;GDFExample.txt&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">gdfFileRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="m">GDF</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="id">path</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">gdfFileRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="m">GDF</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">fromFile</span> <span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="id">path</span>
 </code></pre>
 <br>
 Additionally, you can use the fromArray function instead of fromFile to directly transform an array to a vertex list, edge list tupel.
 <br>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 11)" onmouseover="showTip(event, 'fs1', 11)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 12)" onmouseover="showTip(event, 'fs2', 12)" class="id">Graph</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 13)" onmouseover="showTip(event, 'fs3', 13)" class="id">IO</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 12)" onmouseover="showTip(event, 'fs1', 12)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 13)" onmouseover="showTip(event, 'fs2', 13)" class="id">FGL</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 14)" onmouseover="showTip(event, 'fs3', 14)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 15)" onmouseover="showTip(event, 'fs4', 15)" class="id">GDF</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="id">gdfArrayRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="m">GDF</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="id">fromArray</span> <span class="pn">[|</span><span class="s">&quot;nodedef&gt;name VARCHAR,label VARCHAR&quot;</span><span class="pn">;</span><span class="s">&quot;s1,Site number 1&quot;</span><span class="pn">;</span><span class="s">&quot;s2,Site number 2&quot;</span><span class="pn">;</span><span class="s">&quot;edgedef&gt;node1 VARCHAR,node2 VARCHAR,weight DOUBLE&quot;</span><span class="pn">;</span><span class="s">&quot;s1,s2,1.2341&quot;</span><span class="pn">|]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="id">gdfArrayRead</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 17)" onmouseover="showTip(event, 'fs8', 17)" class="m">GDF</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs11', 18)" onmouseover="showTip(event, 'fs11', 18)" class="id">fromArray</span> <span class="pn">[|</span><span class="s">&quot;nodedef&gt;name VARCHAR,label VARCHAR&quot;</span><span class="pn">;</span><span class="s">&quot;s1,Site number 1&quot;</span><span class="pn">;</span><span class="s">&quot;s2,Site number 2&quot;</span><span class="pn">;</span><span class="s">&quot;edgedef&gt;node1 VARCHAR,node2 VARCHAR,weight DOUBLE&quot;</span><span class="pn">;</span><span class="s">&quot;s1,s2,1.2341&quot;</span><span class="pn">|]</span>
 </code></pre>
 <h2><a name="Writing-GDF-format-files" class="anchor" href="#Writing-GDF-format-files">Writing GDF format files</a></h2>
 <p>To save a graph that takes the same form as a graph created by the reading GDF file functions, the toFile function can be applied. This function needs the vertex list and the edge list of the graph and saves the gdf file at the given path.</p>
-<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 17)" onmouseover="showTip(event, 'fs1', 17)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 18)" onmouseover="showTip(event, 'fs2', 18)" class="id">Graph</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 19)" onmouseover="showTip(event, 'fs3', 19)" class="id">IO</span>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 19)" onmouseover="showTip(event, 'fs1', 19)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 20)" onmouseover="showTip(event, 'fs2', 20)" class="id">FGL</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 21)" onmouseover="showTip(event, 'fs3', 21)" class="id">IO</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 22)" onmouseover="showTip(event, 'fs4', 22)" class="id">GDF</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="id">pathSave</span>    <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 21)" onmouseover="showTip(event, 'fs4', 21)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;GDFExampleToFile.txt&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="id">pathSave</span>    <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 24)" onmouseover="showTip(event, 'fs5', 24)" class="id">fileDir</span> <span class="o">+</span> <span class="s">&quot;GDFExampleToFile.txt&quot;</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 22)" onmouseover="showTip(event, 'fs12', 22)" class="id">vertexList</span>  <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs13', 23)" onmouseover="showTip(event, 'fs13', 23)" class="fn">fst</span> <span onmouseout="hideTip(event, 'fs6', 24)" onmouseover="showTip(event, 'fs6', 24)" class="id">gdfFileRead</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="id">vertexList</span>  <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="fn">fst</span> <span onmouseout="hideTip(event, 'fs7', 27)" onmouseover="showTip(event, 'fs7', 27)" class="id">gdfFileRead</span><span class="pn">)</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 25)" onmouseover="showTip(event, 'fs14', 25)" class="id">edgeList</span>    <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="fn">snd</span> <span onmouseout="hideTip(event, 'fs6', 27)" onmouseover="showTip(event, 'fs6', 27)" class="id">gdfFileRead</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="id">edgeList</span>    <span class="o">=</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="fn">snd</span> <span onmouseout="hideTip(event, 'fs7', 30)" onmouseover="showTip(event, 'fs7', 30)" class="id">gdfFileRead</span><span class="pn">)</span>
 
-<span onmouseout="hideTip(event, 'fs7', 28)" onmouseover="showTip(event, 'fs7', 28)" class="m">GDF</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="id">toFile</span> <span onmouseout="hideTip(event, 'fs12', 30)" onmouseover="showTip(event, 'fs12', 30)" class="id">vertexList</span> <span onmouseout="hideTip(event, 'fs14', 31)" onmouseover="showTip(event, 'fs14', 31)" class="id">edgeList</span> <span onmouseout="hideTip(event, 'fs11', 32)" onmouseover="showTip(event, 'fs11', 32)" class="id">pathSave</span>
+<span onmouseout="hideTip(event, 'fs8', 31)" onmouseover="showTip(event, 'fs8', 31)" class="m">GDF</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 32)" onmouseover="showTip(event, 'fs17', 32)" class="id">toFile</span> <span onmouseout="hideTip(event, 'fs13', 33)" onmouseover="showTip(event, 'fs13', 33)" class="id">vertexList</span> <span onmouseout="hideTip(event, 'fs15', 34)" onmouseover="showTip(event, 'fs15', 34)" class="id">edgeList</span> <span onmouseout="hideTip(event, 'fs12', 35)" onmouseover="showTip(event, 'fs12', 35)" class="id">pathSave</span>
 </code></pre>
 
                 </div>
             </div>
         </div>
         <div class="fsdocs-tip" id="fs1">Multiple items<br />Namespace FSharp<br /><br />--------------------<br />Namespace Microsoft.FSharp</div>
-<div class="fsdocs-tip" id="fs2">Namespace FSharp.Graph</div>
-<div class="fsdocs-tip" id="fs3">Namespace FSharp.Graph.IO</div>
-<div class="fsdocs-tip" id="fs4">val fileDir : string</div>
-<div class="fsdocs-tip" id="fs5">val path : string</div>
-<div class="fsdocs-tip" id="fs6">val gdfFileRead : FSharp.Graph.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.Graph.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
-<div class="fsdocs-tip" id="fs7">Modul GDF<br /><br />aus FSharp.Graph.IO</div>
-<div class="fsdocs-tip" id="fs8">val fromFile : path:string -&gt; FSharp.Graph.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.Graph.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
-<div class="fsdocs-tip" id="fs9">val gdfArrayRead : FSharp.Graph.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.Graph.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
-<div class="fsdocs-tip" id="fs10">val fromArray : data:string [] -&gt; FSharp.Graph.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.Graph.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
-<div class="fsdocs-tip" id="fs11">val pathSave : string</div>
-<div class="fsdocs-tip" id="fs12">val vertexList : FSharp.Graph.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
-<div class="fsdocs-tip" id="fs13">val fst : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T1</div>
-<div class="fsdocs-tip" id="fs14">val edgeList : FSharp.Graph.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
-<div class="fsdocs-tip" id="fs15">val snd : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T2</div>
-<div class="fsdocs-tip" id="fs16">val toFile : vertexList:FSharp.Graph.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list -&gt; edgeList:FSharp.Graph.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list -&gt; path:string -&gt; unit</div>
+<div class="fsdocs-tip" id="fs2">Namespace FSharp.FGL</div>
+<div class="fsdocs-tip" id="fs3">Namespace FSharp.FGL.IO</div>
+<div class="fsdocs-tip" id="fs4">Namespace FSharp.FGL.IO.GDF</div>
+<div class="fsdocs-tip" id="fs5">val fileDir : string</div>
+<div class="fsdocs-tip" id="fs6">val path : string</div>
+<div class="fsdocs-tip" id="fs7">val gdfFileRead : FSharp.FGL.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.FGL.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
+<div class="fsdocs-tip" id="fs8">Modul GDF<br /><br />aus FSharp.FGL.IO.GDF</div>
+<div class="fsdocs-tip" id="fs9">val fromFile : path:string -&gt; FSharp.FGL.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.FGL.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
+<div class="fsdocs-tip" id="fs10">val gdfArrayRead : FSharp.FGL.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.FGL.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
+<div class="fsdocs-tip" id="fs11">val fromArray : data:string [] -&gt; FSharp.FGL.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list * FSharp.FGL.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
+<div class="fsdocs-tip" id="fs12">val pathSave : string</div>
+<div class="fsdocs-tip" id="fs13">val vertexList : FSharp.FGL.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
+<div class="fsdocs-tip" id="fs14">val fst : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T1</div>
+<div class="fsdocs-tip" id="fs15">val edgeList : FSharp.FGL.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list</div>
+<div class="fsdocs-tip" id="fs16">val snd : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T2</div>
+<div class="fsdocs-tip" id="fs17">val toFile : vertexList:FSharp.FGL.LVertex&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list -&gt; edgeList:FSharp.FGL.LEdge&lt;GDF.GDFValue,Map&lt;string,GDF.GDFValue&gt;&gt; list -&gt; path:string -&gt; unit</div>
 
     </div>
 

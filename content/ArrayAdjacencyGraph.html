@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Basic functionality</title>
+    <title>Introduction</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="HLWeil,LibraChris,WalternativE,CSBiology">
     <link rel="shortcut icon" type="image/x-icon" href="https://csbiology.github.io/FSharp.FGL//img/favicon.ico">
@@ -55,14 +55,6 @@
                         <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
                         <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/CSBiology/FSharp.FGL/">Source Repository</a></li>
                         <li class="nav-header">
-  FSharp.Graph
-</li>             
-<li class="nav-item">
-  <a class="nav-link" href="https://csbiology.github.io/FSharp.FGL/content/GDF.html">
-    GDF format reader
-  </a>
-</li>             
-<li class="nav-header">
   FSharp.FGL
 </li>             
 <li class="nav-item">
@@ -81,11 +73,19 @@
   </a>
 </li>             
 <li class="nav-header">
-  ArrayAdjacencyGraph
+  FSharp.FGL.IO
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://csbiology.github.io/FSharp.FGL/content/GDF.html">
+    GDF format reader
+  </a>
+</li>             
+<li class="nav-header">
+  FSharp.FGL.ArrayAdjacencyGraph
 </li>             
 <li class="nav-item">
   <a class="nav-link" href="https://csbiology.github.io/FSharp.FGL/content/ArrayAdjacencyGraph.html">
-    Basic functionality
+    Introduction
   </a>
 </li>             
 <li class="nav-item">
@@ -123,9 +123,10 @@
 <hr>
 <a name="Introduction"></a>
 <h2><a name="Introduction" class="anchor" href="#Introduction">Introduction</a></h2>
-<p>FSharp.ArrayAdjacencyGraph is an adjacency list representation of a multigraph. It is a modified verion of the <a href="https://github.com/YaccConstructor/QuickGraph/blob/master/src/QuickGraph/ArrayAdjacencyGraph.cs">YaccConstructor/QuickGraph/ArrayAdjacencyGraph</a>.</p>
+<p>FSharp.ArrayAdjacencyGraph is an adjacency list representation of a multigraph. It is a modified verion of the <a href="https://github.com/YaccConstructor/QuickGraph/blob/master/src/QuickGraph/ArrayAdjacencyGraph.cs">YaccConstructor/QuickGraph/ArrayAdjacencyGraph</a>.
+In itself the model is a mutable fata type, but it can also be used in a functional, immutable style thanks to added functions.</p>
 <p>The model itself works on two different dictionaries, the label dictionary and the edge dictionary. Both feature vertices as keys. In case of the edge dictionary, the bound value is an array that includes all edges the vertex key is part of.</p>
-<p>Working with this graph model allows for fast caculations on the edges
+<p>Working with this graph model allows for fast caculations on the edges.
 <a name="Features"></a></p>
 <h2><a name="Features" class="anchor" href="#Features">Features</a></h2>
 <p>The basic structure of the implementation is done as in <a href="https://github.com/YaccConstructor/QuickGraph/blob/master/src/QuickGraph/ArrayAdjacencyGraph.cs">YaccConstructor/QuickGraph/ArrayAdjacencyGraph</a>, with minor adjustments to fit FSharp better.
