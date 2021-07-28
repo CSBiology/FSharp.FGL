@@ -16,11 +16,11 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.Tests", "tests\F
 		{C620F259-1DD3-4557-8D9D-23BB79981101} = {C620F259-1DD3-4557-8D9D-23BB79981101}
 	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.Graph", "src\FSharp.Graph\FSharp.Graph.fsproj", "{C620F259-1DD3-4557-8D9D-23BB79981101}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.IO", "src\FSharp.Graph\FSharp.FGL.IO.fsproj", "{C620F259-1DD3-4557-8D9D-23BB79981101}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.ArrayAdjacencyGraph", "src\FSharp.ArrayAdjacencyGraph\FSharp.ArrayAdjacencyGraph.fsproj", "{B2951F30-EF79-42DD-8B1E-3A429937302F}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.ArrayAdjacencyGraph", "src\FSharp.ArrayAdjacencyGraph\FSharp.FGL.ArrayAdjacencyGraph.fsproj", "{B2951F30-EF79-42DD-8B1E-3A429937302F}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C620F259-1DD3-4557-8D9D-23BB79981101} = {C620F259-1DD3-4557-8D9D-23BB79981101}
+		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9} = {0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}
 	EndProjectSection
 EndProject
 Global

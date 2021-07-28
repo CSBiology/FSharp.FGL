@@ -5,7 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <description>Functional graph-library written in F#</description>
     <Authors>HLWeil,LibraChris,WalternativE,CSBiology</Authors>
-    <PackageProjectUrl>csbiology.github.io/FSharp.FGL/</PackageProjectUrl>
+    <PackageProjectUrl>https://csbiology.github.io/FSharp.FGL/</PackageProjectUrl>
     <PackageIconUrl>https://fslab.org/docs-template/img/logo.png</PackageIconUrl>
     <PackageTags>F# FSharp bioinformatics datascience biology graph FGL network</PackageTags>
     <RepositoryUrl>https://github.com/CSBiology/FSharp.FGL</RepositoryUrl>
@@ -40,12 +40,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  
-  
-
-  <ItemGroup>
-    <ProjectReference Include="..\FSharp.Graph\FSharp.Graph.fsproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,6 @@
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
 #I @"../bin/FSharp.FGL/netstandard2.0/"
-#I @"../bin/FSharp.Graph/netstandard2.0/"
 
 (**
 # FSharp.FGL
@@ -14,9 +13,8 @@ This example demonstrates using a function defined in this sample library.
 <br>
 *)
 #r "FSharp.FGL.dll"
-#r "FSharp.Graph"
+
 open FSharp.FGL 
-open FSharp.Graph
 
 Graph.empty
 |> Vertices.addMany [(1,"Look At Me Im VertexOne");(2,"Look At Me Im VertexTwo")]
@@ -29,8 +27,8 @@ Graph.empty
 
 At the moment there are <b>2</b> different graph representations available, each with teir own functions:
 
-* [FSharp.FGL](/content/tutorial.html), an inductive graph model that consists of so called contexts.
-* [ArrayAdjacencyGraph](/content/ArrayAdjacencyGraph.html), an adjacency list representation of a multigraph.
+* [FSharp.FGL](https://csbiology.github.io/FSharp.FGL/content/tutorial.html), an inductive graph model that consists of so called contexts.
+* [ArrayAdjacencyGraph](https://csbiology.github.io/FSharp.FGL/content/ArrayAdjacencyGraph.html), an adjacency list representation of a multigraph.
 
 *)
 
@@ -42,7 +40,7 @@ The library comes with comprehensible documentation.
 It can include tutorials automatically generated from `*.fsx` files in [the content folder][content]. 
 The API reference is automatically generated from comments in the library implementation.
 
- * [Tutorial](/content/tutorial.html) contains a further explanation of this sample library.
+ * [Tutorial](https://csbiology.github.io/FSharp.FGL/content/tutorial.html) contains a further explanation of this sample library.
 
  * [API Reference](reference/index.html) contains automatically generated documentation for all types, modules
    and functions in the library. This includes additional brief samples on using most of the
