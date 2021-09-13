@@ -534,6 +534,57 @@ module Vertices =
     let getLabelList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
         graph.GetLabels()    
 
+    ///Returns modularity based on Louvain
+    let modularity(resolution: float) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+        let totalWeight :float =
+            let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
+            let mutable i = 0
+            for group in graph.AdjacencyGraph() do
+                result.[i] <- group.Value
+                i <- i+1
+            result
+            |> Array.concat
+            |> Array.sumBy (fun (source,target,weight) -> (weight))
+
+        let communitySumtotalSumintern :Dictionary<'Label,float*float> =
+            let output = System.Collections.Generic.Dictionary<'Label,float*float>() 
+            for i in (graph.GetLabels()) do
+                output.Add(i,(0.,0.))
+            output
+
+        for vertex in (graph.GetVertices()) do
+            let label =
+                graph.GetLabel vertex
+
+            let connectedEdges =
+                graph.GetConnectedEdges vertex
+
+            let ki =
+                connectedEdges
+                |> Array.map(fun (s, t, w) ->
+                    if s=vertex then (t,w)
+                    else (s,w))
+                |> Array.sumBy snd
+
+            let selfLoops =                                                
+                connectedEdges
+                |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.) 
+
+
+            let (kiNow,selfLoopsNow) =
+                Dictionary.getValue label communitySumtotalSumintern
+
+            communitySumtotalSumintern.Item label <- ((kiNow+ki),(selfLoopsNow+selfLoops))
+
+        let mutable q = 0.
+        for i in communitySumtotalSumintern do
+            let (totalSumC,sumIntern) = i.Value
+            if totalSumC > 0. then 
+                let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
+                q <- (q+(calculation))
+        q
+
+
 module Edges =
     //Edges
     ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
