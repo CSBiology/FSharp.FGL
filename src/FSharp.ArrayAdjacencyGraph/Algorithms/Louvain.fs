@@ -132,14 +132,24 @@ module Louvain =
             //Total weight of all edges combined
             let totalWeight =
         
-                let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
-                let mutable i = 0
-                for group in (graph.AdjacencyGraph()) do
-                    result.[i] <- group.Value
-                    i <- i+1
-                result
-                |> Array.concat
-                |> Array.sumBy (fun (source,target,weight) -> (weight))
+                //let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
+                //let mutable i = 0
+                //for group in (graph.AdjacencyGraph()) do
+                //    result.[i] <- group.Value
+                //    i <- i+1
+                //result
+                //|> Array.concat
+                //|> Array.sumBy (fun (source,target,weight) -> (weight))
+
+                (
+                    [|
+                        for i in graph.GetVertices() do
+                            //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s = t then w else (w/2.))),i)
+                            graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
+
+                    |]
+                    |> Array.sum
+                )
 
             printfn "total weight = %A" totalWeight
                
@@ -165,7 +175,9 @@ module Louvain =
                 [|
                     for vertex in verti do 
                         graph.GetConnectedEdges(vertex)
-                        |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.) 
+                        //|>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.)
+                        |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w else 0.) 
+
                 |]
             
             //A Dictionary, where the key is the community and the value is a tupel of the weighted degree of the community and the sum of all internal edges.
@@ -186,6 +198,7 @@ module Louvain =
                     let (totalSumC,sumIntern) = i.Value
                     if totalSumC > 0. then 
                         let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
+
                         q <- (q+(calculation))
                 q
 

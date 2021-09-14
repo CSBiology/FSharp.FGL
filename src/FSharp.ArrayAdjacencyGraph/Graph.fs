@@ -548,7 +548,9 @@ module Vertices =
 
         let communitySumtotalSumintern :Dictionary<'Label,float*float> =
             let output = System.Collections.Generic.Dictionary<'Label,float*float>() 
-            for i in (graph.GetLabels()) do
+            let labels = graph.GetLabels()|> Array.distinct
+
+            for i in labels do
                 output.Add(i,(0.,0.))
             output
 
@@ -584,7 +586,66 @@ module Vertices =
                 q <- (q+(calculation))
         q
 
+    let mod2(resolution: float) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+        let totalW =
+            (
+                [|
+                    for i in graph.GetVertices() do
+                        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s = t then w else (w/2.))),i)
+                |]
+                |> Array.sum
+            )
 
+        printfn "totalw = %A" totalW
+        let calculation (vertex: 'Vertex) =
+            //Limit the calculation to connected Verties
+            let connectedEdges =
+                graph.GetConnectedEdges(vertex)
+
+            let edgesMinimal =
+                connectedEdges
+                |> Array.map (fun (s,t,w) -> if s = vertex then (t,w) else (s,w))
+
+            let ki (i:'Vertex) =
+                graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> w)),i)
+
+            let k =
+                ki vertex
+
+            let community =
+                graph.GetLabel vertex
+
+            //Calculate the weight of the edge between the source vertex and the 
+            let AVv2 (v2:'Vertex) =
+                if Array.contains v2 (graph.Neighbours(vertex)) then
+
+                    edgesMinimal
+                    |> Array.filter(fun (v,w) -> (v=v2))
+                    |> Array.sumBy snd
+                else
+                    0.
+
+            let mutable sum = 0.
+
+            for v2 in graph.GetVertices() do
+                if community=(graph.GetLabel(v2)) then
+                    printfn "%A"(community=(graph.GetLabel(v2)))
+                    let newSum = sum + ((AVv2 v2) - ((k*(ki v2))/(2.*totalW)))
+                    sum <- newSum
+            sum
+
+        let allCalculations =
+            [|   
+                for i in graph.GetVertices() do
+                    calculation i
+            |]
+            |> Array.sum
+
+        printfn "all calculations is %A"allCalculations
+
+        (1./(2.*totalW))*allCalculations
+
+            
 module Edges =
     //Edges
     ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
