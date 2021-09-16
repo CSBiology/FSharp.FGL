@@ -428,14 +428,7 @@ module Louvain =
                     let hasImProved = louvainOneLevel 0 0
                     
                     loop (nbOfMoves+1) currentQuality hasImProved
-           
-                elif numberOfLoops > 0 && currentQuality < previousModularity then
-
-                    printfn "numberOfLoops > 0 && currentQuality < previousModularity"
-
-                    nbOfMoves,
-                    graph,
-                    qualityNew
+          
                    
                 elif improvement then 
                       
@@ -449,6 +442,15 @@ module Louvain =
                         printfn "improvement and NOT (qualityNew-currentQuality) > increaseMin"
 
                         build true
+
+
+                elif numberOfLoops > 0 && currentQuality < previousModularity then
+
+                    printfn "numberOfLoops > 0 && currentQuality < previousModularity"
+
+                    nbOfMoves,
+                    graph,
+                    qualityNew
 
                 elif improvement = false && nbOfMoves = 1 then 
 
