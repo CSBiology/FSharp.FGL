@@ -43,8 +43,14 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
         for i=0 to vertexArray.Length-1 do
             let (vertex,label)  = vertexArray.[i]
-            let edges           = Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
-            
+            let edges           = 
+                //Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
+                edgeArray
+                |> Array.filter (fun (s, t, w) -> s=vertex || t=vertex) 
+                |> Array.map (fun (s,t,w) -> 
+                    if s=t then (s,t,w);(s,t,w)
+                    else (s,t,w))
+
             labelDict.Add (vertex,label)                                  
             vertexEdges.Add (vertex,edges)
         
@@ -586,12 +592,14 @@ module Vertices =
                 q <- (q+(calculation))
         q
 
-    let mod2(resolution: float) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+    let mod2 (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
         let totalW =
             (
                 [|
                     for i in graph.GetVertices() do
                         graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s = t then w else (w/2.))),i)
+                        //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
+
                 |]
                 |> Array.sum
             )
@@ -629,7 +637,6 @@ module Vertices =
 
             for v2 in graph.GetVertices() do
                 if community=(graph.GetLabel(v2)) then
-                    printfn "%A"(community=(graph.GetLabel(v2)))
                     let newSum = sum + ((AVv2 v2) - ((k*(ki v2))/(2.*totalW)))
                     sum <- newSum
             sum
@@ -644,6 +651,8 @@ module Vertices =
         printfn "all calculations is %A"allCalculations
 
         (1./(2.*totalW))*allCalculations
+
+            
 
             
 module Edges =
