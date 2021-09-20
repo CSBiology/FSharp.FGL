@@ -597,7 +597,7 @@ module Vertices =
             (
                 [|
                     for i in graph.GetVertices() do
-                        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s = t then w else (w/2.))),i)
+                        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
                         //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
 
                 |]
