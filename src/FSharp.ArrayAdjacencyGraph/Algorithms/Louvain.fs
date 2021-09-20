@@ -200,6 +200,24 @@ module Louvain =
                         let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
 
                         q <- (q+(calculation))
+                
+                
+
+                let getGraph2 = 
+                    ArrayAdjacencyGraph(
+                        (                                               
+                            graph.GetLabels()
+                            |> Array.map (snd)
+                            |> Array.map2 (fun a b -> (a,b)) (graph.GetVertices())                        
+                            |> List.ofArray),
+
+                            (graph.GetEdges()|>List.ofArray)
+                        )
+
+                let mod2 = Vertices.mod2 getGraph2                
+
+
+                printfn "mod: %A =q: %A ? : %A " (mod2) (q) ((mod2)=q)
                 q
 
             //Minimal increase in modularity Quality that has to be achieved. If the increase in modularity is lower, then the first phase of the louvain Algorithm ends and a new iteration can begin.
@@ -320,8 +338,6 @@ module Louvain =
 
                 let qualityNew = modularityQuality currentResolution
                 printfn "Number of communities = %A" ((graph.GetLabels()|> Array.map(snd)|> Array.distinct |> Array.length)-1)
-                printfn "Quality = %A; QualityNew = %A " currentQuality qualityNew
-
 
                 let build (shouldIBuild:bool) :int*ArrayAdjacencyGraph<int,(int*int),float>*float=
 
@@ -386,23 +402,14 @@ module Louvain =
                             for (s,t,w) in edgesToLabelEdges do
                                 if output.ContainsKey (s,t) then 
                                     let value = Dictionary.getValue ((s,t)) output
-                                    if s=t then 
-                                        output.Item ((s,t)) <- (value+w)
-                                    else
-                                        output.Item ((s,t)) <- (value+(w/2.))
+                                    output.Item ((s,t)) <- (value+(w/2.))
     
                                 elif output.ContainsKey (t,s) then
                                     let value = Dictionary.getValue ((t,s)) output
-                                    if s=t then 
-                                        output.Item ((t,s)) <- (value+w)
-                                    else
-                                        output.Item ((t,s)) <- (value+(w/2.))
+                                    output.Item ((t,s)) <- (value+(w/2.))
     
                                 else
-                                    if s=t then 
-                                        output.Add ((s,t),w)
-                                    else
-                                        output.Add ((s,t),(w/2.))
+                                    output.Add ((s,t),(w/2.))
 
                             let result = Array.zeroCreate output.Count
                             let mutable i = 0
