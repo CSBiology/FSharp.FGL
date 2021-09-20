@@ -175,8 +175,8 @@ module Louvain =
                 [|
                     for vertex in verti do 
                         graph.GetConnectedEdges(vertex)
-                        //|>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.)
-                        |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w else 0.) 
+                        |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.)
+                        //|>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w else 0.) 
 
                 |]
             
