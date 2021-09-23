@@ -47,9 +47,10 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
                 //Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
                 edgeArray
                 |> Array.filter (fun (s, t, w) -> s=vertex || t=vertex) 
-                |> Array.map (fun (s,t,w) -> 
-                    if s=t then (s,t,w);(s,t,w)
-                    else (s,t,w))
+                //|> Array.map (fun (s,t,w) -> 
+                //    if s=t then [|(s,t,w);(s,t,w)|]
+                //    else [|(s,t,w)|])
+                //|> Array.concat
 
             labelDict.Add (vertex,label)                                  
             vertexEdges.Add (vertex,edges)
@@ -219,31 +220,22 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     
     ///Adds a labeled, edge to the graph.
     member this.AddEdge((s, t, w): LEdge<'Vertex,'Edge>) =
-        if s = t then 
-            let edgeArraySource = 
-                try
-                    vertexOutEdges.Item s
-                with 
-                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w);(s,t,w)|];edgeArraySource])
+        let edgeArraySource = 
+            try
+                vertexOutEdges.Item s
+            with 
+            |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-        else
-            let edgeArraySource = 
-                try
-                    vertexOutEdges.Item s
-                with 
-                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
-
-            let edgeArrayTarget = 
-                try
-                    vertexOutEdges.Item t
-                with
-                |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
+        let edgeArrayTarget = 
+            try
+                vertexOutEdges.Item t
+            with
+            |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
 
         
-            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
-            vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
+        vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
+        vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
 
         this
     
@@ -255,22 +247,34 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     
     ///Removes an edge from the graph.
     member this.RemoveEdge((s, t, w): LEdge<'Vertex,'Edge>) =
-        let edgeArraySource = 
-            try 
-                vertexOutEdges.Item s
-                |> Array.filter (fun x -> x <> (s, t, w) )
-            with
-            |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
+        if s <> t then 
+            let edgeArraySource = 
+                try 
+                    vertexOutEdges.Item s
+                    |> Array.filter (fun x -> x <> (s, t, w) )
+                with
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-        let edgeArrayTarget = 
-            try
-                vertexOutEdges.Item t
-                |> Array.filter (fun x -> x <> (s, t, w) )
-            with
-            |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t        
+            let edgeArrayTarget = 
+                try
+                    vertexOutEdges.Item t
+                    |> Array.filter (fun x -> x <> (s, t, w) )
+                with
+                |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t        
         
-        vertexOutEdges.Item s <- (edgeArraySource)
-        vertexOutEdges.Item t <- (edgeArrayTarget)
+            vertexOutEdges.Item s <- (edgeArraySource)
+            vertexOutEdges.Item t <- (edgeArrayTarget)
+
+        else
+            let edgeArraySource = 
+                try 
+                    vertexOutEdges.Item s
+                    |> Array.filter (fun x -> x <> (s, t, w) )
+                with
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s 
+
+            vertexOutEdges.Item s <- (edgeArraySource)
+
         this
 
     ///Removes an array of edges from the graph.
@@ -305,7 +309,8 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     member this.Degree(v:'Vertex) :int =
         try
            vertexOutEdges.Item v
-           |> Array.length
+           //|> Array.length
+           |> Array.sumBy (fun (s,t,w) -> if s=t then 2 else 1)
         with
         |_ -> failwithf "The vertex %O does not exist in the graph." v
 
@@ -324,10 +329,11 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         |> Array.length
 
     ///Returns the weighted degree of the vertex v.
-    member this.WeightedDegree(weightingF : LEdge<'Vertex,'Edge> [] -> 'T,v:'Vertex) :'T =
+    member this.WeightedDegree(weightingF : 'Edge -> float,v:'Vertex) :float =
         try
             vertexOutEdges.Item v
-            |> weightingF
+            |> Array.sumBy (fun (s,t,w) -> if s = t then (weightingF w) * 2. else weightingF w)
+            //|> weightingF
         with
         | _ -> failwithf "The vertex %O does not exist in the graph." v
 
@@ -475,7 +481,7 @@ module Vertices =
         graph.OutDegree v
 
     ///Returns the weighted degree of the vertex v.
-    let weightedDegree (weightingF : LEdge<'Vertex,'Edge> [] -> 'T) (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'T =
+    let weightedDegree (weightingF : 'Edge -> float) (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :float =
         graph.WeightedDegree (weightingF,v)
 
     ///Returns false if the vertex v does not have edges connected to it. Otherwise, it returns true.
@@ -540,121 +546,183 @@ module Vertices =
     let getLabelList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
         graph.GetLabels()    
 
-    ///Returns modularity based on Louvain
-    let modularity(resolution: float) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
-        let totalWeight :float =
-            let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
-            let mutable i = 0
-            for group in graph.AdjacencyGraph() do
-                result.[i] <- group.Value
-                i <- i+1
-            result
-            |> Array.concat
-            |> Array.sumBy (fun (source,target,weight) -> (weight))
+    /////Returns modularity based on Louvain
+    //let modularity(resolution: float) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+    //    let totalWeight :float =
+    //        let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
+    //        let mutable i = 0
+    //        for group in graph.AdjacencyGraph() do
+    //            result.[i] <- group.Value
+    //            i <- i+1
+    //        result
+    //        |> Array.concat
+    //        |> Array.sumBy (fun (source,target,weight) -> (weight))
 
-        let communitySumtotalSumintern :Dictionary<'Label,float*float> =
-            let output = System.Collections.Generic.Dictionary<'Label,float*float>() 
-            let labels = graph.GetLabels()|> Array.distinct
+    //    let communitySumtotalSumintern :Dictionary<'Label,float*float> =
+    //        let output = System.Collections.Generic.Dictionary<'Label,float*float>() 
+    //        let labels = graph.GetLabels()|> Array.distinct
 
-            for i in labels do
-                output.Add(i,(0.,0.))
-            output
+    //        for i in labels do
+    //            output.Add(i,(0.,0.))
+    //        output
 
-        for vertex in (graph.GetVertices()) do
-            let label =
-                graph.GetLabel vertex
+    //    for vertex in (graph.GetVertices()) do
+    //        let label =
+    //            graph.GetLabel vertex
 
-            let connectedEdges =
-                graph.GetConnectedEdges vertex
+    //        let connectedEdges =
+    //            graph.GetConnectedEdges vertex
 
-            let ki =
-                connectedEdges
-                |> Array.map(fun (s, t, w) ->
-                    if s=vertex then (t,w)
-                    else (s,w))
-                |> Array.sumBy snd
+    //        let ki =
+    //            connectedEdges
+    //            |> Array.map(fun (s, t, w) ->
+    //                if s=vertex then (t,w)
+    //                else (s,w))
+    //            |> Array.sumBy snd
 
-            let selfLoops =                                                
-                connectedEdges
-                |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.) 
+    //        let selfLoops =                                                
+    //            connectedEdges
+    //            |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.) 
 
 
-            let (kiNow,selfLoopsNow) =
-                Dictionary.getValue label communitySumtotalSumintern
+    //        let (kiNow,selfLoopsNow) =
+    //            Dictionary.getValue label communitySumtotalSumintern
 
-            communitySumtotalSumintern.Item label <- ((kiNow+ki),(selfLoopsNow+selfLoops))
+    //        communitySumtotalSumintern.Item label <- ((kiNow+ki),(selfLoopsNow+selfLoops))
 
-        let mutable q = 0.
-        for i in communitySumtotalSumintern do
-            let (totalSumC,sumIntern) = i.Value
-            if totalSumC > 0. then 
-                let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
-                q <- (q+(calculation))
-        q
+    //    let mutable q = 0.
+    //    for i in communitySumtotalSumintern do
+    //        let (totalSumC,sumIntern) = i.Value
+    //        if totalSumC > 0. then 
+    //            let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
+    //            q <- (q+(calculation))
+    //    q
 
-    let mod2 (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
-        let totalW =
-            (
-                [|
-                    for i in graph.GetVertices() do
-                        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else (w))),i)
-                        //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
+    //let mod2 (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+    //    let totalW =
+    //        (
+    //            [|
+    //                for i in graph.GetVertices() do
+    //                    //printfn "vertex %A value %A " i (graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w))),i))
+    //                    graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (*if s=t then (w/2.) else*) (w))),i)
+                        
+    //                    //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
 
-                |]
-                |> Array.sum
-            )
+    //            |]
+    //            |> Array.sum
+    //        )/2.
 
-        printfn "totalw = %A" totalW
-        let calculation (vertex: 'Vertex) =
-            //Limit the calculation to connected Verties
-            let connectedEdges =
-                graph.GetConnectedEdges(vertex)
+    //    //printfn "totalw = %A" totalW
+        
+    //    //for i in graph.GetVertices() do
+    //        //printfn "vertex %A value %A " i (graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w))),i))
 
-            let edgesMinimal =
-                connectedEdges
-                |> Array.map (fun (s,t,w) -> if s = vertex then (t,w) else (s,w))
+    //    let calculation (vertex: 'Vertex) =
+    //        //Limit the calculation to connected Verties
+    //        let connectedEdges =
+    //            graph.GetConnectedEdges(vertex)
 
-            let ki (i:'Vertex) =
-                graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> w)),i)
+    //        let edgesMinimal =
+    //            connectedEdges
+    //            |> Array.map (fun (s,t,w) -> if s = vertex then (t,w) else (s,w))
 
-            let k =
-                ki vertex
+    //        let ki (i:'Vertex) =
+    //            graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> w)),i)
 
-            let community =
-                graph.GetLabel vertex
+    //        let k =
+    //            ki vertex
 
-            //Calculate the weight of the edge between the source vertex and the 
-            let AVv2 (v2:'Vertex) =
-                if Array.contains v2 (graph.Neighbours(vertex)) then
+    //        let community =
+    //            graph.GetLabel vertex
 
-                    edgesMinimal
-                    |> Array.filter(fun (v,w) -> (v=v2))
-                    |> Array.sumBy snd
-                else
-                    0.
+    //        //Calculate the weight of the edge between the source vertex and the 
+    //        let AVv2 (v2:'Vertex) =
+    //            if Array.contains v2 (graph.Neighbours(vertex)) then
 
-            let mutable sum = 0.
+    //                edgesMinimal
+    //                |> Array.filter(fun (v,w) -> (v=v2))
+    //                |> Array.sumBy snd
+    //            else
+    //                0.
 
-            for v2 in graph.GetVertices() do
-                if community=(graph.GetLabel(v2)) then
-                    let newSum = sum + ((AVv2 v2) - ((k*(ki v2))/(2.*totalW)))
-                    sum <- newSum
-            sum
+    //        let mutable sum = 0.
 
-        let allCalculations =
-            [|   
-                for i in graph.GetVertices() do
-                    calculation i
-            |]
-            |> Array.sum
+    //        for v2 in graph.GetVertices() do
+    //            if community=(graph.GetLabel(v2)) then
+    //                let newSum = sum + ((AVv2 v2) - ((k*(ki v2))/(2.*totalW)))
+    //                sum <- newSum
+    //        sum
 
-        printfn "all calculations is %A"allCalculations
+    //    let allCalculations =
+    //        [|   
+    //            for i in graph.GetVertices() do
+    //                //printfn "vertex %A value %A" i (calculation i)
+    //                calculation i
+    //        |]
+    //        |> Array.sum
 
-        (1./(2.*totalW))*allCalculations
+    //    //printfn "all calculations is %A"allCalculations
 
+    //    (1./(2.*totalW))*allCalculations
+
+    //let mod3 (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+    //    let totalW =
+    //        [|
+    //            for i in graph.GetVertices() do
+    //                //printfn "vertex %A value %A " i (graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w))),i))
+    //                graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (*if s=t then (w/2.) else*) (w))),i)
+                        
+    //                //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w/2.))),i)
+
+    //        |]
+    //        |> Array.sum
+
+    //    printfn "total Weight =%A" totalW
+
+    //    let tot i =
+    //        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w))),i)
+
+    //    let In i =
+    //        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then w else 0.)),i)
+
+    //    let mutable q = 0. 
+
+    //    for i in graph.GetVertices() do
+    //        if (tot i) > 0. then
+    //            let value = q
+    //            //printfn "tot %A; in %A" (tot i) (In i)
+    //            //printfn "calculation %A " ((In i) - ((tot i)*(tot i)) / totalW)
+    //            q <- ((In i) - ((tot i)*(tot i)) / totalW)+value
+
+    //    (q/totalW)
+
+    //let mod4 (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : float =
+    //    let totalW =      
+    //            [|
+    //                for i in graph.GetVertices() do
+    //                    graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s = t then (w/2.) else w)),i)
+    //                    //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w))),i)
+
+    //            |]
+    //            |> Array.sum
+
+    //    printfn "total Weight =%A" totalW
+
+    //    let tot i =
+    //        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else w)),i)
             
-
+    //    let In i =
+    //        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else 0.)),i)
             
+    //    let mutable q = 0. 
+
+    //    for i in graph.GetVertices() do
+    //        if (tot i) > 0. then
+    //            printfn "vertex: %A; tot %A; In: %A" i (graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else w)),i)) (graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else 0.)),i))
+    //            q <- (q+((In i) - ((tot i)*(tot i)) / totalW))
+
+    //    (q/totalW)
+        
 module Edges =
     //Edges
     ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
