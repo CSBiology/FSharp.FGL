@@ -43,8 +43,15 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
 
         for i=0 to vertexArray.Length-1 do
             let (vertex,label)  = vertexArray.[i]
-            let edges           = Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
-            
+            let edges           = 
+                //Array.filter (fun (s, t, w) -> s=vertex || t=vertex) edgeArray         
+                edgeArray
+                |> Array.filter (fun (s, t, w) -> s=vertex || t=vertex) 
+                //|> Array.map (fun (s,t,w) -> 
+                //    if s=t then [|(s,t,w);(s,t,w)|]
+                //    else [|(s,t,w)|])
+                //|> Array.concat
+
             labelDict.Add (vertex,label)                                  
             vertexEdges.Add (vertex,edges)
         
@@ -213,31 +220,22 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     
     ///Adds a labeled, edge to the graph.
     member this.AddEdge((s, t, w): LEdge<'Vertex,'Edge>) =
-        if s = t then 
-            let edgeArraySource = 
-                try
-                    vertexOutEdges.Item s
-                with 
-                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w);(s,t,w)|];edgeArraySource])
+        let edgeArraySource = 
+            try
+                vertexOutEdges.Item s
+            with 
+            |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-        else
-            let edgeArraySource = 
-                try
-                    vertexOutEdges.Item s
-                with 
-                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
-
-            let edgeArrayTarget = 
-                try
-                    vertexOutEdges.Item t
-                with
-                |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
+        let edgeArrayTarget = 
+            try
+                vertexOutEdges.Item t
+            with
+            |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t
 
         
-            vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
-            vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
+        vertexOutEdges.Item s <- (Array.concat [[|(s,t,w)|];edgeArraySource])
+        vertexOutEdges.Item t <- (Array.concat [[|(s,t,w)|];edgeArrayTarget])
 
         this
     
@@ -249,22 +247,34 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     
     ///Removes an edge from the graph.
     member this.RemoveEdge((s, t, w): LEdge<'Vertex,'Edge>) =
-        let edgeArraySource = 
-            try 
-                vertexOutEdges.Item s
-                |> Array.filter (fun x -> x <> (s, t, w) )
-            with
-            |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
+        if s <> t then 
+            let edgeArraySource = 
+                try 
+                    vertexOutEdges.Item s
+                    |> Array.filter (fun x -> x <> (s, t, w) )
+                with
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s
 
-        let edgeArrayTarget = 
-            try
-                vertexOutEdges.Item t
-                |> Array.filter (fun x -> x <> (s, t, w) )
-            with
-            |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t        
+            let edgeArrayTarget = 
+                try
+                    vertexOutEdges.Item t
+                    |> Array.filter (fun x -> x <> (s, t, w) )
+                with
+                |_ -> failwithf "The target vertex %O of the edge does not exist in this graph." t        
         
-        vertexOutEdges.Item s <- (edgeArraySource)
-        vertexOutEdges.Item t <- (edgeArrayTarget)
+            vertexOutEdges.Item s <- (edgeArraySource)
+            vertexOutEdges.Item t <- (edgeArrayTarget)
+
+        else
+            let edgeArraySource = 
+                try 
+                    vertexOutEdges.Item s
+                    |> Array.filter (fun x -> x <> (s, t, w) )
+                with
+                |_ -> failwithf "The source vertex %O of the edge does not exist in this graph." s 
+
+            vertexOutEdges.Item s <- (edgeArraySource)
+
         this
 
     ///Removes an array of edges from the graph.
@@ -299,7 +309,8 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
     member this.Degree(v:'Vertex) :int =
         try
            vertexOutEdges.Item v
-           |> Array.length
+           //|> Array.length
+           |> Array.sumBy (fun (s,t,w) -> if s=t then 2 else 1)
         with
         |_ -> failwithf "The vertex %O does not exist in the graph." v
 
@@ -318,10 +329,11 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         |> Array.length
 
     ///Returns the weighted degree of the vertex v.
-    member this.WeightedDegree(weightingF : LEdge<'Vertex,'Edge> [] -> 'T,v:'Vertex) :'T =
+    member this.WeightedDegree(weightingF : 'Edge -> float,v:'Vertex) :float =
         try
             vertexOutEdges.Item v
-            |> weightingF
+            |> Array.sumBy (fun (s,t,w) -> if s = t then (weightingF w) * 2. else weightingF w)
+            //|> weightingF
         with
         | _ -> failwithf "The vertex %O does not exist in the graph." v
 
@@ -441,7 +453,16 @@ module Graph =
     ///Create an ArrayAdjacencyGraph based on the given vertex list and edge list.
     let create (vertexList : LVertex<'Vertex,'Label> list) (edgeList : LEdge<'Vertex,'Edge> list) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
         ArrayAdjacencyGraph(vertexList,edgeList)
+    
+    ///Create an ArrayAdjacencyGraph based on the given vertex list and edge list by adding each edge via the AddEdge function.    
+    let createOfEdgelist (vertexList : LVertex<'Vertex,'Label> list) (edgeList : LEdge<'Vertex,'Edge> list) : ArrayAdjacencyGraph<'Vertex,'Label,'Edge> =
+        let graph = ArrayAdjacencyGraph(vertexList,[])
+        for i in edgeList do
+            graph.AddEdge i
+            |> ignore
+        graph
 
+        
 module Vertices =
     //Vertices
     ///Returns true, if the graph contains the vertex, else false.
@@ -469,7 +490,7 @@ module Vertices =
         graph.OutDegree v
 
     ///Returns the weighted degree of the vertex v.
-    let weightedDegree (weightingF : LEdge<'Vertex,'Edge> [] -> 'T) (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'T =
+    let weightedDegree (weightingF : 'Edge -> float) (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :float =
         graph.WeightedDegree (weightingF,v)
 
     ///Returns false if the vertex v does not have edges connected to it. Otherwise, it returns true.
@@ -533,7 +554,7 @@ module Vertices =
     ///Returns all labels of the graph.
     let getLabelList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
         graph.GetLabels()    
-
+          
 module Edges =
     //Edges
     ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.

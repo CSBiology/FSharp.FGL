@@ -68,7 +68,8 @@ module Louvain =
                 | None      -> 0.
     
     //Contains the code for the Louvain method for community detection.
-    //Blondel, Vincent D; Guillaume, Jean-Loup; Lambiotte, Renaud; Lefebvre, Etienne (9 October 2008). "Fast unfolding of communities in large networks". Journal of Statistical Mechanics: Theory and Experiment. 2008
+    //Blondel, Vincent D; Guillaume, Jean-Loup; Lambiotte, Renaud; Lefebvre, Etienne (9 October 2008). "Fast unfolding of communities in large networks". Journal of Statistical Mechanics: Theory and Experiment. 2008 
+    
     let private louvainMethod (g1:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized:bool) (modularityIncreaseThreshold: float) (resolution: float) : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = 
         
         //Create the vertices for the output graph and a new one for further computation
@@ -130,18 +131,16 @@ module Louvain =
                 Randomize.shuffle verti|>ignore
 
             //Total weight of all edges combined
-            let totalWeight =
-        
-                let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
-                let mutable i = 0
-                for group in (graph.AdjacencyGraph()) do
-                    result.[i] <- group.Value
-                    i <- i+1
-                result
-                |> Array.concat
-                |> Array.sumBy (fun (source,target,weight) -> (weight))
+            let totalWeight =      
+                    [|
+                        for i in graph.GetVertices() do
+                            //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s = t then (w/2.) else w)),i)
+                            //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> (w))),i)
+                            graph.WeightedDegree ((id),i)
+                    |]
+                    |> Array.sum
+            
 
-               
             //Array of all neighbouring vertices, returned as (vertex,edgeweight) array. The index of the element is the same as the vertex in verti.
             let neighbours =
                 [|
@@ -156,17 +155,26 @@ module Louvain =
             
             //weighted Degree of the vertex. The index of the element is the same as the vertex in verti.
             let ki =
-                neighbours
-                |> Array.map(Array.sumBy snd)
+                [|
+                    for i in verti do 
+                        //graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else w)),i)
+                        graph.WeightedDegree ((id),i)
+
+                |]
                                                                               
             //The weight of all self-referencing loops of the vertices. The index of the element is the same as the vertex in verti.
             let selfLoops =                                                
+                //[|
+                //    for i in verti do 
+                //        graph.WeightedDegree ((Array.sumBy(fun (s,t,w) -> if s=t then (w/2.) else 0.)),i)
+
+                //|]
                 [|
-                    for vertex in verti do 
-                        graph.GetConnectedEdges(vertex)
-                        |>Array.sumBy(fun (s,t,w) -> if s=vertex&&t=vertex then w/2. else 0.) 
+                    for i=0 to verti.Length-1 do
+                        neighbours.[i]
+                        |> Array.sumBy (fun (v,w) -> if v=(verti.[i]) then 2.*w else 0.)
                 |]
-            
+
             //A Dictionary, where the key is the community and the value is a tupel of the weighted degree of the community and the sum of all internal edges.
             let communitySumtotalSumintern =
                 let output = System.Collections.Generic.Dictionary<int,float*float>() 
@@ -185,9 +193,22 @@ module Louvain =
                     let (totalSumC,sumIntern) = i.Value
                     if totalSumC > 0. then 
                         let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
+
                         q <- (q+(calculation))
                 q
 
+            let newModQ resolution :float =
+                let f = resolution
+                let mutable q = 0. 
+                for i in communitySumtotalSumintern do
+                    let (totalSumC,sumIntern) = i.Value
+                    if totalSumC > 0. then 
+                        let calculation = ((sumIntern)-(totalSumC*totalSumC) / totalWeight)
+                
+                        q <- (q+(calculation))
+
+                (q/totalWeight)
+                       
             //Minimal increase in modularity Quality that has to be achieved. If the increase in modularity is lower, then the first phase of the louvain Algorithm ends and a new iteration can begin.
             let increaseMin = modularityIncreaseThreshold //0.000001
 
@@ -305,7 +326,7 @@ module Louvain =
             let rec loop nbOfMoves currentQuality improvement :(int*ArrayAdjacencyGraph<int,int*int,float>*float)=
 
                 let qualityNew = modularityQuality currentResolution
-                   
+
                 let build (shouldIBuild:bool) :int*ArrayAdjacencyGraph<int,(int*int),float>*float=
 
                     if not shouldIBuild then
@@ -316,7 +337,7 @@ module Louvain =
                         let (vertexToLabelMap,vertexNewLabel) :((Map<int,int>)*(Dictionary<int,int>))=
                             let labelMap =
                                 graph.GetLabels()
-                                |> Array.map snd
+                                 |> Array.map snd
                                 |> Array.distinct
                                 |> Array.mapi (fun i label -> (label,i))
                                 |> Map.ofArray
@@ -354,14 +375,31 @@ module Louvain =
 
                             let getLabel vertex =
                                 Dictionary.getValue vertex vertexNewLabel
-   
+                            
+                            //let edgeListToSum :(int*int*float)[] =
+                            //    [|
+                            //        for vertex in verti do
+                            //            graph.GetConnectedEdges vertex
+                            //    |]
+                            //    |> Array.concat
+                            //    |> Array.map(fun (s,t,w) -> if s=t then (s,t,(w/2.)) else (s,t,w))
+
+                            //let edgesToLabelEdges :(int*int*float)[] =
+                            //    edgeListToSum
+                            //    |> Array.map (fun (s,t,w) -> ((getLabel s),(getLabel t),w))
+
                             let edgesToLabelEdges :(int*int*float)[] = 
-                                let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
-                                let mutable i = 0
-                                for group in (graph.AdjacencyGraph()) do
-                                    result.[i] <- group.Value
-                                    i <- i+1
-                                result
+                                //let result = Array.zeroCreate (graph.AdjacencyGraph()).Count
+                                //let mutable i = 0
+                                //for group in (graph.AdjacencyGraph()) do
+                                //    result.[i] <- group.Value
+                                //    i <- i+1
+                                //result
+                                //|> Array.concat
+                                [|
+                                    for vertex in verti do
+                                        graph.GetConnectedEdges vertex
+                                |]
                                 |> Array.concat
                                 |> Array.map (fun (s,t,w) -> ((getLabel s),(getLabel t),w))
 
@@ -369,23 +407,15 @@ module Louvain =
                             for (s,t,w) in edgesToLabelEdges do
                                 if output.ContainsKey (s,t) then 
                                     let value = Dictionary.getValue ((s,t)) output
-                                    if s=t then 
-                                        output.Item ((s,t)) <- (value+w)
-                                    else
-                                        output.Item ((s,t)) <- (value+(w/2.))
+                                    output.Item ((s,t)) <- (value+(w/2.))
     
                                 elif output.ContainsKey (t,s) then
                                     let value = Dictionary.getValue ((t,s)) output
-                                    if s=t then 
-                                        output.Item ((t,s)) <- (value+w)
-                                    else
-                                        output.Item ((t,s)) <- (value+(w/2.))
+                                    output.Item ((s,t)) <- (value+(w/2.))
     
                                 else
-                                    if s=t then 
-                                        output.Add ((s,t),w)
-                                    else
-                                        output.Add ((s,t),(w/2.))
+                                    
+                                    output.Add ((s,t),(w/2.))
 
                             let result = Array.zeroCreate output.Count
                             let mutable i = 0
@@ -395,7 +425,9 @@ module Louvain =
                                 result.[i] <- (s,t,w)
                                 i <- i + 1
                             result
-                           
+                        
+                            
+
                         nbOfMoves,                                    
                         ArrayAdjacencyGraph(
                             (vert),
@@ -405,32 +437,37 @@ module Louvain =
                 
                 //Start of the cycle
                 if nbOfMoves = 0 then 
-                 
-                    let hasImProved = louvainOneLevel 0 0
 
+                    let hasImProved = louvainOneLevel 0 0
+                    
                     loop (nbOfMoves+1) currentQuality hasImProved
-           
-                elif numberOfLoops > 0 && currentQuality < previousModularity then
-                        
-                    nbOfMoves,
-                    graph,
-                    qualityNew
+          
                    
                 elif improvement then 
                       
                     if (qualityNew-currentQuality) > increaseMin then 
-                         
-                            loop (nbOfMoves+1) (qualityNew) (louvainOneLevel 0 0)
+
+                        loop (nbOfMoves+1) (qualityNew) (louvainOneLevel 0 0)
 
                     else                    
+
                         build true
+
+
+                elif numberOfLoops > 0 && currentQuality < previousModularity then
+
+                    nbOfMoves,
+                    graph,
+                    qualityNew
+
                 elif improvement = false && nbOfMoves = 1 then 
-                                  
+
                     nbOfMoves,
                     graph,
                     qualityNew
 
                 else 
+
                     build true
                     
             //Start the louvainApplication
@@ -444,7 +481,9 @@ module Louvain =
                 louvainCycleInPlace newG randomized modularityIncreaseThreshold nbOfLoops modulartiy           
 
             if nbOfMoves < 2 || ((nbOfLoops>0) && (newModularity<modulartiy)) then 
-            
+                
+
+                printfn "new modularity= %A" modulartiy
                 g
 
             else 
@@ -453,9 +492,6 @@ module Louvain =
 
 
         louvainInPlace_ 0 g2 modularityIncreaseThreshold 0.
-
-
-
 
 
     /// Takes an ArrayAdjacencyGraph and returns a new graph whose Labels have been transformed into tupels, where the second part is the community accorging to modularity-optimization. 
@@ -487,9 +523,9 @@ module Louvain =
     ///
     /// randomized : Boolean, if true randomizes the order in which the vertices are checked. Else the calculations are ordered by the index of the vertices.
     ///
-    /// resolution : The higher the resolution, the smaller the number of communities. The value has to be 1. or higher. Based on : "R. Lambiotte, J.-C. Delvenne, M. Barahona Laplacian Dynamics and Multiscale Modular Structure in Networks 2009", 	arXiv:0812.1770 [physics.soc-ph].
-    ///
     /// modularityIncreaseThreshold : Threshold of modularity-difference that has to be exceeded in order to be recognized as a modularity-increase.
     /// The value has to be between 0. and 1. to get a meaningful result. The smaller the value, the longer the calculation takes.
+    ///
+    ///resolution : The higher the resolution, the smaller the number of communities. The value has to be 1. or higher. Based on : "R. Lambiotte, J.-C. Delvenne, M. Barahona Laplacian Dynamics and Multiscale Modular Structure in Networks 2009", 	arXiv:0812.1770 [physics.soc-ph].
     let louvainResolution (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized: bool) (modularityIncreaseThreshold: float) (resolution: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>) =
         louvainMethod graph randomized modularityIncreaseThreshold resolution
