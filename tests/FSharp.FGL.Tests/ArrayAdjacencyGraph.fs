@@ -711,13 +711,13 @@ let testVertices =
             let weightedDegreeTotal = 
                 [
                     for (v,l) in exampleGraphVertices do
-                        (testGraph.WeightedDegree ((Array.sumBy (fun (s,t,w) -> w)),v))
+                        (testGraph.WeightedDegree ((fun x -> float x),v))
                 ]
                 |> List.sum
             
             Expect.equal
                 weightedDegreeTotal
-                (exampleGraphEdges|>List.sumBy (fun (s,t,w) -> 2*w))
+                (exampleGraphEdges|>List.sumBy (fun (s,t,w) -> 2.*float w))
                 "WeightedDegree Total does not equal the weight of all edges combined"
         )
 
