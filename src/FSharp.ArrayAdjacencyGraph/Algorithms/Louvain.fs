@@ -69,7 +69,7 @@ module Louvain =
     
     //Contains the code for the Louvain method for community detection.
     //Blondel, Vincent D; Guillaume, Jean-Loup; Lambiotte, Renaud; Lefebvre, Etienne (9 October 2008). "Fast unfolding of communities in large networks". Journal of Statistical Mechanics: Theory and Experiment. 2008
-    let private louvainMethod (g1:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized:bool) (modularityIncreaseThreshold: float) : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = 
+    let private louvainMethod (g1:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized:bool) (modularityIncreaseThreshold: float) (resolution: float) : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = 
         
         //Create the vertices for the output graph and a new one for further computation
         let vertices,vertices2 : Dictionary<'Vertex,'Label*int>*Dictionary<'Vertex,int*int>=
@@ -105,6 +105,13 @@ module Louvain =
                 let key = fst v
                 newVertices.Add (key,v)
             newVertices
+
+        let currentResolution =
+            if resolution <= 0. then
+                failwith "The resolution has to be at least 1."
+            else
+                resolution
+
 
         //The output graph
         let g : (ArrayAdjacencyGraph<'Vertex,'Label*int,float>) = ArrayAdjacencyGraph(edges,vertices)
@@ -172,15 +179,14 @@ module Louvain =
                 output       
             
             //Function to calculate the modularity of the graph.
-            let modularityQuality startValue =
-                if startValue <> 0. then failwith "Wrong startValue"
-                let mutable q = startValue
+            let modularityQuality resolution =
+                let mutable q = 0.
                 for i in communitySumtotalSumintern do
                     let (totalSumC,sumIntern) = i.Value
                     if totalSumC > 0. then 
-                        let calculation = (sumIntern - (totalSumC*totalSumC) / totalWeight)
+                        let calculation = resolution*((sumIntern/2.)/(totalWeight/2.))-((totalSumC/totalWeight)**2.)
                         q <- (q+(calculation))
-                (q/totalWeight)
+                q
 
             //Minimal increase in modularity Quality that has to be achieved. If the increase in modularity is lower, then the first phase of the louvain Algorithm ends and a new iteration can begin.
             let increaseMin = modularityIncreaseThreshold //0.000001
@@ -262,7 +268,7 @@ module Louvain =
                                 |> Array.map (fun (community,connectionToCommunity) -> 
                                         (
                                         community,
-                                        (connectionToCommunity-((Dictionary.getValue community communitySumtotalSumintern|>fst)*ki/totalWeight)),
+                                        (currentResolution*connectionToCommunity-((Dictionary.getValue community communitySumtotalSumintern|>fst)*ki/totalWeight)),
                                         connectionToCommunity
                                         )
                                     )
@@ -297,8 +303,8 @@ module Louvain =
             // 1) No improvement was preformed 
             // 2) The increase in modularityQuality by preforming the louvainOneLevel results in a score lower than the increaseMin.
             let rec loop nbOfMoves currentQuality improvement :(int*ArrayAdjacencyGraph<int,int*int,float>*float)=
-                
-                let qualityNew = modularityQuality 0.
+
+                let qualityNew = modularityQuality currentResolution
                    
                 let build (shouldIBuild:bool) :int*ArrayAdjacencyGraph<int,(int*int),float>*float=
 
@@ -428,7 +434,7 @@ module Louvain =
                     build true
                     
             //Start the louvainApplication
-            loop 0 (modularityQuality 0.) false
+            loop 0 (modularityQuality currentResolution) false
 
         //The louvainLoop combines the two phases of the louvain Algorithm. As long as improvments can be performed, the louvainApplication is executed.
         let rec louvainInPlace_ nbOfLoops (newG:ArrayAdjacencyGraph<int,int*int,float>) (modularityIncreaseThreshold: float) (modulartiy:float) =
@@ -447,7 +453,11 @@ module Louvain =
 
 
         louvainInPlace_ 0 g2 modularityIncreaseThreshold 0.
-   
+
+
+
+
+
     /// Takes an ArrayAdjacencyGraph and returns a new graph whose Labels have been transformed into tupels, where the second part is the community accorging to modularity-optimization. 
     /// Parameters:
     ///
@@ -456,7 +466,7 @@ module Louvain =
     /// modularityIncreaseThreshold : Threshold of modularity-difference that has to be exceeded in order to be recognized as a modularity-increase.
     /// The value has to be between 0. and 1. to get a meaningful result. The smaller the value, the longer the calculation takes.
     let louvain (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
-        louvainMethod graph false modularityIncreaseThreshold
+        louvainMethod graph false modularityIncreaseThreshold 1.
     
     /// Takes an ArrayAdjacencyGraph and returns a new graph whose Labels have been transformed into tupels, where the second part is the community accorging to modularity-optimization.
     /// In addition, the modularity optimization is carried out in a random order
@@ -468,4 +478,18 @@ module Louvain =
     /// modularityIncreaseThreshold : Threshold of modularity-difference that has to be exceeded in order to be recognized as a modularity-increase.
     /// The value has to be between 0. and 1. to get a meaningful result. The smaller the value, the longer the calculation takes.
     let louvainRandom (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (modularityIncreaseThreshold: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>)=
-        louvainMethod graph true modularityIncreaseThreshold
+        louvainMethod graph true modularityIncreaseThreshold 1.
+
+    /// Takes an ArrayAdjacencyGraph and returns a new graph whose Labels have been transformed into tupels, where the second part is the community accorging to modularity-optimization.
+    /// Parameters:
+    ///
+    /// graph : ArrayAdjacencyGraph, that is used as the template for the modularity optimization.
+    ///
+    /// randomized : Boolean, if true randomizes the order in which the vertices are checked. Else the calculations are ordered by the index of the vertices.
+    ///
+    /// resolution : The higher the resolution, the smaller the number of communities. The value has to be 1. or higher. Based on : "R. Lambiotte, J.-C. Delvenne, M. Barahona Laplacian Dynamics and Multiscale Modular Structure in Networks 2009", 	arXiv:0812.1770 [physics.soc-ph].
+    ///
+    /// modularityIncreaseThreshold : Threshold of modularity-difference that has to be exceeded in order to be recognized as a modularity-increase.
+    /// The value has to be between 0. and 1. to get a meaningful result. The smaller the value, the longer the calculation takes.
+    let louvainResolution (graph:ArrayAdjacencyGraph<'Vertex,'Label,float>) (randomized: bool) (modularityIncreaseThreshold: float) (resolution: float) :(ArrayAdjacencyGraph<'Vertex,'Label*int,float>) =
+        louvainMethod graph randomized modularityIncreaseThreshold resolution
