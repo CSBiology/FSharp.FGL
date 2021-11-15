@@ -2,7 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>  
+    <description>A graph data structure efficient for large sparse graph representation written in F#</description>
+    <Authors>LibraChris,HLWeil,CSBiology</Authors>
+    <PackageProjectUrl>https://csbiology.github.io/FSharp.FGL/</PackageProjectUrl>
+    <PackageIconUrl>https://fslab.org/docs-template/img/logo.png</PackageIconUrl>
+    <PackageTags>F# FSharp bioinformatics datascience biology graph FGL network</PackageTags>
+    <RepositoryUrl>https://github.com/CSBiology/FSharp.FGL</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
