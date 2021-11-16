@@ -188,3 +188,6 @@ pkg
 
 # Documentation outputs
 /output/
+tests/FSharp.FGL.Tests/TestFiles/TestFileWrite2.txt
+docs/content/data/GDFExampleToFile.txt
+docs/content/data/GDFExampleToFile.txt
