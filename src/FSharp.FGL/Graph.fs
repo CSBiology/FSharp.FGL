@@ -108,13 +108,13 @@ module Graph =
         let g1 = Map.remove v g
         let g2 =
             List.fold (fun g (value, _) ->
-                let composedPrism = Compose.prism (Map.key_ value) Lenses.mpred_
+                let composedPrism = Compose.prism (Map.key_ value) Lenses.msucc_
                 let adjListMapping = Map.remove v
                 let adjListInGraphMapping = Optic.map composedPrism adjListMapping
                 adjListInGraphMapping g)
                 g1 p
         List.fold (fun g (value, _) ->
-            let composedPrism = Compose.prism (Map.key_ value) Lenses.msucc_
+            let composedPrism = Compose.prism (Map.key_ value) Lenses.mpred_
             let adjListMapping = Map.remove v
             let adjListInGraphMapping = Optic.map composedPrism adjListMapping
             adjListInGraphMapping g)
