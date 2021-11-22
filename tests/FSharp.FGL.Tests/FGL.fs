@@ -1,4 +1,4 @@
-﻿module FGL
+﻿module FGLTests
 
 open FSharp.FGL
 open FSharp.FGL.Graph
@@ -50,11 +50,10 @@ let testInitializeGraph =
 [<Tests>]
 let testFGLGraph =
 
-    testList "Graph.decompose"[
+    testList "FGL.Graph"[
 
-        testCase "does Graph.decompose remove the correct edges"(fun () ->
+        testCase "Decompose"(fun () ->
 
-            
             let vertexList =
                 [
                     for i=0 to 5 do
@@ -84,9 +83,13 @@ let testFGLGraph =
                         
             
             let g = FSharp.FGL.Undirected.Graph.create vertexList edgeList 
-            
+
+            let toBeDecomposed =
+                //rnd.Next(0,5)
+                3
+
             let gDecomposed =
-                FSharp.FGL.Graph.decompose 3 g
+                FSharp.FGL.Graph.decompose toBeDecomposed g
                 |> snd
 
             let vertexListDecomposed =
@@ -95,12 +98,24 @@ let testFGLGraph =
             let edgeListDecomposed =
                 Undirected.Edges.toEdgeList gDecomposed
 
+
+            let listTripelLowestSource (edgeList) =
+                edgeList
+                |> List.map(fun (s,t,w) ->
+                    if s < t then
+                        (s,t,w)
+                    else
+                        (t,s,w)
+                )
+
             Expect.sequenceEqual
-                vertexList
+                (vertexList|> List.choose(fun (v,l) -> if v <> toBeDecomposed then Some (v,l) else None))
                 vertexListDecomposed
-                "THIS IS SUPPOSED TO FAIL"
+                "vertexList of the decomposed Graph is equal to the expected values "
 
-
+            Expect.isTrue
+                ((edgeListDecomposed|>listTripelLowestSource)=(FSharp.FGL.Undirected.Edges.toEdgeList g|>listTripelLowestSource|> List.choose(fun (s,t,w) -> if s <> toBeDecomposed && t <> toBeDecomposed then Some (s,t,w) else None)))
+                "edgeList of the decomposed Graph is equal to the expected values "
 
         )
 
