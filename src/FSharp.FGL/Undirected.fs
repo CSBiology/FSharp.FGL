@@ -108,7 +108,7 @@ module Vertices =
     let add ((v1, v2, edge): LEdge<'Vertex,'Edge>) (g: Graph<'Vertex,'Label,'Edge>) : Graph<'Vertex,'Label,'Edge> =
         if Vertices.contains v1 g |> not then failwithf "Source Vertex %O does not exist" v1 
         if Vertices.contains v2 g |> not then failwithf "Target Vertex %O does not exist" v2
-        if contains v1 v2 g then failwithf "Edge between Source vertex %O Target Vertex %O does not exist" v1 v2
+        if contains v1 v2 g then failwithf "Edge between Source vertex %O Target Vertex %O already exists" v1 v2
         let g1 = 
             let composedPrism = Compose.prism (Map.key_ v1) Lenses.msucc_
             let adjListMapping = Map.add v2 edge
