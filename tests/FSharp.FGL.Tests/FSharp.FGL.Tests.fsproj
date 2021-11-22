@@ -15,6 +15,7 @@
     <Compile Include="IOTests.fs" />
     <Compile Include="ArrayAdjacencyGraph.fs" />
     <Compile Include="Main.fs" />
+    <Compile Include="FGLGraph.fs" />
   </ItemGroup>
 
   <ItemGroup>
