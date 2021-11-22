@@ -105,6 +105,7 @@ module Graph =
     //    |> toContext v
 
     let internal decomposeGraph v p s g : Graph<'Vertex,'Label,'Edge>=
+        let connectedVertices = (s@p)|> List.distinct
         let g1 = Map.remove v g
         let g2 =
             List.fold (fun g (value, _) ->
@@ -112,13 +113,14 @@ module Graph =
                 let adjListMapping = Map.remove v
                 let adjListInGraphMapping = Optic.map composedPrism adjListMapping
                 adjListInGraphMapping g)
-                g1 p
+                g1 connectedVertices
         List.fold (fun g (value, _) ->
             let composedPrism = Compose.prism (Map.key_ value) Lenses.mpred_
             let adjListMapping = Map.remove v
             let adjListInGraphMapping = Optic.map composedPrism adjListMapping
             adjListInGraphMapping g)
-            g2 s
+            g2 (connectedVertices)
+    
 
     ///Lookup a context in the graph. If the binding exists, it returns the context and the graph minus the vertex and its edges. Raising KeyNotFoundException if no binding exists in the graph.
     let decompose (v:'Vertex) (g: Graph<'Vertex,'Label,'Edge>) = 
