@@ -1,4 +1,4 @@
-﻿namespace ArrayAdjacencyGraph.Models.Gilbert
+﻿namespace ArrayAdjacencyGraph.Models
 
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph

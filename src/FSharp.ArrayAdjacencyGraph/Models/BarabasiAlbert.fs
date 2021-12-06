@@ -1,4 +1,4 @@
-﻿namespace ArrayAdjacencyGraph.Models.BarabasiAlbert
+﻿namespace ArrayAdjacencyGraph.Models
 
 open FSharp.FGL.ArrayAdjacencyGraph
 
