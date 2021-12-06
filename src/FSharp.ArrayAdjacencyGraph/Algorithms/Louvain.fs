@@ -1,4 +1,4 @@
-﻿namespace ArrayAdjacencyGraph.Algorithms.Louvain
+﻿namespace ArrayAdjacencyGraph.Algorithms
 
 open FSharp.FGL.ArrayAdjacencyGraph
 open System.Collections.Generic
