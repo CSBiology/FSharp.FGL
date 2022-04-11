@@ -70,7 +70,7 @@ let testGDFWriterFuntions =
     let testWriteFilePath = System.IO.Path.Combine(testDirectory,"TestFileWrite.txt")
     let testWriteFilePath2 = System.IO.Path.Combine(testDirectory,"TestFileWrite2.txt")
 
-    testList "GDFWriter"[
+    testList "GDFWriter" [
         testCase "IsWrittenFileIdenticalToInformationInSource" (fun () ->
 
             let testRead = GDF.fromFile testReadFilePath
