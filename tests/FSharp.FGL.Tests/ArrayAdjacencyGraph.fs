@@ -186,6 +186,10 @@ let testEdges =
         testCase "GetEdges" (fun () ->
             
             let getEdge =
+
+
+
+
                 [
                     for i in exampleGraphEdges do
                         let (s,t,w) = i
@@ -942,4 +946,182 @@ let testLabels =
                 (sprintf "SetLabel does not correctly change the label %A" x)
         )
 
+    ]
+
+
+[<Tests>]
+let testMeasures =
+    let exampleGraphVertices =
+        [ for i=0 to 5 do (i,i) ]
+   
+    let exampleGraphEdges =
+        [
+            1,2,1.0//1,2,3,4
+            2,3,1.0//1,2,3
+            3,4,1.0//1,2
+            4,5,1.0//1
+            4,1,1.0
+        ]
+
+    let exampleGraphEdgesWeighted =
+        [
+            1,2,2.0//1,2,3,4
+            2,3,3.0//1,2,3
+            3,2,1.0//1,2,3
+            3,4,4.0//1,2
+            4,5,1.0//1
+            4,1,99.0
+        ]
+    let fig7Nodes = ["a","a"; "b","b";"c","c";"d","d";"e","e";]
+    let fig7 = 
+        [
+            "a","b",10.0
+            "b","c",1.0
+            "b","d", 1.0
+            "c","e",1.0
+            "d","e",1.0
+        ]
+
+    let fig4Nodes = ["a","a"; "b","b";"c","c";"d","d";]
+    let fig4 = 
+        [
+            "a","b",10.0
+            "b","c",1.0
+            "b","d", 1.0
+            "c","d",1.0
+        ]
+
+
+    let fig4Graph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(fig4Nodes,fig4)
+    let fig7Graph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(fig7Nodes,fig7)
+   
+    let testGraph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
+    let weightedGraph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdgesWeighted)
+
+    testList "Test Measures" [
+        
+        // Undirected / Unweighted 
+        testCase "meanShortestPath" (fun () ->
+            let msp = Measures.meanShortestUnDirected fig7Graph
+            Expect.floatClose Accuracy.medium msp 1.6 "Incorrect mean shortest path does not return the correct label"
+        )
+
+        testCase "tryGetShortestPath" (fun () ->
+            let sp = Measures.tryGetShortestPath testGraph 1 5
+            Expect.isSome sp "Incorrect shortest path"     
+            Expect.equal sp.Value 2.0 "Incorrect shortest path"       
+        )
+
+        // Directed / Unweighted 
+        testCase "meanShortestPathDirected" (fun () ->
+            let msp = Measures.meanShortestPathDirected fig7Graph
+            Expect.floatClose Accuracy.medium msp 1.5555555555 "Incorrect mean shortest path does not return the correct label"
+        )
+
+        testCase "tryGetShortestPathDirected" (fun () ->
+            let sp = Measures.tryGetShortestPathDirected testGraph 1 5
+            Expect.isSome sp "Incorrect shortest path"     
+            Expect.equal sp.Value 4.0 "Incorrect shortest path"       
+        )
+
+        testCase "tryGetShortestPathDirected - reverse path" (fun () ->
+            let sp = Measures.tryGetShortestPathDirected testGraph 3 1
+            Expect.isSome sp "Incorrect shortest path"     
+            Expect.equal sp.Value 2.0 "Incorrect shortest path"       
+        )
+
+        testCase "tryGetShortestPathDirected - No path exists" (fun () ->
+            let sp = Measures.tryGetShortestPathDirected testGraph 5 1   
+            Expect.isNone sp "Incorrect shortest path"       
+        )
+
+        // Directed / Weighted 
+        testCase "meanShortestPathDirectedWeighted" (fun () ->
+            let msp = Measures.meanShortestPathDirectedhWeighted fig7Graph
+            Expect.floatClose Accuracy.medium msp 5.555555 "Incorrect mean shortest path does not return the correct label"
+        )
+
+        testCase "tryGetShortestPathDirectedWeighted" (fun () ->
+            let sp = Measures.tryGetShortestPathDirectedhWeighted fig7Graph "a" "c"
+            Expect.isSome sp "Incorrect shortest path"     
+            Expect.equal sp.Value 11.0 "Incorrect shortest path"       
+        )
+
+        //Vertex Mean shortest path
+        testCase "meanShortestPathUnDirectedVertex - A" (fun () ->
+            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "a"   
+            Expect.floatClose Accuracy.medium sp 2.0 "Incorrect shortest path" 
+        )    
+         
+        testCase "meanShortestPathUnDirectedVertex - B" (fun () ->
+            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "b"   
+            Expect.floatClose Accuracy.medium sp 1.25 "Incorrect shortest path"   
+        )
+        
+        testCase "meanShortestPathUnDirectedVertex - C" (fun () ->
+            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "c"     
+            Expect.floatClose Accuracy.medium sp 1.5 "Incorrect shortest path"  
+        )
+
+        testCase "meanShortestPathUnDirectedVertex - D" (fun () ->
+            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "d"     
+            Expect.floatClose Accuracy.medium sp 1.5 "Incorrect shortest path"  
+        )
+
+        testCase "meanShortestPathUnDirectedVertex - E" (fun () ->
+            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "e"     
+            Expect.floatClose Accuracy.medium sp 1.75 "Incorrect shortest path"   
+        ) 
+
+        testCase "meanShortestPathDirectedVertex - B" (fun () ->
+            let sp = Measures.meanShortestPathDirectedVertex fig7Graph "b"     
+            Expect.floatClose Accuracy.medium sp 1.33333333333 "Incorrect shortest path"   
+        ) 
+
+        testCase "meanShortestPathDirectedhWeightedVertex - B" (fun () ->
+            let sp = Measures.meanShortestPathDirectedhWeightedVertex fig7Graph "a"     
+            Expect.floatClose Accuracy.medium sp 11.0 "Incorrect shortest path"   
+        ) 
+       
+        //Closeness
+        testCase "getClosenessUnDirected-A" (fun () ->
+            let sp = Measures.getClosenessUnDirected fig7Graph "a"  
+            Expect.floatClose Accuracy.medium sp 0.5 "Incorrect closeness"       
+        )
+        
+        testCase "getClosenessUnDirected-B" (fun () ->
+            let sp = Measures.getClosenessUnDirected fig7Graph "b"  
+            Expect.floatClose Accuracy.medium sp 0.8 "Incorrect closeness"       
+        )
+
+        testCase "getClosenessUnDirected-C" (fun () ->
+            let sp = Measures.getClosenessUnDirected fig7Graph "c"  
+            Expect.floatClose Accuracy.medium sp 0.6666666666666666 "Incorrect closeness"       
+        )
+
+        testCase "getClosenessUnDirected-D" (fun () ->
+            let sp = Measures.getClosenessUnDirected fig7Graph "d"  
+            Expect.floatClose Accuracy.medium sp 00.6666666666666666 "Incorrect closeness"       
+        )
+
+        testCase "getClosenessOutward" (fun () ->
+            let sp = Measures.getClosenessOutward fig7Graph "c"  
+            Expect.floatClose Accuracy.medium sp 1.0 "Incorrect closeness"       
+        )
+
+        testCase "getClosenessInward" (fun () ->
+            let sp = Measures.getClosenessInward fig7Graph "e"  
+            Expect.floatClose Accuracy.medium sp 0.5714285714285714 "Incorrect closeness"       
+        )
+        
+        testCase "getNNeighborhoodConnectivity" (fun () ->
+            let sp = Measures.getNeighborhoodConnectivity fig7Graph "d"  
+            Expect.floatClose Accuracy.medium sp 2.5 "Incorrect closeness"       
+        )
+
+        testCase "getClusteringCoefficient" (fun () ->
+            let sp = Measures.getClusteringCoefficient fig4Graph "b"  
+            Expect.floatClose Accuracy.medium sp 0.333333 "ClusteringCoefficient"       
+        )
+   
     ]
