@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Compile Include="Graph.fs" />
+    <Compile Include="Measures.fs" />
     <Compile Include="Models\BollobasRiordan.fs" />
     <Compile Include="Models\BarabasiAlbert.fs" />
     <Compile Include="Models\Gilbert.fs" />

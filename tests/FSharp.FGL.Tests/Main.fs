@@ -12,4 +12,5 @@ let main argv =
     Tests.runTestsWithCLIArgs [] argv ArrayAdjacencyGraphTests.testEdges            |>ignore
     Tests.runTestsWithCLIArgs [] argv ArrayAdjacencyGraphTests.testVertices         |>ignore
     Tests.runTestsWithCLIArgs [] argv ArrayAdjacencyGraphTests.testLabels           |>ignore
+    Tests.runTestsWithCLIArgs [] argv ArrayAdjacencyGraphTests.testMeasures         |>ignore
     0
