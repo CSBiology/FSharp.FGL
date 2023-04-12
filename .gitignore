@@ -16,7 +16,6 @@
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
 [Bb]in/
 [Oo]bj/
 
@@ -192,3 +191,4 @@ pkg
 tests/FSharp.FGL.Tests/TestFiles/TestFileWrite2.txt
 docs/content/data/GDFExampleToFile.txt
 docs/content/data/GDFExampleToFile.txt
+.fsdocs
