@@ -10,8 +10,9 @@ index: 4
 (*** hide ***) 
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I @"../../bin/FSharp.FGL/netstandard2.0/"
-#I @"../../bin/FSharp.FGL.ArrayAdjacencyGraph/netstandard2.0/"
+#r "../src/FSharp.FGL/bin/Release/netstandard2.0/FSharp.FGL.dll"
+#r "../src/FSharp.FGL.IO/bin/Release/netstandard2.0/FSharp.FGL.IO.dll"
+#r "../src/FSharp.FGL.ArrayAdjacencyGraph/bin/Release/netstandard2.0/FSharp.FGL.ArrayAdjacencyGraph.dll"
 
 (**
 #Louvain method for community detection
@@ -19,9 +20,6 @@ index: 4
 <a name="Louvain method for community detection"></a>
 ## Louvain method for community detection
 *)
-
-#r "FSharp.FGL"
-#r "FSharp.FGL.ArrayAdjacencyGraph"
 
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
@@ -73,7 +71,7 @@ The application of the louvain algorithm on the example graph would look like th
 
 //Returns the graph with the louvain calculation on top of it
 let myGraphLouvain : ArrayAdjacencyGraph<int,string*int,float> =
-    Louvain.Louvain.louvain myGraph 0.00001
+    Louvain.louvain 0.00001 myGraph
 
 (*** hide ***)
 #r "nuget: Cyjs.NET, 0.0.3"

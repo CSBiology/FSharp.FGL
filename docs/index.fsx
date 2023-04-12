@@ -1,7 +1,10 @@
 (*** hide ***)
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I @"../bin/FSharp.FGL/netstandard2.0/"
+#r "../src/FSharp.FGL/bin/Release/netstandard2.0/FSharp.FGL.dll"
+#r "../src/FSharp.FGL.IO/bin/Release/netstandard2.0/FSharp.FGL.IO.dll"
+#r "../src/FSharp.FGL.ArrayAdjacencyGraph/bin/Release/netstandard2.0/FSharp.FGL.ArrayAdjacencyGraph.dll"
+
 
 (**
 # FSharp.FGL
@@ -12,7 +15,6 @@ FSharp.FGL is a functional library to work with graphs.
 This example demonstrates using a function defined in this sample library.
 <br>
 *)
-#r "FSharp.FGL.dll"
 
 open FSharp.FGL 
 

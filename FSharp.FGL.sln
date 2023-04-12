@@ -1,71 +1,97 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30503.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{83F16175-43B1-4C90-A1EE-8E351C33435D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{B6C0497F-1830-4984-A247-A1FB597CC069}"
 	ProjectSection(SolutionItems) = preProject
-		build.fsx = build.fsx
+		LICENSE = LICENSE
+		README.md = README.md
+		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL", "src\FSharp.FGL\FSharp.FGL.fsproj", "{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}"
-EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.Tests", "tests\FSharp.FGL.Tests\FSharp.FGL.Tests.fsproj", "{AF68A6B7-83AC-4946-8F32-0CC6236B3964}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B2951F30-EF79-42DD-8B1E-3A429937302F} = {B2951F30-EF79-42DD-8B1E-3A429937302F}
-		{C620F259-1DD3-4557-8D9D-23BB79981101} = {C620F259-1DD3-4557-8D9D-23BB79981101}
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{F73C2794-342B-4664-837F-B3A6C36656A0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.IO", "src\FSharp.Graph\FSharp.FGL.IO.fsproj", "{C620F259-1DD3-4557-8D9D-23BB79981101}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{7D7D61DB-79BB-464D-B8AF-1EE275535063}"
+	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
+		build.sh = build.sh
+		global.json = global.json
+	EndProjectSection
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.ArrayAdjacencyGraph", "src\FSharp.ArrayAdjacencyGraph\FSharp.FGL.ArrayAdjacencyGraph.fsproj", "{B2951F30-EF79-42DD-8B1E-3A429937302F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9} = {0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "build\build.fsproj", "{832AEC8F-735C-4606-BB43-BF574AAA2A8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AF400BAE-CEE5-4C2A-92BF-DE2E5EB2F1EB}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.Tests", "tests\FSharp.FGL.Tests\FSharp.FGL.Tests.fsproj", "{3544618B-1190-435F-B259-1FDD010CDF23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA7B2891-0F15-4484-A7B2-FAA29B614234}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL", "src\FSharp.FGL\FSharp.FGL.fsproj", "{A95AD17A-96CC-4FD9-AF68-4397E9B86E42}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.ArrayAdjacencyGraph", "src\FSharp.FGL.ArrayAdjacencyGraph\FSharp.FGL.ArrayAdjacencyGraph.fsproj", "{D16623D0-B496-4696-AD50-B1B22A9AA9B3}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "FSharp.FGL.IO", "src\FSharp.FGL.IO\FSharp.FGL.IO.fsproj", "{E9349B14-25D1-4637-84AA-E4EBEA46F4E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".ci", ".ci", "{597DEC02-D268-4426-87B3-55C045EFA312}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B59E8D28-12FA-4ACC-9779-FAACDC2C6883}"
+	ProjectSection(SolutionItems) = preProject
+		docs\AAGLouvain.fsx = docs\AAGLouvain.fsx
+		docs\AAGModels.fsx = docs\AAGModels.fsx
+		docs\AAGnewGraph.fsx = docs\AAGnewGraph.fsx
+		docs\ArrayAdjacencyGraph.fsx = docs\ArrayAdjacencyGraph.fsx
+		docs\GDF.fsx = docs\GDF.fsx
+		docs\index.fsx = docs\index.fsx
+		docs\models.fsx = docs\models.fsx
+		docs\newgraph.fsx = docs\newgraph.fsx
+		docs\_template.html = docs\_template.html
+		docs\_template.ipynb = docs\_template.ipynb
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		DotnetCore|Any CPU = DotnetCore|Any CPU
-		Mono|Any CPU = Mono|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.DotnetCore|Any CPU.ActiveCfg = DotnetCore|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.DotnetCore|Any CPU.Build.0 = DotnetCore|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.Mono|Any CPU.Build.0 = Mono|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B4C521D-F935-4DAD-9DB8-FF19AAD882E9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.DotnetCore|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.DotnetCore|Any CPU.Build.0 = Debug|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Mono|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Mono|Any CPU.Build.0 = Debug|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF68A6B7-83AC-4946-8F32-0CC6236B3964}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.DotnetCore|Any CPU.ActiveCfg = Debug|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.DotnetCore|Any CPU.Build.0 = Debug|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.Mono|Any CPU.ActiveCfg = Debug|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.Mono|Any CPU.Build.0 = Debug|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C620F259-1DD3-4557-8D9D-23BB79981101}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.DotnetCore|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.DotnetCore|Any CPU.Build.0 = Debug|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.Mono|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.Mono|Any CPU.Build.0 = Debug|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2951F30-EF79-42DD-8B1E-3A429937302F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832AEC8F-735C-4606-BB43-BF574AAA2A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832AEC8F-735C-4606-BB43-BF574AAA2A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832AEC8F-735C-4606-BB43-BF574AAA2A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832AEC8F-735C-4606-BB43-BF574AAA2A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3544618B-1190-435F-B259-1FDD010CDF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3544618B-1190-435F-B259-1FDD010CDF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3544618B-1190-435F-B259-1FDD010CDF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3544618B-1190-435F-B259-1FDD010CDF23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95AD17A-96CC-4FD9-AF68-4397E9B86E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95AD17A-96CC-4FD9-AF68-4397E9B86E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95AD17A-96CC-4FD9-AF68-4397E9B86E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95AD17A-96CC-4FD9-AF68-4397E9B86E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D16623D0-B496-4696-AD50-B1B22A9AA9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D16623D0-B496-4696-AD50-B1B22A9AA9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D16623D0-B496-4696-AD50-B1B22A9AA9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D16623D0-B496-4696-AD50-B1B22A9AA9B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9349B14-25D1-4637-84AA-E4EBEA46F4E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9349B14-25D1-4637-84AA-E4EBEA46F4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9349B14-25D1-4637-84AA-E4EBEA46F4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9349B14-25D1-4637-84AA-E4EBEA46F4E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{832AEC8F-735C-4606-BB43-BF574AAA2A8B} = {7D7D61DB-79BB-464D-B8AF-1EE275535063}
+		{3544618B-1190-435F-B259-1FDD010CDF23} = {AF400BAE-CEE5-4C2A-92BF-DE2E5EB2F1EB}
+		{A95AD17A-96CC-4FD9-AF68-4397E9B86E42} = {BA7B2891-0F15-4484-A7B2-FAA29B614234}
+		{D16623D0-B496-4696-AD50-B1B22A9AA9B3} = {BA7B2891-0F15-4484-A7B2-FAA29B614234}
+		{E9349B14-25D1-4637-84AA-E4EBEA46F4E3} = {BA7B2891-0F15-4484-A7B2-FAA29B614234}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4FA3718-6BBE-44B3-A581-3309B3967A0A}

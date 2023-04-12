@@ -9,7 +9,9 @@ index: 2
 (*** hide ***) 
 // This block of code is omitted in the generated HTML documentation. Use 
 // it to define helpers that you do not want to show in the documentation.
-#I @"../../bin/FSharp.FGL/netstandard2.0/"
+#r "../src/FSharp.FGL/bin/Release/netstandard2.0/FSharp.FGL.dll"
+#r "../src/FSharp.FGL.IO/bin/Release/netstandard2.0/FSharp.FGL.IO.dll"
+#r "../src/FSharp.FGL.ArrayAdjacencyGraph/bin/Release/netstandard2.0/FSharp.FGL.ArrayAdjacencyGraph.dll"
 
 (**
 #Basic functionality
@@ -18,8 +20,6 @@ In FSharp.FGL, the basic functions are separated into the Directed and the Undir
 In this quick tutorial we will work with directed Graphs.
 
 *)
-
-#r "FSharp.FGL.dll"
 
 open FSharp.FGL
 open FSharp.FGL.Directed
