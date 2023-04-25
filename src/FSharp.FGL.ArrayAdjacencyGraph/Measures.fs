@@ -59,15 +59,15 @@ module Measures =
         |> Seq.average
 
     /// Returns a Some of the undirected shortest path from source to target vertices, else None.         
-    let tryGetShortestPath (graph: ArrayAdjacencyGraph<'Vertex,'Label, 'Edge>) (source: 'Vertex) (target: 'Vertex) = 
+    let tryGetShortestPath  (source: 'Vertex) (target: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label, 'Edge>)= 
         (dijkstra graph graph.Neighbours (fun (n, v) -> 1.0) source).[target]
 
     /// Returns a Some of the outward directed shortest path from source to target vertices, else None.       
-    let tryGetShortestPathDirected (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) (target: 'Vertex) = 
+    let tryGetShortestPathDirected (source: 'Vertex) (target: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) = 
         (dijkstra graph graph.Successors (fun (n, v) -> 1.0) source).[target]
     
     /// Returns a Some of the sum of edge weights along the outward directed shortest path from source to target vertices, else None.    
-    let tryGetShortestPathDirectedhWeighted (graph: ArrayAdjacencyGraph<'Vertex,'Label,float>) (source: 'Vertex) (target: 'Vertex) = 
+    let tryGetShortestPathDirectedhWeighted  (source: 'Vertex) (target: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,float>) = 
         (dijkstra graph graph.Successors (getWeight graph) source).[target]
 
     /// Returns the average of all the undirected shortest paths between connected vertices in the graph.
@@ -92,17 +92,17 @@ module Measures =
     //Averages Shortest Paths
 
     /// Returns the average of all the shortest paths from the source vertex to the connected vertices.
-    let meanShortestPathUnDirectedVertex (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let meanShortestPathUnDirectedVertex (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) =
         (dijkstra graph graph.Neighbours (fun (_, _) -> 1.0) source)
         |> meanShortestPathVertexBase
 
     /// Returns the average of all the outward directed shortest paths from the source vertex to the connected vertices.
-    let meanShortestPathDirectedVertex (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let meanShortestPathDirectedVertex  (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>)=
         (dijkstra graph graph.Successors (fun (_, _) -> 1.0) source)
         |> meanShortestPathVertexBase
 
      /// Returns the average of all the summed weights on outward directed edges on shortest paths from the source vertex to the connected vertices.
-    let meanShortestPathDirectedhWeightedVertex (graph: ArrayAdjacencyGraph<'Vertex,'Label,float>) (source: 'Vertex) =
+    let meanShortestPathDirectedhWeightedVertex  (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,float>) =
         (dijkstra graph graph.Successors (getWeight graph) source)
         |> meanShortestPathVertexBase
       
@@ -118,19 +118,19 @@ module Measures =
             1.0 / (v |> Seq.average) 
     
     /// Returns closeness centrality of the source vertex.
-    let getClosenessUnDirected (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let getClosenessUnDirected  (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>)=
         getClosenessBase graph source (graph.Neighbours)
 
     /// Returns outward directed closeness centrality of the source vertex.
-    let getClosenessOutward (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let getClosenessOutward  (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>)=
         getClosenessBase graph source (graph.Successors)
 
     /// Returns inward directed closeness centrality of the source vertex.
-    let getClosenessInward (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let getClosenessInward  (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) =
         getClosenessBase graph source (graph.Predecessors)
 
     /// Returns Neighborhood Connectivity as defined in cytoscape documentation for source vertex.
-    let getNeighborhoodConnectivity(graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let getNeighborhoodConnectivity(source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) =
         graph.Neighbours source
         |> Seq.map(fun v -> graph.Degree v |> float)
         |> Seq.average
@@ -145,12 +145,36 @@ module Measures =
         | _, [] -> () }
 
     /// Returns Clustering Coeffcient as defined in cytoscape documentation for source vertex.
-    let getClusteringCoefficient (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (source: 'Vertex) =
+    let getClusteringCoefficient (source: 'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) =
         graph.Neighbours source
         |> Array.toList
         |> combinations [] 2
-        |> Seq.map(fun l -> (l|> List.head), (l |> List.last))
+                |> Seq.map(fun l -> (l|> List.head), (l |> List.last))
         |> Seq.map(fun (v1, v2) -> 
-            if graph.TryGetEdge(v1, v2).IsSome || (graph.TryGetEdge(v2, v1)).IsSome then 1.0 else 0.0 
+            if graph.TryGetUndirectedEdge(v1, v2).IsSome then 1.0 else 0.0 
             )
         |> fun s ->  (s |> Seq.sum) /(s |> Seq.length |> float)
+
+    let private depthFirstSearch (source: 'Vertex)  (getNeightbours : 'Vertex -> 'Vertex array) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) =
+        let vertices = new Dictionary<'Vertex, bool>()
+        graph.GetVertices() |> Array.map(fun v -> vertices.Add(v, false)) |> ignore
+        let rec dfs (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (v:'Vertex)  =
+            vertices[v] <- true
+            getNeightbours v 
+            |> Array.filter(fun w -> not vertices[w])
+            |> Array.map(fun x -> dfs graph x ) 
+            |> ignore     
+        dfs graph source
+        vertices
+            
+    let isStronglyConnected (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) : bool =
+        let firstPass = 
+            (depthFirstSearch (graph.GetVertices()[0])  (graph.Successors) graph
+            |> Seq.exists(fun (KeyValue(v,b)) -> not b))
+            |> not
+        let reverseGraphPass =
+            (depthFirstSearch (graph.GetVertices()[0])  (graph.Predecessors) graph
+            |> Seq.exists(fun (KeyValue(v,b)) -> not b))
+            |> not
+        firstPass && reverseGraphPass
+

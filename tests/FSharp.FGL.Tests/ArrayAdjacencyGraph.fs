@@ -991,8 +991,17 @@ let testMeasures =
             "c","d",1.0
         ]
 
+    let fig4Connected = 
+        [
+        "a","b",10.0
+        "b","c",1.0
+        "b","d", 1.0
+        "c","d",1.0
+        "d","a",1.0
+        ]
 
     let fig4Graph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(fig4Nodes,fig4)
+    let fig4GraphConnected  = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(fig4Nodes,fig4Connected)
     let fig7Graph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(fig7Nodes,fig7)
    
     let testGraph = FSharp.FGL.ArrayAdjacencyGraph.ArrayAdjacencyGraph(exampleGraphVertices,exampleGraphEdges)
@@ -1007,7 +1016,7 @@ let testMeasures =
         )
 
         testCase "tryGetShortestPath" (fun () ->
-            let sp = Measures.tryGetShortestPath testGraph 1 5
+            let sp = Measures.tryGetShortestPath  1 5 testGraph
             Expect.isSome sp "Incorrect shortest path"     
             Expect.equal sp.Value 2.0 "Incorrect shortest path"       
         )
@@ -1019,19 +1028,19 @@ let testMeasures =
         )
 
         testCase "tryGetShortestPathDirected" (fun () ->
-            let sp = Measures.tryGetShortestPathDirected testGraph 1 5
+            let sp = Measures.tryGetShortestPathDirected  1 5 testGraph
             Expect.isSome sp "Incorrect shortest path"     
             Expect.equal sp.Value 4.0 "Incorrect shortest path"       
         )
 
         testCase "tryGetShortestPathDirected - reverse path" (fun () ->
-            let sp = Measures.tryGetShortestPathDirected testGraph 3 1
+            let sp = Measures.tryGetShortestPathDirected  3 1 testGraph
             Expect.isSome sp "Incorrect shortest path"     
             Expect.equal sp.Value 2.0 "Incorrect shortest path"       
         )
 
         testCase "tryGetShortestPathDirected - No path exists" (fun () ->
-            let sp = Measures.tryGetShortestPathDirected testGraph 5 1   
+            let sp = Measures.tryGetShortestPathDirected  5 1 testGraph
             Expect.isNone sp "Incorrect shortest path"       
         )
 
@@ -1042,86 +1051,96 @@ let testMeasures =
         )
 
         testCase "tryGetShortestPathDirectedWeighted" (fun () ->
-            let sp = Measures.tryGetShortestPathDirectedhWeighted fig7Graph "a" "c"
+            let sp = Measures.tryGetShortestPathDirectedhWeighted  "a" "c" fig7Graph
             Expect.isSome sp "Incorrect shortest path"     
             Expect.equal sp.Value 11.0 "Incorrect shortest path"       
         )
 
         //Vertex Mean shortest path
         testCase "meanShortestPathUnDirectedVertex - A" (fun () ->
-            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "a"   
+            let sp = Measures.meanShortestPathUnDirectedVertex  "a" fig7Graph
             Expect.floatClose Accuracy.medium sp 2.0 "Incorrect shortest path" 
         )    
          
         testCase "meanShortestPathUnDirectedVertex - B" (fun () ->
-            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "b"   
+            let sp = Measures.meanShortestPathUnDirectedVertex  "b" fig7Graph
             Expect.floatClose Accuracy.medium sp 1.25 "Incorrect shortest path"   
         )
         
         testCase "meanShortestPathUnDirectedVertex - C" (fun () ->
-            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "c"     
+            let sp = Measures.meanShortestPathUnDirectedVertex  "c" fig7Graph   
             Expect.floatClose Accuracy.medium sp 1.5 "Incorrect shortest path"  
         )
 
         testCase "meanShortestPathUnDirectedVertex - D" (fun () ->
-            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "d"     
+            let sp = Measures.meanShortestPathUnDirectedVertex  "d"  fig7Graph    
             Expect.floatClose Accuracy.medium sp 1.5 "Incorrect shortest path"  
         )
 
         testCase "meanShortestPathUnDirectedVertex - E" (fun () ->
-            let sp = Measures.meanShortestPathUnDirectedVertex fig7Graph "e"     
+            let sp = Measures.meanShortestPathUnDirectedVertex  "e" fig7Graph    
             Expect.floatClose Accuracy.medium sp 1.75 "Incorrect shortest path"   
         ) 
 
         testCase "meanShortestPathDirectedVertex - B" (fun () ->
-            let sp = Measures.meanShortestPathDirectedVertex fig7Graph "b"     
+            let sp = Measures.meanShortestPathDirectedVertex  "b" fig7Graph  
             Expect.floatClose Accuracy.medium sp 1.33333333333 "Incorrect shortest path"   
         ) 
 
         testCase "meanShortestPathDirectedhWeightedVertex - B" (fun () ->
-            let sp = Measures.meanShortestPathDirectedhWeightedVertex fig7Graph "a"     
+            let sp = Measures.meanShortestPathDirectedhWeightedVertex  "a" fig7Graph    
             Expect.floatClose Accuracy.medium sp 11.0 "Incorrect shortest path"   
         ) 
        
         //Closeness
         testCase "getClosenessUnDirected-A" (fun () ->
-            let sp = Measures.getClosenessUnDirected fig7Graph "a"  
+            let sp = Measures.getClosenessUnDirected  "a" fig7Graph  
             Expect.floatClose Accuracy.medium sp 0.5 "Incorrect closeness"       
         )
         
         testCase "getClosenessUnDirected-B" (fun () ->
-            let sp = Measures.getClosenessUnDirected fig7Graph "b"  
+            let sp = Measures.getClosenessUnDirected  "b"   fig7Graph
             Expect.floatClose Accuracy.medium sp 0.8 "Incorrect closeness"       
         )
 
         testCase "getClosenessUnDirected-C" (fun () ->
-            let sp = Measures.getClosenessUnDirected fig7Graph "c"  
+            let sp = Measures.getClosenessUnDirected  "c"   fig7Graph
             Expect.floatClose Accuracy.medium sp 0.6666666666666666 "Incorrect closeness"       
         )
 
         testCase "getClosenessUnDirected-D" (fun () ->
-            let sp = Measures.getClosenessUnDirected fig7Graph "d"  
+            let sp = Measures.getClosenessUnDirected  "d"  fig7Graph
             Expect.floatClose Accuracy.medium sp 00.6666666666666666 "Incorrect closeness"       
         )
 
         testCase "getClosenessOutward" (fun () ->
-            let sp = Measures.getClosenessOutward fig7Graph "c"  
+            let sp = Measures.getClosenessOutward  "c"  fig7Graph
             Expect.floatClose Accuracy.medium sp 1.0 "Incorrect closeness"       
         )
 
         testCase "getClosenessInward" (fun () ->
-            let sp = Measures.getClosenessInward fig7Graph "e"  
+            let sp = Measures.getClosenessInward  "e"  fig7Graph
             Expect.floatClose Accuracy.medium sp 0.5714285714285714 "Incorrect closeness"       
         )
         
         testCase "getNNeighborhoodConnectivity" (fun () ->
-            let sp = Measures.getNeighborhoodConnectivity fig7Graph "d"  
+            let sp = Measures.getNeighborhoodConnectivity  "d"  fig7Graph
             Expect.floatClose Accuracy.medium sp 2.5 "Incorrect closeness"       
         )
 
         testCase "getClusteringCoefficient" (fun () ->
-            let sp = Measures.getClusteringCoefficient fig4Graph "b"  
+            let sp = Measures.getClusteringCoefficient  "b"  fig4Graph
             Expect.floatClose Accuracy.medium sp 0.333333 "ClusteringCoefficient"       
         )
    
+        testCase "isNotStronglyConnected" (fun () ->
+            let sp = Measures.isStronglyConnected  fig4Graph
+            Expect.isFalse sp "depthFirstSearch"       
+        )
+
+        testCase "isStronglyConnected" (fun () ->
+            let sp = Measures.isStronglyConnected  fig4GraphConnected
+            Expect.isTrue sp "depthFirstSearch"       
+        )
+
     ]
