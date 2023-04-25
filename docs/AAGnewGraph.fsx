@@ -8,9 +8,9 @@ index: 2
 *)
 
 (*** hide ***) 
-#I @"../../bin/FSharp.FGL/netstandard2.0/"
-#I @"../../bin/FSharp.FGL.ArrayAdjacencyGraph/netstandard2.0/"
-
+#r "../src/FSharp.FGL/bin/Release/netstandard2.0/FSharp.FGL.dll"
+#r "../src/FSharp.FGL.IO/bin/Release/netstandard2.0/FSharp.FGL.IO.dll"
+#r "../src/FSharp.FGL.ArrayAdjacencyGraph/bin/Release/netstandard2.0/FSharp.FGL.ArrayAdjacencyGraph.dll"
 
 (**
 <a name="Creating a Graph"></a>
@@ -19,9 +19,6 @@ index: 2
 The graph creation in ArrayAdjacencyGraph can be achived via two differnet approaches. 
 <br> The easiest method is relies on a vertex list and an edge list like this :
 *)
-
-#r "FSharp.FGL"
-#r "FSharp.FGL.ArrayAdjacencyGraph"
 
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph

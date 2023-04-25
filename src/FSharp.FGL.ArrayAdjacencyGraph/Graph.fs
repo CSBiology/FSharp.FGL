@@ -76,12 +76,28 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
             edges
             |> Array.tryFind (fun (s,t,e) -> s = source && t = target)
         )
-             
+
+    ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not. Undirected adaptation of TryGetEdge.
+    member this.TryGetUndirectedEdge((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> option =
+        Dictionary.tryGetValue source vertexOutEdges
+        |> Option.bind (fun edges ->
+            edges
+            |> Array.tryFind (fun (s,t,e) -> s = source && t = target || t = source && s = target)
+        )
+               
     ///Return the first edge in the graph that matches the conditions.
     member this.GetEdge((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> =
         try 
             vertexOutEdges.Item source
             |> Array.find (fun (s,t,e) -> s = source && t = target)
+        with
+        | _ -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
+
+    ///Return the first edge in the graph that matches the conditions. Undirected adaptation of GetEdge.
+    member this.GetUndirectedEdge((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> =
+        try 
+            vertexOutEdges.Item source
+            |> Array.find (fun (s,t,e) -> s = source && t = target || t = source && s = target)
         with
         | _ -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
 
@@ -92,8 +108,16 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
             edges
             |> Array.filter (fun (s,t,e) -> s = source && t = target)
         ) 
-       
-    ///Return all edges in the graph that matches the conditions
+
+     ///Lookup all edges in the graph that matches the conditions, returning a Some value if it exists and None if not. Undirected adaptation of TryGetEdges.
+     member this.TryGetUndirectedEdges((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> [] option=       
+         Dictionary.tryGetValue source vertexOutEdges
+         |> Option.map (fun edges ->
+             edges
+             |> Array.filter (fun (s,t,e) -> s = source && t = target || t = source && s = target)
+         ) 
+          
+    ///Return all edges in the graph that matches the conditions.
     member this.GetEdges((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> [] =
         try 
             vertexOutEdges.Item source
@@ -101,6 +125,13 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         with
         |_ -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
 
+    ///Return all edges in the graph that matches the conditions. Undirected adaptation of GetEdges.
+    member this.GetUndirectedEdges((source:'Vertex),(target:'Vertex)) :LEdge<'Vertex,'Edge> [] =
+        try 
+            vertexOutEdges.Item source
+            |> Array.filter (fun (s,t,e) -> s = source && t = target|| t = source && s = target)
+        with
+        |_ -> failwithf "An edge from vertex %O to vertex %O does not exist in the graph" source target
 
     ///Returns all edges of the graph.
     member this.GetEdges() :LEdge<'Vertex,'Edge>[]=
@@ -572,6 +603,22 @@ module Edges =
     ///Return all edges in the graph that matches the conditions
     let getMany (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
         graph.GetEdges(source,target)
+
+    ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
+    let tryGetUndirected (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> option =
+        graph.TryGetUndirectedEdge(source,target)
+         
+    ///Return the first edge in the graph that matches the conditions.
+    let getUndirected (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> =
+        graph.GetUndirectedEdge(source,target)
+
+    ///Lookup all edges in the graph that matches the conditions, returning a Some value if it exists and None if not.
+    let tryGetManyUndirected (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] option=       
+        graph.TryGetUndirectedEdges(source,target)
+   
+    ///Return all edges in the graph that matches the conditions
+    let getManyUndirected (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
+        graph.GetUndirectedEdges(source,target)
 
     ///Returns all edges of the graph.
     let toEdgeList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge>[]=

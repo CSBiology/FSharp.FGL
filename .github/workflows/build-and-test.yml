@@ -1,0 +1,39 @@
+name: Build and test
+
+on:
+  push:
+    branches: [ developer ]
+  pull_request:
+    branches: [ developer ]
+
+
+jobs:
+  build-and-test-linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.x.x
+    - name: make script executable
+      run: chmod u+x build.sh
+    - name: Build and test
+      working-directory: ./
+      run: ./build.sh runtests
+
+  build-and-test-windows:
+    
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.x.x
+    - name: Build and test
+      working-directory: ./
+      run: ./build.cmd runtests
