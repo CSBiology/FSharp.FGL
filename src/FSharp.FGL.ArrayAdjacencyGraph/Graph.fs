@@ -504,8 +504,8 @@ module Graph =
 
     ///Transform an ArrayAdjacencyGraph into a functional Graph 
     let toFunctionalGraphModel (graph:ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) (directed:bool) :Graph<'Vertex,'Label,'Edge> =
-        let vertices    = graph.GetLabeledVertices()
-        let edges       = graph.GetEdges()
+        let vertices    = graph.GetLabeledVertices()|> List.ofArray
+        let edges       = graph.GetEdges()|> List.ofArray
 
         if directed then
             FSharp.FGL.Directed.Graph.create vertices edges
