@@ -522,13 +522,13 @@ module Vertices =
         graph.GetVertices()  
 
     ///Returns the vertices of the graph in List form.
-    let toLabeledVertexList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex list=
+    let toLabeledVertexList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :('Vertex*'Label) list=
         graph.GetLabeledVertices()|>List.ofArray 
 
      ///Returns the vertices of the graph in Array form.
-    let toLabeledVertexArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[]=
+    let toLabeledVertexArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :('Vertex*'Label)[]=
         graph.GetLabeledVertices() 
-        
+
     ///Returns the degree of the vertex v.
     let degree (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
         graph.Degree v
