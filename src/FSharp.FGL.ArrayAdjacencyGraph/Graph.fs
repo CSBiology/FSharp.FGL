@@ -504,10 +504,14 @@ module Vertices =
     let count (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
         graph.VertexCount
 
-    ///Returns the vertices of the graph.
-    let toVertexList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[]=
-        graph.GetVertices()
-    
+    ///Returns the vertices of the graph in List form.
+    let toVertexList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex list=
+        graph.GetVertices()|>List.ofArray 
+
+     ///Returns the vertices of the graph in Array form.
+    let toVertexArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[]=
+        graph.GetVertices()  
+
     ///Returns the degree of the vertex v.
     let degree (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
         graph.Degree v
@@ -582,10 +586,14 @@ module Vertices =
     let setLabel (v:'Vertex) (l:'Label) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :ArrayAdjacencyGraph<'Vertex,'Label,'Edge> = 
         (graph.Copy()).SetLabel(v,l)
 
-    ///Returns all labels of the graph.
-    let getLabelList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
+    ///Returns all labels of the graph as List.
+    let getLabelList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label list=
         graph.GetLabels()    
-          
+
+     ///Returns all labels of the graph as Array.
+    let getLabelArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
+        graph.GetLabels()        
+             
 module Edges =
     //Edges
     ///Lookup the first edge in the graph that matches the conditions, returning a Some value if it exists and None if not.
@@ -620,8 +628,12 @@ module Edges =
     let getManyUndirected (source:'Vertex) (target:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge> [] =
         graph.GetUndirectedEdges(source,target)
 
-    ///Returns all edges of the graph.
-    let toEdgeList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge>[]=
+    ///Returns all edges of the graph as List.
+    let toEdgeList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge>list=
+        graph.GetEdges()|> List.ofArray    ///Returns all edges of the graph.
+
+    ///Returns all edges of the graph as Array.
+    let toEdgeArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :LEdge<'Vertex,'Edge>[]=
         graph.GetEdges()
 
     ///Number of edges in the graph
