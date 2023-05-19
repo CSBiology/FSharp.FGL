@@ -478,7 +478,16 @@ type ArrayAdjacencyGraph<'Vertex,'Label,'Edge when 'Vertex : equality and 'Edge 
         for group in labels do
             result.[i] <- group.Value
             i <- i+1
-        result       
+        result      
+
+    ///Returns the Vertices of the graph, inculding their respective Labels.
+    member this.GetLabeledVertices() :('Vertex*'Label) []=
+        let result = Array.zeroCreate labels.Count
+        let mutable i = 0
+        for group in labels do
+            result.[i] <- group.Key,group.Value
+            i <- i+1
+        result  
 
 module Graph =
     ///Create an ArrayAdjacencyGraph based on the given vertex list and edge list.
@@ -512,6 +521,14 @@ module Vertices =
     let toVertexArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[]=
         graph.GetVertices()  
 
+    ///Returns the vertices of the graph in List form.
+    let toLabeledVertexList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex list=
+        graph.GetLabeledVertices()|>List.ofArray 
+
+     ///Returns the vertices of the graph in Array form.
+    let toLabeledVertexArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Vertex[]=
+        graph.GetLabeledVertices() 
+        
     ///Returns the degree of the vertex v.
     let degree (v:'Vertex) (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :int =
         graph.Degree v
