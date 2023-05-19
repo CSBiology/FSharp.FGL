@@ -508,20 +508,20 @@ module Graph =
         let edges       = graph.GetEdges()
 
         if directed then
-            FGL.Directed.Graph.create vertices edges
+            FSharp.FGL.Directed.Graph.create vertices edges
         else
-            FGL.Undirected.Graph.create vertices edges
+            FSharp.FGL.Undirected.Graph.create vertices edges
 
     ///Transform an a functional Graph into an ArrayAdjacencyGraph 
     let toFunctionalGraphModel (graph:Graph<'Vertex,'Label,'Edge> ) (directed:bool) :ArrayAdjacencyGraph<'Vertex,'Label,'Edge>=
-        let vertices    = FGl.Graph.toVertexList    graph
+        let vertices        = FSharp.FGL.Graph.toVertexList    graph
 
         if directed then
-            let edges       = FGl.Directed.toEdgeList graph
+            let edges       = FSharp.FGL.Directed.toEdgeList graph
 
             createOfEdgelist vertices edges
         else
-            let edges       = FGl.Undirected.toEdgeList graph
+            let edges       = FSharp.FGL.Undirected.toEdgeList graph
 
             createOfEdgelist vertices edges
 
