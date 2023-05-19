@@ -605,7 +605,7 @@ module Vertices =
 
     ///Returns all labels of the graph as List.
     let getLabelList (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label list=
-        graph.GetLabels()    
+        graph.GetLabels()|>List.ofArray    
 
      ///Returns all labels of the graph as Array.
     let getLabelArray (graph: ArrayAdjacencyGraph<'Vertex,'Label,'Edge>) :'Label []=
